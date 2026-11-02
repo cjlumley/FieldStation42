@@ -805,6 +805,25 @@ class ShowCatalog:
         # discard that block and fill using the tightest technique possible
         additional_reels = []
 
+        # If this leftover fill is still one of the strict mid-show breaks (the last full block was
+        # discarded for overshooting), give it the same in/out bumpers as the other breaks.
+        fill_pre, fill_post = None, None
+        engine = (self.config.get("autobump") or {}).get("engine")
+        if (use_bumpers and strict_count and len(blocks) < strict_count and strategy != "end"
+                and ("autobump" not in self.config or engine) and not AutoBumpAgent.do_fill(self.config)):
+            try:
+                if engine:
+                    autos = AutoBumpAgent.gen_bumps(self.config)
+                    pre, post = autos["message_bump"], autos["next_bump"]
+                else:
+                    pre = self.find_bump(remaining, when, ShowCatalog.prebump, bump_tag=bump_dir, lookahead=lookahead)
+                    post = self.find_bump(remaining, when, ShowCatalog.postbump, bump_tag=bump_dir, lookahead=lookahead)
+                if pre and post and remaining - pre.duration - post.duration > self.min_gap:
+                    fill_pre, fill_post = pre, post
+                    remaining -= pre.duration + post.duration
+            except (MatchingContentNotFound, NoFillerContentFound):
+                pass
+
         if AutoBumpAgent.do_fill(self.config):
             fill = AutoBumpAgent.fill_block(self.config, remaining)
             blocks.append(ReelBlock(fill, [], None))
@@ -834,7 +853,9 @@ class ShowCatalog:
                     keep_going = False
                     remaining = 0
 
-            blocks.append(ReelBlock(None, additional_reels, None))
+            if not additional_reels:
+                fill_pre, fill_post = None, None
+            blocks.append(ReelBlock(fill_pre, additional_reels, fill_post))
 
         return blocks
 

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Snow Day station ID</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@700;800&display=swap">
+<style>
+body{margin:0}
+a{color:#FFF3DC}a:hover{color:#F3B43F}
+@keyframes snowfall{from{transform:translateY(-30px)}to{transform:translateY(520px)}}
+@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:0.25}}
+@keyframes flicker{0%,100%{opacity:1}40%{opacity:0.72}70%{opacity:0.9}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes wobble{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes steam{0%{transform:translateY(12px);opacity:0}30%{opacity:0.8}100%{transform:translateY(-44px);opacity:0}}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes popCycle{0%{transform:scale(0.2);opacity:0}8%{transform:scale(1.08);opacity:1}11%{transform:scale(0.97)}13%,85%{transform:scale(1);opacity:1}94%,100%{transform:scale(0.2);opacity:0}}
+@keyframes riseCycle{0%{transform:translateY(160px);opacity:0}12%{transform:translateY(-6px);opacity:1}16%,84%{transform:translateY(0);opacity:1}94%,100%{transform:translateY(160px);opacity:0}}
+@keyframes dropCycle{0%{transform:translateY(-560px)}9%{transform:translateY(16px)}13%{transform:translateY(-6px)}16%,84%{transform:translateY(0)}94%,100%{transform:translateY(-560px)}}
+@keyframes slideCycle{0%{transform:translateX(-720px)}8%{transform:translateX(12px)}11%,84%{transform:translateX(0)}93%,100%{transform:translateX(-720px)}}
+@keyframes slideRCycle{0%{transform:translateX(720px)}8%{transform:translateX(-12px)}11%,84%{transform:translateX(0)}93%,100%{transform:translateX(720px)}}
+@keyframes panelCycle{0%{transform:translateX(320px)}8%{transform:translateX(-8px)}11%,84%{transform:translateX(0)}93%,100%{transform:translateX(320px)}}
+@keyframes unfurlCycle{0%{transform:scaleX(0);opacity:0}10%{transform:scaleX(1.05);opacity:1}14%,84%{transform:scaleX(1);opacity:1}94%,100%{transform:scaleX(0);opacity:0}}
+@keyframes stampCycle{0%,10%{transform:scale(3) rotate(-14deg);opacity:0}16%{transform:scale(0.92) rotate(-8deg);opacity:1}19%,85%{transform:scale(1) rotate(-8deg);opacity:1}94%,100%{transform:scale(0.2) rotate(-8deg);opacity:0}}
+@keyframes zoomStingCycle{0%{transform:scale(2.6);opacity:0}12%{transform:scale(0.94);opacity:1}17%{transform:scale(1.03)}21%,80%{transform:scale(1);opacity:1}92%,100%{transform:scale(0.6);opacity:0}}
+@keyframes burstCycle{0%,8%{transform:scale(0) rotate(0deg);opacity:0}20%{transform:scale(1) rotate(20deg);opacity:1}60%{opacity:0.7}100%{transform:scale(1.5) rotate(70deg);opacity:0}}
+</style>
+</helmet>
+<div style="width: 640px; height: 480px; filter: {{crtFilter}}; position: relative; overflow: hidden; font-family: 'Nunito', system-ui, sans-serif; color: #FFF3DC">
+<div style="position: absolute; left: 0; top: 0"><dc-import name="SnowBG" theme="{{theme}}" ornaments="{{orn}}" hint-size="640px,480px"></dc-import></div>
+<div style="position: absolute; left: 64px; top: 140px; width: 512px; display: flex; flex-direction: column; align-items: center; gap: 22px">
+<div style="animation: popCycle 8s cubic-bezier(0.2, 0.8, 0.3, 1) both infinite">
+<div style="animation: bob 3s ease-in-out infinite"><dc-import name="SnowWordmark" size="96" uid="b1" hint-size="499px,120px"></dc-import></div>
+</div>
+<div style="animation: riseCycle 8s ease-out 0.3s both infinite">
+<div style="background: #6E0F1F; color: #FFF3DC; font-size: 22px; font-weight: 800; padding: 8px 22px; border-radius: 999px; border: 3px solid #F3B43F; box-shadow: 0 4px 0 #3A0A12; white-space: nowrap">{{tag}}</div>
+</div>
+</div>
+<sc-if value="{{crt}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; z-index: 10; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px), repeating-linear-gradient(90deg, rgba(255,0,0,0.06) 0px, rgba(255,0,0,0.06) 1px, rgba(0,255,0,0.06) 1px, rgba(0,255,0,0.06) 2px, rgba(0,0,255,0.06) 2px, rgba(0,0,255,0.06) 3px), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 58%, rgba(0,0,0,0.5) 100%); box-shadow: inset 0 0 50px rgba(0,0,0,0.55)"></div>
+</sc-if>
+<sc-if value="{{safe}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 32px; top: 24px; width: 576px; height: 432px; box-sizing: border-box; border: 2px dashed rgba(255,230,0,0.9); z-index: 11; pointer-events: none"></div>
+<div aria-hidden="true" style="position: absolute; left: 64px; top: 48px; width: 512px; height: 384px; box-sizing: border-box; border: 2px dashed rgba(0,240,255,0.95); z-index: 11; pointer-events: none"></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tag": {"editor": "enum", "options": ["all December · channel 12", "cozy holiday specials all month", "your home for the holidays", "the most wonderful channel of the year"], "default": "all December · channel 12", "section": "Copy"}, "theme": {"editor": "enum", "options": ["plaid", "night", "lights", "giftwrap", "hearth"], "default": "plaid", "section": "Look"}, "crt": {"editor": "boolean", "default": true, "section": "Look"}, "safe": {"editor": "boolean", "default": false, "section": "Look"}, "$preview": {"width": 640, "height": 480}}'>
+class Component extends DCLogic {
+renderVals() {
+const p = this.props;
+const crt = p.crt ?? true;
+const fit = (t, max, min, w, lines) => { const n = Math.max(4, String(t ?? '').length); return Math.max(min, Math.min(max, Math.floor((w * lines * 0.92) / (n * 0.54)))); };
+const v = { tag: p.tag ?? 'all December · channel 12' };
+return { ...v, theme: p.theme ?? 'plaid', orn: true, crt, safe: p.safe ?? false, crtFilter: crt ? 'blur(0.6px) saturate(1.2) contrast(1.08)' : 'none' };
+}
+}
+</script>
+</body>
+</html>

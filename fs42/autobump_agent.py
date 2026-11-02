@@ -47,11 +47,38 @@ class AutoBumpAgent:
 
 
     @staticmethod
+    def engine_page_url(engine):
+        return AutoBumpAgent.static_url(f"{engine}/engine.html")
+
+    @staticmethod
+    def engine_cue(url):
+        """If url is a cue for a live graphics engine page (static/<engine>/engine.html), return
+        {"engine", "page", "cue"}; otherwise None."""
+        parsed = urllib.parse.urlparse(url)
+        if not parsed.path.endswith("/engine.html"):
+            return None
+        query = urllib.parse.parse_qs(parsed.query)
+        engine = parsed.path.rstrip("/").split("/")[-2]
+        page = urllib.parse.urlunparse(parsed._replace(query="", fragment=""))
+        return {"engine": engine, "page": page, "cue": query.get("cue", ["pre"])[0]}
+
+    @staticmethod
+    def engine_bumps(ab_config):
+        """Bumps for a live graphics engine: the page decides what to show at air time from the schedule."""
+        duration = ab_config.get("duration") or 7
+        page = AutoBumpAgent.engine_page_url(ab_config["engine"])
+        pre = CatalogEntry(f"{AutoBumpAgent.url_prefix}{page}?cue=pre", duration, AutoBumpAgent.tag_str)
+        post = CatalogEntry(f"{AutoBumpAgent.url_prefix}{page}?cue=post", duration, AutoBumpAgent.tag_str)
+        return {"message_bump": pre, "next_bump": post}
+
+    @staticmethod
     def gen_bumps(station_config):
         if "autobump" not in station_config:
             return {"start_block": None, "end_block": None}
 
         ab_config = dict(station_config["autobump"])
+        if ab_config.get("engine"):
+            return AutoBumpAgent.engine_bumps(ab_config)
 
         # first, check duration:
         # if the user set a duration, respect that as the bump length

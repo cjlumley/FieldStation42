@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Snow Day logo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="display: inline-block; line-height: 0; font-family: 'Baloo 2', system-ui, sans-serif; color: #FFF3DC; filter: {{fx}}">
+<svg width="{{w}}" height="{{h}}" viewBox="0 0 520 125" role="img" aria-label="snow day">
+<defs>
+<filter id="{{uid}}w" x="-10%" y="-20%" width="120%" height="140%">
+<feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="4" result="noise"></feTurbulence>
+<feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+</filter>
+<mask id="{{uid}}m" maskUnits="userSpaceOnUse" x="0" y="0" width="520" height="125">
+<rect x="0" y="0" width="520" height="125" style="fill: #FFFFFF"></rect>
+<g filter="{{filterRef}}">
+<text x="260" y="101" style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 100px; text-anchor: middle; fill: #000000; stroke: #000000; stroke-width: 9px; stroke-linejoin: round">snow day</text>
+</g>
+</mask>
+</defs>
+<text x="260" y="90" style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 100px; text-anchor: middle; fill: #FFF3DC">snow day</text>
+<g mask="{{maskRef}}">
+<text x="260" y="92" style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 100px; text-anchor: middle; fill: #BCD3EC; stroke: #BCD3EC; stroke-width: 9px; stroke-linejoin: round">snow day</text>
+</g>
+<g mask="{{maskRef}}">
+<text x="260" y="90" style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 100px; text-anchor: middle; fill: #FFFFFF; stroke: #FFFFFF; stroke-width: 9px; stroke-linejoin: round">snow day</text>
+</g>
+</svg>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"size":{"editor":"int","default":110,"min":16,"max":200},"ink":{"editor":"color","default":"#6E0F1F"},"deep":{"editor":"color","default":"#4A0814"},"uid":{"editor":null,"default":"x"},"$preview":{"width":572,"height":138}}'>
+class Component extends DCLogic {
+renderVals() {
+const size = Number(this.props.size ?? 110);
+const ink = this.props.ink ?? '#6E0F1F';
+const deep = this.props.deep ?? '#4A0814';
+const uid = 'sd' + (this.props.uid ?? 'x');
+const t = Math.max(1.5, Math.round(size * 0.04 * 10) / 10);
+const e = Math.max(2, Math.round(size * 0.075));
+let fx = 'drop-shadow(' + t + 'px 0 0 ' + ink + ') drop-shadow(-' + t + 'px 0 0 ' + ink + ') drop-shadow(0 ' + t + 'px 0 ' + ink + ') drop-shadow(0 -' + t + 'px 0 ' + ink + ') drop-shadow(0 ' + e + 'px 0 ' + deep + ')';
+if (size >= 60) fx += ' drop-shadow(0 10px 14px rgba(0,0,0,0.35))';
+return { w: Math.round(size * 5.2), h: Math.round(size * 1.25), fx, uid, maskRef: 'url(#' + uid + 'm)', filterRef: 'url(#' + uid + 'w)' };
+}
+}
+</script>
+</body>
+</html>

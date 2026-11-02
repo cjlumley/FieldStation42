@@ -1,0 +1,60 @@
+{
+  "_comment": "Snow Day live bumper config. shows: FS42 tag -> on-screen name. movies: tags that get the movie promo.",
+  "shows": {
+    "charlie_brown_christmas": "A Charlie Brown Christmas",
+    "frosty": "Frosty the Snowman",
+    "grinch": "How the Grinch Stole Christmas!",
+    "mickeys_christmas_carol": "Mickey's Christmas Carol",
+    "rudolph": "Rudolph the Red-Nosed Reindeer",
+    "santa_claus_is_comin": "Santa Claus Is Comin' to Town",
+    "year_without_santa": "The Year Without a Santa Claus",
+    "elf": "Elf",
+    "home_alone": "Home Alone",
+    "home_alone_2": "Home Alone 2: Lost in New York",
+    "miracle_on_34th_street": "Miracle on 34th Street",
+    "muppet_christmas_carol": "The Muppet Christmas Carol",
+    "christmas_vacation": "Christmas Vacation",
+    "nightmare_before_christmas": "The Nightmare Before Christmas",
+    "polar_express": "The Polar Express"
+  },
+  "movies": [
+    "elf",
+    "home_alone",
+    "home_alone_2",
+    "miracle_on_34th_street",
+    "muppet_christmas_carol",
+    "christmas_vacation",
+    "nightmare_before_christmas",
+    "polar_express"
+  ],
+  "facts": [
+    "Santa's postal code in Canada is H0H 0H0, and Canada Post answers his letters every year.",
+    "Toronto's Santa Claus Parade began in 1905, when Santa arrived by train and rode to Eaton's.",
+    "Rudolph was created in 1939 as a free booklet for Montgomery Ward shoppers.",
+    "A Charlie Brown Christmas first aired in 1965.",
+    "Every year, Nova Scotia sends Boston a giant Christmas tree to say thanks for its help after the 1917 Halifax Explosion.",
+    "Jingle Bells was played in space in 1965 by the Gemini 6 astronauts, on a harmonica and bells.",
+    "The 1966 Grinch special was narrated by Boris Karloff.",
+    "Reindeer and caribou are the same species.",
+    "Snowflakes almost always have six sides.",
+    "It's a Wonderful Life wasn't a hit when it came out in 1946. TV reruns made it a classic."
+  ],
+  "genericTeases": [
+    "more holiday favourites",
+    "more cozy specials",
+    "more snow day"
+  ],
+  "ids": [
+    "all December \u00b7 channel 12",
+    "cozy holiday specials all month",
+    "your home for the holidays",
+    "the most wonderful channel of the year"
+  ],
+  "themes": [
+    "plaid",
+    "night",
+    "lights",
+    "giftwrap",
+    "hearth"
+  ]
+}

@@ -208,6 +208,9 @@ class StationPlayer:
         self.skip_reception_check = False
         self.web_process = None
         self.web_queue = None
+        # persistent live-graphics windows (autobump "engine"), keyed by engine page url
+        self.graphics = {}
+        self._start_graphics_engines()
         self.parental_controls_process = None
         self.parental_controls_queue = None
         self.parental_unlocked_network = None
@@ -485,8 +488,44 @@ class StationPlayer:
         except Exception as e:
             self._l.debug(f"Could not show stream down OSD: {e}")
 
+    def _start_graphics_engines(self):
+        """Start one persistent graphics window per autobump engine used by any station, so the
+        first bumper doesn't pay the 3-4 s browser start-up."""
+        if not WEB_RENDER_AVAILABLE:
+            return
+        try:
+            for station in StationManager().stations:
+                engine = (station.get("autobump") or {}).get("engine")
+                if engine:
+                    self._graphics_engine(AutoBumpAgent.engine_page_url(engine))
+        except Exception as e:
+            self._l.error(f"Could not start graphics engines: {e}")
+
+    def _graphics_engine(self, page):
+        from fs42.graphics_engine import GraphicsEngine
+        engine = self.graphics.get(page)
+        if engine is None or not engine.alive():
+            networks = []
+            for station in StationManager().stations:
+                ab = station.get("autobump") or {}
+                if ab.get("engine") and AutoBumpAgent.engine_page_url(ab["engine"]) == page:
+                    networks.append(station["network_name"])
+            stretch = any((s.get("autobump") or {}).get("stretch") for s in StationManager().stations)
+            from urllib.parse import urlencode
+            url = f"{page}?{urlencode({'networks': ','.join(networks), 'stretch': '1' if stretch else '0'})}"
+            engine = GraphicsEngine(url)
+            self.graphics[page] = engine
+        return engine
+
+    def _hide_graphics(self):
+        for engine in self.graphics.values():
+            engine.hide()
+
     def shutdown(self):
         self.current_playing_file_path = None
+        for engine in self.graphics.values():
+            engine.stop()
+        self.graphics = {}
         # Terminate any running web process
         if self.web_process and self.web_process.is_alive():
             self._l.info("Terminating web process")
@@ -567,6 +606,16 @@ class StationPlayer:
                     from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
                     web_url = AutoBumpAgent.extract_url(file_path)
                     remaining = file_duration - (offset_seconds or 0) if file_duration else None
+                    cue = AutoBumpAgent.engine_cue(web_url)
+                    if cue and WEB_RENDER_AVAILABLE:
+                        # live graphics: stop the video underneath and cue the persistent window
+                        self.mpv.stop()
+                        self._graphics_engine(cue["page"]).show({
+                            "cue": cue["cue"],
+                            "duration": remaining if remaining else file_duration,
+                            "network": self.station_config["network_name"],
+                        })
+                        return True
                     if remaining is not None:
                         parsed = urlparse(web_url)
                         params = parse_qs(parsed.query, keep_blank_values=True)
@@ -596,6 +645,7 @@ class StationPlayer:
                 self._l.info(f"playing {file_path}")
                 self.mpv.command("playlist-clear")
                 self.mpv.play(file_path)
+                self._hide_graphics()
                 
 
                 timeout_seconds = StationManager().server_conf.get("video_seek_timeout", 10)
@@ -919,6 +969,7 @@ class StationPlayer:
             self._l.error(f"Failed to stop player - might not be running")
 
     def show_web(self, web_config, blocking=True):
+        self._hide_graphics()
         if not WEB_RENDER_AVAILABLE:
             self._l.error("Web rendering not available - PySide6 not installed")
             msg = "Web rendering requires PySide6 to be installed and configured. Please check documentation."
@@ -1180,6 +1231,7 @@ class StationPlayer:
                                     self._l.debug(f"Ignoring non-interrupting command during slot: {response.payload}")
                                     continue
                                 if response.status == PlayerState.CHANNEL_CHANGE:
+                                    self._hide_graphics()
                                     if stream_is_down:
                                         try:
                                             self.mpv.command("show-text", "", 1)

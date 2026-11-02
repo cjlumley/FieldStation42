@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Snow Day backgrounds</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 640px; height: 480px; position: relative; overflow: hidden; background: #6E0F1F">
+<sc-if value="{{isPlaid}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: repeating-linear-gradient(90deg, rgba(60,8,18,0.42) 0px, rgba(60,8,18,0.42) 48px, rgba(0,0,0,0) 48px, rgba(0,0,0,0) 96px), repeating-linear-gradient(0deg, rgba(60,8,18,0.42) 0px, rgba(60,8,18,0.42) 48px, rgba(0,0,0,0) 48px, rgba(0,0,0,0) 96px), #B3203A"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: radial-gradient(circle at 50% 52%, rgba(255,214,140,0.32) 0%, rgba(255,214,140,0) 60%)"></div>
+</sc-if>
+<sc-if value="{{isNight}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: linear-gradient(180deg, #0E1638 0%, #1B2A5E 65%, #2A3B78 100%)"></div>
+<div aria-hidden="true" style="position: absolute; left: 520px; top: 40px; width: 66px; height: 70px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #FFFBE6 0%, #FFF0C2 60%, #EBD08A 100%); box-shadow: 0 0 40px 12px rgba(255,240,194,0.3)"></div>
+<sc-for list="{{stars}}" as="st" hint-placeholder-count="22">
+<div aria-hidden="true" style="position: absolute; left: {{st.x}}px; top: {{st.y}}px; width: {{st.s}}px; height: {{st.s}}px; border-radius: 50%; background: #FFF6D8; animation: twinkle {{st.dur}}s ease-in-out {{st.d}}s infinite"></div>
+</sc-for>
+<div aria-hidden="true" style="position: absolute; left: 40px; top: 360px; width: 56px; height: 80px; background: #0F2A3F; clip-path: polygon(50% 0%, 100% 100%, 0% 100%)"></div>
+<div aria-hidden="true" style="position: absolute; left: 556px; top: 350px; width: 60px; height: 90px; background: #0F2A3F; clip-path: polygon(50% 0%, 100% 100%, 0% 100%)"></div>
+<div aria-hidden="true" style="position: absolute; left: -60px; top: 420px; width: 420px; height: 150px; border-radius: 50%; background: linear-gradient(180deg, #F4F8FF 0%, #C9D6EE 100%)"></div>
+<div aria-hidden="true" style="position: absolute; left: 260px; top: 432px; width: 460px; height: 150px; border-radius: 50%; background: linear-gradient(180deg, #EAF1FB 0%, #BCCDE0 100%)"></div>
+</sc-if>
+<sc-if value="{{isLights}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: radial-gradient(circle at 50% 50%, #2E7A55 0%, #14452F 60%, #0A2A1C 100%)"></div>
+<sc-for list="{{bokeh}}" as="bk" hint-placeholder-count="8">
+<div aria-hidden="true" style="position: absolute; left: {{bk.x}}px; top: {{bk.y}}px; width: {{bk.s}}px; height: {{bk.s}}px; border-radius: 50%; background: {{bk.c}}; filter: blur(6px); animation: twinkle {{bk.dur}}s ease-in-out {{bk.d}}s infinite"></div>
+</sc-for>
+<div aria-hidden="true" style="position: absolute; left: -20px; top: -110px; width: 680px; height: 180px; border-radius: 50%; border-bottom: 2px solid #06180F"></div>
+<div aria-hidden="true" style="position: absolute; left: -20px; top: 412px; width: 680px; height: 180px; border-radius: 50%; border-top: 2px solid #06180F"></div>
+<sc-for list="{{bulbs}}" as="b" hint-placeholder-count="28">
+<div aria-hidden="true" style="position: absolute; left: {{b.x}}px; top: {{b.y}}px; width: 12px; height: 16px; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; background: {{b.c}}; box-shadow: 0 0 10px {{b.c}}; animation: twinkle 1.6s ease-in-out {{b.d}}s infinite"></div>
+</sc-for>
+</sc-if>
+<sc-if value="{{isWrap}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: repeating-linear-gradient(135deg, #B3203A 0px, #B3203A 30px, #9C1A31 30px, #9C1A31 60px)"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: radial-gradient(circle at 50% 52%, rgba(255,214,140,0.3) 0%, rgba(255,214,140,0) 60%)"></div>
+<sc-for list="{{sparkles}}" as="sp" hint-placeholder-count="12">
+<div aria-hidden="true" style="position: absolute; left: {{sp.x}}px; top: {{sp.y}}px; width: {{sp.s}}px; height: {{sp.s}}px; background: #F3B43F; clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%); animation: twinkle {{sp.dur}}s ease-in-out {{sp.d}}s infinite"></div>
+</sc-for>
+</sc-if>
+<sc-if value="{{isHearth}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: repeating-linear-gradient(90deg, #5B3A26 0px, #5B3A26 58px, #46291A 58px, #46291A 60px)"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: radial-gradient(ellipse at 50% 112%, rgba(255,140,40,0.7) 0%, rgba(255,140,40,0) 62%); animation: flicker 2.2s ease-in-out infinite"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 30px; background: #1E5B3F"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 22px; width: 640px; height: 22px; background: radial-gradient(circle at 18px 0px, #1E5B3F 0px, #1E5B3F 17px, rgba(0,0,0,0) 18px); background-size: 32px 22px; background-repeat: repeat-x"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 4px; width: 640px; height: 34px; background: radial-gradient(circle at 18px 20px, #D7263D 0px, #D7263D 5px, rgba(0,0,0,0) 6px); background-size: 72px 34px; background-repeat: repeat-x"></div>
+</sc-if>
+<sc-for list="{{flakes}}" as="f" hint-placeholder-count="30">
+<div aria-hidden="true" style="position: absolute; left: {{f.x}}px; top: -20px; width: {{f.size}}px; height: {{f.size}}px; border-radius: 50%; background: #FFFFFF; opacity: {{f.op}}; animation: snowfall {{f.dur}}s linear {{f.delay}}s infinite"></div>
+</sc-for>
+<sc-if value="{{orn}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 40px; top: {{ornTop}}px; width: 42px; height: 130px; transform-origin: 50% 0; animation: sway 3.4s ease-in-out -0.4s infinite">
+<div style="position: absolute; left: 20px; top: 0; width: 2px; height: 60px; background: rgba(255,243,220,0.65)"></div>
+<div style="position: absolute; left: 15px; top: 58px; width: 12px; height: 7px; border-radius: 3px; background: linear-gradient(90deg, #A86A00, #FFE08A, #A86A00)"></div>
+<div style="position: absolute; left: 0; top: 64px; width: 42px; height: 42px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #FFFFFF 0%, #FFF0B0 14%, #F3B43F 55%, #A86A00 100%); box-shadow: 0 6px 12px rgba(0,0,0,0.35)"></div>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 566px; top: {{ornTop}}px; width: 36px; height: 120px; transform-origin: 50% 0; animation: sway 3s ease-in-out -1.8s infinite">
+<div style="position: absolute; left: 17px; top: 0; width: 2px; height: 44px; background: rgba(255,243,220,0.65)"></div>
+<div style="position: absolute; left: 12px; top: 42px; width: 12px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #A86A00, #FFE08A, #A86A00)"></div>
+<div style="position: absolute; left: 0; top: 47px; width: 36px; height: 36px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #FFFFFF 0%, #8FE0B0 14%, #1F8A55 55%, #0D3D25 100%); box-shadow: 0 6px 12px rgba(0,0,0,0.35)"></div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["plaid","night","lights","giftwrap","hearth"],"default":"plaid"},"ornaments":{"editor":"boolean","default":true},"$preview":{"width":640,"height":480}}'>
+class Component extends DCLogic {
+renderVals() {
+const theme = this.props.theme ?? 'plaid';
+const ornOn = this.props.ornaments ?? true;
+let s = 7;
+const r = () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+const flakes = [];
+for (let i = 0; i < 30; i++) {
+const size = 3 + Math.round(r() * 7);
+const dur = 6 + r() * 8;
+flakes.push({ x: Math.round(r() * 640), size, dur: dur.toFixed(1), delay: (-r() * dur).toFixed(1), op: (0.45 + r() * 0.55).toFixed(2) });
+}
+const stars = [];
+for (let i = 0; i < 22; i++) stars.push({ x: Math.round(r() * 620), y: Math.round(r() * 300), s: 2 + Math.round(r() * 3), dur: (1.5 + r() * 2).toFixed(1), d: (-r() * 3).toFixed(1) });
+const warm = ['rgba(255,214,140,0.45)', 'rgba(255,120,120,0.35)', 'rgba(255,240,200,0.4)'];
+const bokeh = [];
+for (let i = 0; i < 8; i++) bokeh.push({ x: Math.round(r() * 590), y: 90 + Math.round(r() * 300), s: 30 + Math.round(r() * 50), c: warm[i % 3], dur: (3 + r() * 3).toFixed(1), d: (-r() * 3).toFixed(1) });
+const colors = ['#F0505A', '#3DDC84', '#FFD24A', '#4FA8FF'];
+const bulbs = [];
+for (let i = 0; i < 13; i++) {
+const x = 16 + i * 50;
+const t = (x + 6 - 320) / 340;
+const k = Math.sqrt(Math.max(0, 1 - t * t));
+bulbs.push({ x, y: Math.round(-20 + 90 * k - 4), c: colors[i % 4], d: (i * 0.17).toFixed(2) });
+bulbs.push({ x, y: Math.round(502 - 90 * k - 12), c: colors[(i + 2) % 4], d: (i * 0.17 + 0.8).toFixed(2) });
+}
+const sparkles = [];
+for (let i = 0; i < 12; i++) sparkles.push({ x: Math.round(r() * 610), y: Math.round(r() * 450), s: 10 + Math.round(r() * 14), dur: (1.4 + r() * 2).toFixed(1), d: (-r() * 3).toFixed(1) });
+return {
+isPlaid: theme === 'plaid', isNight: theme === 'night', isLights: theme === 'lights', isWrap: theme === 'giftwrap', isHearth: theme === 'hearth',
+orn: ornOn && (theme === 'plaid' || theme === 'giftwrap' || theme === 'hearth'),
+ornTop: theme === 'hearth' ? 34 : 0,
+flakes, stars, bokeh, bulbs, sparkles
+};
+}
+}
+</script>
+</body>
+</html>

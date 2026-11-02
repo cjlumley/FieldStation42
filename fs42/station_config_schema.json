@@ -48,6 +48,23 @@
           "type": "integer",
           "description": "Duration of commercial breaks in seconds"
         },
+        "break_every": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Minutes of program between commercial breaks; sets the break count from content length (broadcast style) instead of from break_duration"
+        },
+        "min_break_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Minimum share of each standard slot left for commercials; the slot grows by schedule_increment until it is met (default 0.067)"
+        },
+        "max_break_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Maximum share of a slot that may be commercials when growing it for min_break_ratio (default 0.30)"
+        },
         "content_dir": {
           "type": "string",
           "description": "Directory containing content files"
@@ -691,6 +708,14 @@
       "type": "object",
       "description": "Auto-generated bump configuration",
       "properties": {
+        "engine": {
+          "type": "string",
+          "description": "Live graphics engine: name of a folder in fs42/fs42_server/static with an engine.html page (e.g. snowday). Break bumpers are drawn at air time from the live schedule by one persistent window."
+        },
+        "stretch": {
+          "type": "boolean",
+          "description": "Engine only: stretch the 640x480 design to fill the screen (composite 720x480 shown as 4:3) instead of letterboxing it"
+        },
         "title": {
           "type": "string"
         },

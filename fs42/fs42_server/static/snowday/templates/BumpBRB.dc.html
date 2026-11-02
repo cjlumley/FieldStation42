@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Snow Day we'll be right back</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@700;800&display=swap">
+<style>
+body{margin:0}
+a{color:#FFF3DC}a:hover{color:#F3B43F}
+@keyframes snowfall{from{transform:translateY(-30px)}to{transform:translateY(520px)}}
+@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:0.25}}
+@keyframes flicker{0%,100%{opacity:1}40%{opacity:0.72}70%{opacity:0.9}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes wobble{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes steam{0%{transform:translateY(12px);opacity:0}30%{opacity:0.8}100%{transform:translateY(-44px);opacity:0}}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes popCycle{0%{transform:scale(0.2);opacity:0}8%{transform:scale(1.08);opacity:1}11%{transform:scale(0.97)}13%,85%{transform:scale(1);opacity:1}94%,100%{transform:scale(0.2);opacity:0}}
+@keyframes riseCycle{0%{transform:translateY(160px);opacity:0}12%{transform:translateY(-6px);opacity:1}16%,84%{transform:translateY(0);opacity:1}94%,100%{transform:translateY(160px);opacity:0}}
+@keyframes dropCycle{0%{transform:translateY(-560px)}9%{transform:translateY(16px)}13%{transform:translateY(-6px)}16%,84%{transform:translateY(0)}94%,100%{transform:translateY(-560px)}}
+@keyframes slideCycle{0%{transform:translateX(-720px)}8%{transform:translateX(12px)}11%,84%{transform:translateX(0)}93%,100%{transform:translateX(-720px)}}
+@keyframes slideRCycle{0%{transform:translateX(720px)}8%{transform:translateX(-12px)}11%,84%{transform:translateX(0)}93%,100%{transform:translateX(720px)}}
+@keyframes panelCycle{0%{transform:translateX(320px)}8%{transform:translateX(-8px)}11%,84%{transform:translateX(0)}93%,100%{transform:translateX(320px)}}
+@keyframes unfurlCycle{0%{transform:scaleX(0);opacity:0}10%{transform:scaleX(1.05);opacity:1}14%,84%{transform:scaleX(1);opacity:1}94%,100%{transform:scaleX(0);opacity:0}}
+@keyframes stampCycle{0%,10%{transform:scale(3) rotate(-14deg);opacity:0}16%{transform:scale(0.92) rotate(-8deg);opacity:1}19%,85%{transform:scale(1) rotate(-8deg);opacity:1}94%,100%{transform:scale(0.2) rotate(-8deg);opacity:0}}
+@keyframes zoomStingCycle{0%{transform:scale(2.6);opacity:0}12%{transform:scale(0.94);opacity:1}17%{transform:scale(1.03)}21%,80%{transform:scale(1);opacity:1}92%,100%{transform:scale(0.6);opacity:0}}
+@keyframes burstCycle{0%,8%{transform:scale(0) rotate(0deg);opacity:0}20%{transform:scale(1) rotate(20deg);opacity:1}60%{opacity:0.7}100%{transform:scale(1.5) rotate(70deg);opacity:0}}
+</style>
+</helmet>
+<div style="width: 640px; height: 480px; filter: {{crtFilter}}; position: relative; overflow: hidden; font-family: 'Nunito', system-ui, sans-serif; color: #FFF3DC">
+<div style="position: absolute; left: 0; top: 0"><dc-import name="SnowBG" theme="{{theme}}" ornaments="{{orn}}" hint-size="640px,480px"></dc-import></div>
+<div aria-hidden="true" style="position: absolute; left: 60px; top: 96px; width: 250px; height: 310px; transform: scale(0.82); transform-origin: 0 0">
+<sc-if value="{{isCocoa}}" hint-placeholder-val="{{false}}">
+<div style="position: absolute; left: 20px; top: 0; width: 150px; height: 90px">
+<div style="position: absolute; left: 20px; top: 0; width: 22px; height: 80px; border-left: 6px solid rgba(255,255,255,0.7); border-radius: 50%; animation: steam 2.4s ease-out 0s infinite"></div>
+<div style="position: absolute; left: 62px; top: 6px; width: 22px; height: 76px; border-right: 6px solid rgba(255,255,255,0.6); border-radius: 50%; animation: steam 2.4s ease-out 0.8s infinite"></div>
+<div style="position: absolute; left: 104px; top: 2px; width: 22px; height: 80px; border-left: 6px solid rgba(255,255,255,0.65); border-radius: 50%; animation: steam 2.4s ease-out 1.6s infinite"></div>
+</div>
+<div style="position: absolute; left: 0; top: 94px; width: 250px; height: 210px">
+<div style="position: absolute; left: 150px; top: 36px; width: 84px; height: 100px; box-sizing: border-box; border-radius: 50%; border: 20px solid #EADBC0; box-shadow: 0 0 0 5px #5B3A26, inset 0 0 0 5px #5B3A26"></div>
+<div style="position: absolute; left: 0; top: 0; width: 176px; height: 190px; box-sizing: border-box; border-radius: 0 0 44px 44px; background: linear-gradient(90deg, #FFF3DC 0%, #FFF3DC 55%, #E3D2B4 100%); border: 6px solid #5B3A26; overflow: hidden"><div style="position: absolute; left: 0; top: 70px; width: 176px; height: 34px; background: #A3192F"></div></div>
+<div style="position: absolute; left: 0; top: -20px; width: 176px; height: 44px; box-sizing: border-box; border-radius: 50%; background: radial-gradient(ellipse at 50% 40%, #8A5A36 0%, #5B3A26 100%); border: 6px solid #5B3A26"></div>
+<div style="position: absolute; left: 40px; top: -12px; width: 26px; height: 20px; border-radius: 6px; background: #FFFFFF; box-shadow: 0 3px 0 #D9CCB8"></div>
+<div style="position: absolute; left: 80px; top: -16px; width: 24px; height: 20px; border-radius: 6px; background: #FFFFFF; box-shadow: 0 3px 0 #D9CCB8; transform: rotate(12deg)"></div>
+</div>
+</sc-if>
+<sc-if value="{{isGift}}" hint-placeholder-val="{{true}}">
+<div style="position: absolute; left: 0; top: 74px; width: 220px; height: 230px; animation: bob 2.4s ease-in-out infinite">
+<div style="position: absolute; left: 66px; top: 0; width: 46px; height: 40px; border-radius: 50% 50% 10% 50%; border: 10px solid #F3B43F; box-sizing: border-box; transform: rotate(-30deg)"></div>
+<div style="position: absolute; left: 104px; top: 0; width: 46px; height: 40px; border-radius: 50% 50% 50% 10%; border: 10px solid #F3B43F; box-sizing: border-box; transform: rotate(30deg)"></div>
+<div style="position: absolute; left: 10px; top: 40px; width: 200px; height: 44px; border-radius: 8px; background: linear-gradient(180deg, #E0485C 0%, #B3203A 100%); box-shadow: 0 4px 0 #6E0F1F"></div>
+<div style="position: absolute; left: 22px; top: 84px; width: 176px; height: 140px; border-radius: 0 0 10px 10px; background: linear-gradient(180deg, #C8243C 0%, #8A1229 100%)"></div>
+<div style="position: absolute; left: 96px; top: 40px; width: 28px; height: 184px; background: linear-gradient(90deg, #C98A12, #FFE08A, #C98A12)"></div>
+<div style="position: absolute; left: 22px; top: 136px; width: 176px; height: 22px; background: linear-gradient(180deg, #C98A12, #FFE08A, #C98A12)"></div>
+</div>
+</sc-if>
+<sc-if value="{{isSnowman}}" hint-placeholder-val="{{false}}">
+<div style="position: absolute; left: 20px; top: 14px; width: 200px; height: 300px; transform-origin: 50% 100%; animation: wobble 3s ease-in-out infinite">
+<div style="position: absolute; left: 20px; top: 150px; width: 160px; height: 150px; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #FFFFFF 0%, #F1F5FB 55%, #C9D6EE 100%)"></div>
+<div style="position: absolute; left: 40px; top: 70px; width: 120px; height: 110px; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #FFFFFF 0%, #F1F5FB 55%, #C9D6EE 100%)"></div>
+<div style="position: absolute; left: 30px; top: 150px; width: 140px; height: 22px; border-radius: 10px; background: #A3192F"></div>
+<div style="position: absolute; left: 120px; top: 160px; width: 22px; height: 50px; border-radius: 6px; background: #A3192F; transform: rotate(-12deg)"></div>
+<div style="position: absolute; left: 76px; top: 106px; width: 10px; height: 10px; border-radius: 50%; background: #1A1A1A"></div>
+<div style="position: absolute; left: 112px; top: 106px; width: 10px; height: 10px; border-radius: 50%; background: #1A1A1A"></div>
+<div style="position: absolute; left: 98px; top: 120px; width: 34px; height: 12px; background: #F28C28; clip-path: polygon(0% 0%, 100% 50%, 0% 100%)"></div>
+<div style="position: absolute; left: 50px; top: 54px; width: 100px; height: 18px; border-radius: 4px; background: #1A1A1A"></div>
+<div style="position: absolute; left: 66px; top: 0; width: 68px; height: 60px; border-radius: 6px 6px 0 0; background: #1A1A1A"></div>
+<div style="position: absolute; left: 66px; top: 40px; width: 68px; height: 10px; background: #A3192F"></div>
+</div>
+</sc-if>
+<sc-if value="{{isTree}}" hint-placeholder-val="{{false}}">
+<div style="position: absolute; left: 0; top: 4px; width: 230px; height: 310px">
+<div style="position: absolute; left: 100px; top: 0; width: 34px; height: 34px; background: #F3B43F; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); animation: twinkle 1.4s ease-in-out infinite"></div>
+<div style="position: absolute; left: 55px; top: 26px; width: 124px; height: 100px; background: #2E8A55; clip-path: polygon(50% 0%, 100% 100%, 0% 100%)"></div>
+<div style="position: absolute; left: 30px; top: 90px; width: 174px; height: 120px; background: #237A49; clip-path: polygon(50% 0%, 100% 100%, 0% 100%)"></div>
+<div style="position: absolute; left: 6px; top: 160px; width: 222px; height: 120px; background: #1E6B40; clip-path: polygon(50% 0%, 100% 100%, 0% 100%)"></div>
+<div style="position: absolute; left: 98px; top: 278px; width: 38px; height: 32px; background: #5B3A26"></div>
+<div style="position: absolute; left: 96px; top: 96px; width: 14px; height: 14px; border-radius: 50%; background: #E0485C; animation: twinkle 1.6s ease-in-out -0.4s infinite"></div>
+<div style="position: absolute; left: 132px; top: 160px; width: 14px; height: 14px; border-radius: 50%; background: #F3B43F; animation: twinkle 1.6s ease-in-out -0.9s infinite"></div>
+<div style="position: absolute; left: 70px; top: 200px; width: 14px; height: 14px; border-radius: 50%; background: #4FA8FF; animation: twinkle 1.6s ease-in-out -1.3s infinite"></div>
+<div style="position: absolute; left: 150px; top: 240px; width: 14px; height: 14px; border-radius: 50%; background: #E0485C; animation: twinkle 1.6s ease-in-out -0.2s infinite"></div>
+<div style="position: absolute; left: 50px; top: 250px; width: 14px; height: 14px; border-radius: 50%; background: #F3B43F; animation: twinkle 1.6s ease-in-out -1.1s infinite"></div>
+</div>
+</sc-if>
+</div>
+<div style="position: absolute; left: 276px; top: 120px; width: 300px; transform-origin: 20% 50%; animation: popCycle 7s ease-out both infinite">
+<div style="display: flex; flex-direction: column; gap: 2px; font-family: 'Baloo 2', sans-serif; font-weight: 800; line-height: 0.98; color: #FFF3DC; filter: drop-shadow(4px 0 0 #6E0F1F) drop-shadow(-4px 0 0 #6E0F1F) drop-shadow(0 4px 0 #6E0F1F) drop-shadow(0 -4px 0 #6E0F1F) drop-shadow(0 7px 0 #4A0814)">
+<div data-fit="1" style="width: 290px; font-size: 46px; white-space: nowrap">{{line1}}</div>
+<div data-fit="1" style="width: 290px; font-size: {{size2}}px; color: #F3B43F; white-space: nowrap">{{line2}}</div>
+</div>
+<div style="margin-top: 14px; width: 290px; font-size: 22px; font-weight: 800; line-height: 1.3; text-shadow: 0 2px 6px rgba(0,0,0,0.6)">{{sub}}</div>
+</div>
+<div style="position: absolute; right: 64px; bottom: 48px"><dc-import name="SnowWordmark" size="34" uid="s1" hint-size="177px,42px"></dc-import></div>
+<sc-if value="{{crt}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; z-index: 10; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px), repeating-linear-gradient(90deg, rgba(255,0,0,0.06) 0px, rgba(255,0,0,0.06) 1px, rgba(0,255,0,0.06) 1px, rgba(0,255,0,0.06) 2px, rgba(0,0,255,0.06) 2px, rgba(0,0,255,0.06) 3px), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 58%, rgba(0,0,0,0.5) 100%); box-shadow: inset 0 0 50px rgba(0,0,0,0.55)"></div>
+</sc-if>
+<sc-if value="{{safe}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 32px; top: 24px; width: 576px; height: 432px; box-sizing: border-box; border: 2px dashed rgba(255,230,0,0.9); z-index: 11; pointer-events: none"></div>
+<div aria-hidden="true" style="position: absolute; left: 64px; top: 48px; width: 512px; height: 384px; box-sizing: border-box; border: 2px dashed rgba(0,240,255,0.95); z-index: 11; pointer-events: none"></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"line": {"editor": "enum", "options": ["we&#39;ll be right back!", "don&#39;t go anywhere!", "back in a jingle!", "stay cozy, back soon!"], "default": "we&#39;ll be right back!", "section": "Copy"}, "art": {"editor": "enum", "options": ["gift", "cocoa", "snowman", "tree"], "default": "gift", "section": "Look"}, "theme": {"editor": "enum", "options": ["plaid", "night", "lights", "giftwrap", "hearth"], "default": "plaid", "section": "Look"}, "crt": {"editor": "boolean", "default": true, "section": "Look"}, "safe": {"editor": "boolean", "default": false, "section": "Look"}, "$preview": {"width": 640, "height": 480}}'>
+class Component extends DCLogic {
+renderVals() {
+const p = this.props;
+const crt = p.crt ?? true;
+const fit = (t, max, min, w, lines) => { const n = Math.max(4, String(t ?? '').length); return Math.max(min, Math.min(max, Math.floor((w * lines * 0.92) / (n * 0.54)))); };
+const art = p.art ?? 'gift';
+const lines = { "we'll be right back!": ["we'll be", 'right back!', 'grab a cocoa'], "don't go anywhere!": ["don't go", 'anywhere!', 'more after these messages'], 'back in a jingle!': ['back in a', 'jingle!', 'stay right here'], 'stay cozy, back soon!': ['stay cozy,', 'back soon!', 'more holiday fun in a minute'] };
+const l = lines[p.line] || lines["we'll be right back!"];
+const v = { line1: l[0], line2: l[1], size2: fit(l[1], 62, 40, 290, 1), sub: l[2], isCocoa: art === 'cocoa', isGift: art === 'gift', isSnowman: art === 'snowman', isTree: art === 'tree' };
+return { ...v, theme: p.theme ?? 'plaid', orn: false, crt, safe: p.safe ?? false, crtFilter: crt ? 'blur(0.6px) saturate(1.2) contrast(1.08)' : 'none' };
+}
+}
+</script>
+</body>
+</html>

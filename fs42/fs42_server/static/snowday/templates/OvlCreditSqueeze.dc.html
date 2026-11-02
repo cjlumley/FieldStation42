@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Snow Day end-credits squeeze overlay</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@700;800&display=swap">
+<style>
+body{margin:0}
+a{color:#FFF3DC}a:hover{color:#F3B43F}
+@keyframes snowfall{from{transform:translateY(-30px)}to{transform:translateY(520px)}}
+@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:0.25}}
+@keyframes flicker{0%,100%{opacity:1}40%{opacity:0.72}70%{opacity:0.9}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes wobble{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes steam{0%{transform:translateY(12px);opacity:0}30%{opacity:0.8}100%{transform:translateY(-44px);opacity:0}}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes popCycle{0%{transform:scale(0.2);opacity:0}8%{transform:scale(1.08);opacity:1}11%{transform:scale(0.97)}13%,85%{transform:scale(1);opacity:1}94%,100%{transform:scale(0.2);opacity:0}}
+@keyframes riseCycle{0%{transform:translateY(160px);opacity:0}12%{transform:translateY(-6px);opacity:1}16%,84%{transform:translateY(0);opacity:1}94%,100%{transform:translateY(160px);opacity:0}}
+@keyframes dropCycle{0%{transform:translateY(-560px)}9%{transform:translateY(16px)}13%{transform:translateY(-6px)}16%,84%{transform:translateY(0)}94%,100%{transform:translateY(-560px)}}
+@keyframes slideCycle{0%{transform:translateX(-720px)}8%{transform:translateX(12px)}11%,84%{transform:translateX(0)}93%,100%{transform:translateX(-720px)}}
+@keyframes slideRCycle{0%{transform:translateX(720px)}8%{transform:translateX(-12px)}11%,84%{transform:translateX(0)}93%,100%{transform:translateX(720px)}}
+@keyframes panelCycle{0%{transform:translateX(320px)}8%{transform:translateX(-8px)}11%,84%{transform:translateX(0)}93%,100%{transform:translateX(320px)}}
+@keyframes unfurlCycle{0%{transform:scaleX(0);opacity:0}10%{transform:scaleX(1.05);opacity:1}14%,84%{transform:scaleX(1);opacity:1}94%,100%{transform:scaleX(0);opacity:0}}
+@keyframes stampCycle{0%,10%{transform:scale(3) rotate(-14deg);opacity:0}16%{transform:scale(0.92) rotate(-8deg);opacity:1}19%,85%{transform:scale(1) rotate(-8deg);opacity:1}94%,100%{transform:scale(0.2) rotate(-8deg);opacity:0}}
+@keyframes zoomStingCycle{0%{transform:scale(2.6);opacity:0}12%{transform:scale(0.94);opacity:1}17%{transform:scale(1.03)}21%,80%{transform:scale(1);opacity:1}92%,100%{transform:scale(0.6);opacity:0}}
+@keyframes burstCycle{0%,8%{transform:scale(0) rotate(0deg);opacity:0}20%{transform:scale(1) rotate(20deg);opacity:1}60%{opacity:0.7}100%{transform:scale(1.5) rotate(70deg);opacity:0}}
+</style>
+</helmet>
+<div style="width: 640px; height: 480px; filter: {{crtFilter}}; position: relative; overflow: hidden; font-family: 'Nunito', system-ui, sans-serif; color: #FFF3DC">
+<sc-if value="{{showChecker}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background-color: #3A3F4A; background-image: conic-gradient(#2E333C 0deg 90deg, #3A3F4A 90deg 180deg, #2E333C 180deg 270deg, #3A3F4A 270deg 360deg); background-size: 24px 24px"></div>
+<div style="position: absolute; left: 40px; top: 130px; width: 280px; height: 210px; box-sizing: border-box; border: 3px dashed rgba(255,255,255,0.55); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.8)">end credits shrink into here</div>
+</sc-if>
+<div style="position: absolute; left: 340px; top: 0; width: 300px; height: 480px; animation: panelCycle 9s cubic-bezier(0.2, 0.8, 0.3, 1) both infinite">
+<div style="position: absolute; left: 0; top: 0; width: 300px; height: 480px; background: repeating-linear-gradient(90deg, rgba(60,8,18,0.42) 0px, rgba(60,8,18,0.42) 40px, rgba(0,0,0,0) 40px, rgba(0,0,0,0) 80px), repeating-linear-gradient(0deg, rgba(60,8,18,0.42) 0px, rgba(60,8,18,0.42) 40px, rgba(0,0,0,0) 40px, rgba(0,0,0,0) 80px), #B3203A; border-left: 5px solid #F3B43F; box-sizing: border-box"></div>
+<div aria-hidden="true" style="position: absolute; left: 244px; top: 0; width: 36px; height: 110px; transform-origin: 50% 0; animation: sway 3s ease-in-out infinite">
+<div style="position: absolute; left: 17px; top: 0; width: 2px; height: 50px; background: rgba(255,243,220,0.65)"></div>
+<div style="position: absolute; left: 0; top: 52px; width: 36px; height: 36px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #FFFFFF 0%, #FFF0B0 14%, #F3B43F 55%, #A86A00 100%)"></div>
+</div>
+<div style="position: absolute; left: 24px; top: 52px"><dc-import name="SnowWordmark" size="38" uid="s1" hint-size="198px,48px"></dc-import></div>
+<div style="position: absolute; left: 24px; top: 128px; width: 212px; box-sizing: border-box; padding: 16px 16px; border-radius: 20px; background: #FFF3DC; border: 5px solid #6E0F1F; box-shadow: 0 8px 0 #4A0814; display: flex; flex-direction: column; gap: 6px">
+<div aria-hidden="true" style="position: absolute; left: 10px; right: 10px; top: -12px; height: 20px; background: radial-gradient(circle at 11px 16px, #FFFFFF 0px, #FFFFFF 11px, rgba(255,255,255,0) 12px); background-size: 22px 20px; background-repeat: repeat-x"></div>
+<div style="font-size: 18px; font-weight: 800; letter-spacing: 3px; color: #A3192F">UP NEXT</div>
+<div data-fit="3" style="width: 170px; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: {{nameSize}}px; line-height: 1.02; color: #5B3A26">{{showName}}</div>
+<div style="font-size: 20px; font-weight: 800; color: #A3192F">{{time}}</div>
+</div>
+<div style="position: absolute; left: 24px; top: 340px; width: 212px; font-size: 20px; font-weight: 800; line-height: 1.3; color: #FFF3DC">{{later}}</div>
+</div>
+<sc-if value="{{crt}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; z-index: 10; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px), repeating-linear-gradient(90deg, rgba(255,0,0,0.06) 0px, rgba(255,0,0,0.06) 1px, rgba(0,255,0,0.06) 1px, rgba(0,255,0,0.06) 2px, rgba(0,0,255,0.06) 2px, rgba(0,0,255,0.06) 3px), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 58%, rgba(0,0,0,0.5) 100%); box-shadow: inset 0 0 50px rgba(0,0,0,0.55)"></div>
+</sc-if>
+<sc-if value="{{safe}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 32px; top: 24px; width: 576px; height: 432px; box-sizing: border-box; border: 2px dashed rgba(255,230,0,0.9); z-index: 11; pointer-events: none"></div>
+<div aria-hidden="true" style="position: absolute; left: 64px; top: 48px; width: 512px; height: 384px; box-sizing: border-box; border: 2px dashed rgba(0,240,255,0.95); z-index: 11; pointer-events: none"></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"showName": {"editor": "text", "default": "[SHOW NAME]", "section": "Copy"}, "time": {"editor": "text", "default": "[7:30]", "section": "Copy"}, "later": {"editor": "text", "default": "later: [MOVIE] at [8:00]", "section": "Copy"}, "showChecker": {"editor": "boolean", "default": true, "section": "Look"}, "crt": {"editor": "boolean", "default": false, "section": "Look"}, "safe": {"editor": "boolean", "default": false, "section": "Look"}, "$preview": {"width": 640, "height": 480}}'>
+class Component extends DCLogic {
+renderVals() {
+const p = this.props;
+const crt = p.crt ?? false;
+const fit = (t, max, min, w, lines) => { const n = Math.max(4, String(t ?? '').length); return Math.max(min, Math.min(max, Math.floor((w * lines * 0.92) / (n * 0.54)))); };
+const name = p.showName ?? '[SHOW NAME]';
+const v = { showName: name, nameSize: fit(name, 34, 20, 170, 3), time: p.time ?? '[7:30]', later: p.later ?? 'later: [MOVIE] at [8:00]', showChecker: p.showChecker ?? true };
+return { ...v, crt, safe: p.safe ?? false, crtFilter: crt ? 'blur(0.6px) saturate(1.2) contrast(1.08)' : 'none' };
+}
+}
+</script>
+</body>
+</html>
