@@ -194,8 +194,9 @@ class StationPlayer:
                 script_opts="osc-idlescreen=no",
                 hr_seek="yes",
                 image_display_duration="inf",
-                # use the hardware decoder when there is one (Pi 5 HEVC drops ~half its frames in software)
-                hwdec="auto",
+                # use the hardware decoder when there is one (Pi 5 HEVC drops ~half its frames in software).
+                # copy-back mode: plain "auto" (drm-prime) renders solid blue on Pi 5 + Wayland/Vulkan
+                hwdec="auto-copy",
             )
 
         self.station_config = station_config
