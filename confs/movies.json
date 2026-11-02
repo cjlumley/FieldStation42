@@ -3,9 +3,21 @@
     "network_name": "Movies",
     "channel_number": 5,
     "network_type": "standard",
-    "schedule_increment": 0,
-    "commercial_free": true,
+    "schedule_increment": 30,
+    "break_strategy": "standard",
+    "commercial_free": false,
+    "break_duration": 240,
+    "break_every": 12,
+    "min_break_ratio": 0.2,
+    "max_break_ratio": 0.35,
     "content_dir": "catalog/movies",
+    "commercial_dir": "commercial",
+    "bump_dir": "bump",
+    "tag_overrides": {
+      "movies": {
+        "start_bump": "intro"
+      }
+    },
     "day_templates": {
       "allday": {
         "0": {

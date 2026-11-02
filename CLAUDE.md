@@ -124,6 +124,63 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
 2. Finish plan step 3 by rsyncing `CRT/filler/` from the Mac to `/mnt/crtmedia/Filler/`. Decide first how the existing `Filler/spots` fits the `kids/` and `general/` layout.
 3. Plan step 4: build the real year-round main channel with shows, period ads, bumpers and real 30-minute slots.
 
+## Snow Day bumpers (Christmas channel, ch 12)
+- Designs live in Cooper's Claude Design canvas "CRT Network Pitch Board", page "Snow Day bumper library":
+  15 templates plus a shared background (5 themes) and a shared logo.
+- They render to clips with the **snowday-kit** (Node + Playwright + ffmpeg), on Cooper's Mac. Its README has the full spec. Flow:
+  `channel.json` (FS42 tag → on-screen show name, facts) → `build-library.mjs` → `render.mjs` → `out/snowday/`.
+- **Picture rule (Pi 5 composite):** the output is a fixed 720×480i frame with no scaler and no overscan control,
+  and the tube shows it as 4:3. Templates are designed at 640×480 (true 4:3) and stretched to 720×480.
+  - Title-safe area: x 64–576, y 48–432 on the 640 design.
+  - **The library is mixed**: ads 960×720 SAR 1:1, Magic School Bus 720×480 SAR 8:9, Goosebumps PAL 704×576,
+    SpongeBob 950×720, movies 1920×1080 16:9. Because of that, at the CRT step mpv needs `monitoraspect=4:3`
+    (or `monitorpixelaspect`) so every file gets its own aspect right. The bumpers should then be tagged
+    with a real 4:3 display aspect (720×480 SAR 8:9, i.e. the kit's `--sar` option), not SAR 1:1.
+    Cooper said to leave `mpv.conf` alone, so ask, or pass the option from `station_player.py`.
+- **FS42 folder map** (inside `catalog/christmas/`, symlinked to `/mnt/crtmedia/Station/christmas/`, which holds placeholders):
+  - `bump/` = IDs, greetings, trivia. `bump/pre/` = into-break. `bump/post/` = out-of-break stings.
+  - `next/--<tag>/` = "up next <show>".
+  - `shows/<tag>/{pre,post}` = show-specific bumpers, via `tag_overrides` → `bump_dir`.
+  - `special/` = sign-off/on, plus per-day countdown clips.
+  - Run `--rebuild_catalog` then `--add_week` after adding clips. `tools/make_placeholders.py` holds the tag → name list
+    (`CHRISTMAS_SPECIALS` / `CHRISTMAS_MOVIES`), and it must match the kit's `channel.json`.
+- **One FS42 tag per title** (e.g. `rudolph`, `elf`), because `next/` matching uses the slot's tag. Specials run 7–16h and movies the rest,
+  using `random_tags`. Breaks come every 12 minutes (`break_every`).
+- **Verified in FS42's source:**
+  - **`next/` fires on every break, mid-show included.** Its clips are merged at random into the pre/post/fill pools whenever the
+    next block's tag matches. In the first build, 493 of 524 "up next" clips aired mid-show, but all named the right show.
+    Proposed fix (not done): only pass `lookahead` to the last break and the after-show fill in `make_reel_fill`.
+  - **`tag_overrides` `bump_dir` with pre/post:** pre/post come from `<override>/pre` and `<override>/post`. If either is missing,
+    FS42 falls back to the override folder's own clips, not the channel's `bump/pre`. An override folder with no clips errors
+    (`Can't find bump folder`), so only add an override once `shows/<tag>/` has clips. `{"tags": "shows/x", "chance": 0.5}` mixes with the channel pool.
+  - **Countdown clips need no daily job.** Folder names like `December 24` or `December 1 - December 25` are date hints, and they work
+    in bump folders (hints stack from every path level). FS42 filters by the block's air date even when building a week ahead.
+    A dated clip in `bump/December 13/` only joins that day's pool at random, though. To air one at a fixed time each day,
+    generate `date_overrides` slots with a `start_bump` file path. `start_bump` folders ignore date hints.
+- `OvlCreditSqueeze` is an on-top overlay. It needs alpha video plus an FS42 OSD/mpv overlay extension, so it's not part of v1.
+
+**Live Snow Day bumpers (Cooper chose this over pre-rendered clips: "do b so that we can do this properly").**
+Channel 12 draws its break bumpers live, at air time, from the real schedule.
+- Config: `"autobump": {"engine": "snowday", "duration": 7}` (optional `"stretch": true` for the CRT).
+  Every break gets a `cue=pre` entry (into break) and a `cue=post` entry (out of break).
+- Page: `fs42/fs42_server/static/snowday/`. It holds `engine.html` and `engine.js`, plus copies of the kit's `runtime.js`,
+  `templates/` and fonts, and `channel.json` (FS42 tag → name, movie tags, facts, IDs, themes).
+  - It caches `/schedules/<network>` and refreshes every 20 s.
+  - `cue=post` → "Now back to <show>" if any `feature` entry remains in the current block after this bumper.
+    Otherwise "Up next <show> at <h:mm>", or UpNextThen.
+  - `cue=pre` → a weighted pick from: BRB, "stay tuned: more <show>", trivia, countdown (Dec 1–24, from today's date), Merry, ID,
+    Lineup (the next 4 blocks with real times), and Movie promo (a movie later today).
+  - Each template's `*Cycle` animation plays once, stretched to the slot length.
+- Window: `fs42/graphics_engine.py`. Launching a fresh web window per bumper (stock autobump) costs **3–4 s of black** on the Pi 5.
+  So the player starts **one persistent QtWebEngine window** per engine at startup (`StationPlayer._start_graphics_engines`).
+  A cue updates the page with JS and shows the window over mpv in about 0.1 s; any normal video, channel change or web channel hides it.
+- Autobump `engine` support is in `AutoBumpAgent.engine_bumps` / `engine_cue`. Leftover-fill breaks get engine cues too (`ShowCatalog.make_reel_fill`).
+  Tests: `test/test_graphics_engine_bumps.py`.
+- To change wording, weights or templates, edit `engine.js` and `channel.json`. They're static files: restart the player (the window loads once); no rebuild needed.
+  To update the designs, copy the kit's templates into `static/snowday/templates/`.
+- The pre-rendered clips in `/mnt/crtmedia/Station/christmas/` (from `~/snowday-kit-src/`, rendered on the Pi with Node in `~/.local/node`
+  and the system Chromium via `pi-chromium.cjs`) are a fallback only. With `autobump.engine` set, FS42 doesn't air folder bumpers on ch 12.
+
 ## Working style
 Cooper has ADHD. Give a plain-language summary first, then the detail. Keep steps short.
 He's a strong developer (TS/React/Python), so don't over-explain code. Explain anything hardware or Linux-specific.

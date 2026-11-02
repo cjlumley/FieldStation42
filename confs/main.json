@@ -6,9 +6,25 @@
     "schedule_increment": 30,
     "break_strategy": "standard",
     "commercial_free": false,
+    "break_duration": 150,
+    "break_every": 8,
     "content_dir": "catalog/main",
     "commercial_dir": "commercial",
     "bump_dir": "bump",
+    "tag_overrides": {
+      "magic_school_bus": {
+        "start_bump": "up_next/magic_school_bus"
+      },
+      "spongebob": {
+        "start_bump": "up_next/spongebob"
+      },
+      "scooby_doo": {
+        "start_bump": "up_next/scooby_doo"
+      },
+      "are_you_afraid": {
+        "start_bump": "up_next/are_you_afraid"
+      }
+    },
     "day_templates": {
       "allday": {
         "0": {

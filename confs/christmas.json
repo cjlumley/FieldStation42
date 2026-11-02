@@ -1,0 +1,336 @@
+{
+  "station_conf": {
+    "network_name": "Christmas",
+    "network_long_name": "Snow Day",
+    "channel_number": 12,
+    "network_type": "standard",
+    "schedule_increment": 30,
+    "break_strategy": "standard",
+    "commercial_free": false,
+    "break_duration": 180,
+    "break_every": 12,
+    "min_break_ratio": 0.2,
+    "max_break_ratio": 0.35,
+    "content_dir": "catalog/christmas",
+    "commercial_dir": "commercial",
+    "bump_dir": "bump",
+    "autobump": {
+      "engine": "snowday",
+      "duration": 7
+    },
+    "day_templates": {
+      "allday": {
+        "0": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "1": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "2": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "3": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "4": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "5": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "6": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "7": {
+          "tags": [
+            "charlie_brown_christmas",
+            "frosty",
+            "grinch",
+            "mickeys_christmas_carol",
+            "rudolph",
+            "santa_claus_is_comin",
+            "year_without_santa"
+          ],
+          "random_tags": true
+        },
+        "8": {
+          "tags": [
+            "charlie_brown_christmas",
+            "frosty",
+            "grinch",
+            "mickeys_christmas_carol",
+            "rudolph",
+            "santa_claus_is_comin",
+            "year_without_santa"
+          ],
+          "random_tags": true
+        },
+        "9": {
+          "tags": [
+            "charlie_brown_christmas",
+            "frosty",
+            "grinch",
+            "mickeys_christmas_carol",
+            "rudolph",
+            "santa_claus_is_comin",
+            "year_without_santa"
+          ],
+          "random_tags": true
+        },
+        "10": {
+          "tags": [
+            "charlie_brown_christmas",
+            "frosty",
+            "grinch",
+            "mickeys_christmas_carol",
+            "rudolph",
+            "santa_claus_is_comin",
+            "year_without_santa"
+          ],
+          "random_tags": true
+        },
+        "11": {
+          "tags": [
+            "charlie_brown_christmas",
+            "frosty",
+            "grinch",
+            "mickeys_christmas_carol",
+            "rudolph",
+            "santa_claus_is_comin",
+            "year_without_santa"
+          ],
+          "random_tags": true
+        },
+        "12": {
+          "tags": [
+            "charlie_brown_christmas",
+            "frosty",
+            "grinch",
+            "mickeys_christmas_carol",
+            "rudolph",
+            "santa_claus_is_comin",
+            "year_without_santa"
+          ],
+          "random_tags": true
+        },
+        "13": {
+          "tags": [
+            "charlie_brown_christmas",
+            "frosty",
+            "grinch",
+            "mickeys_christmas_carol",
+            "rudolph",
+            "santa_claus_is_comin",
+            "year_without_santa"
+          ],
+          "random_tags": true
+        },
+        "14": {
+          "tags": [
+            "charlie_brown_christmas",
+            "frosty",
+            "grinch",
+            "mickeys_christmas_carol",
+            "rudolph",
+            "santa_claus_is_comin",
+            "year_without_santa"
+          ],
+          "random_tags": true
+        },
+        "15": {
+          "tags": [
+            "charlie_brown_christmas",
+            "frosty",
+            "grinch",
+            "mickeys_christmas_carol",
+            "rudolph",
+            "santa_claus_is_comin",
+            "year_without_santa"
+          ],
+          "random_tags": true
+        },
+        "16": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "17": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "18": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "19": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "20": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "21": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "22": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        },
+        "23": {
+          "tags": [
+            "elf",
+            "home_alone",
+            "home_alone_2",
+            "miracle_on_34th_street",
+            "muppet_christmas_carol",
+            "christmas_vacation",
+            "nightmare_before_christmas",
+            "polar_express"
+          ],
+          "random_tags": true
+        }
+      }
+    },
+    "monday": "allday",
+    "tuesday": "allday",
+    "wednesday": "allday",
+    "thursday": "allday",
+    "friday": "allday",
+    "saturday": "allday",
+    "sunday": "allday"
+  }
+}
