@@ -64,6 +64,20 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
 - `confs/main_config.json` holds the web API key and is gitignored. Every other `confs/*.json` is tracked. Never commit the key.
 - `gh` is logged in as cjlumley. Commits use the GitHub noreply email (set in the repo-local git config).
 
+**Ch2 `Main`** (`confs/main.json`): the first channel with ads. Cooper put the Mac filler library on hold, so it uses what's on the Pi.
+- Shows: Magic School Bus, SpongeBob, Scooby-Doo and Are You Afraid of the Dark, in real 30-minute slots with two shows rotating per hour.
+  Goosebumps is left out because its double-episode files run ~43 minutes.
+- `catalog/main/` holds symlinks: one per show folder, `commercial/` with one link per clean ad, and `bump/` linking to the House Hippo PSA in `~/demo`.
+  Nothing on the SSD was changed for this.
+- Ads are the 8 clean toy and kid ads in `/mnt/crtmedia/Filler/spots/`, numbered 004 005 006 010 011 014 015 016.
+  - Cooper had the 7 pure-Toonami clips deleted (001 002 003 008 012 013 017).
+  - 007 and 009 are half ad, half Toonami. They're not linked yet, and Cooper hasn't decided whether to trim or delete them.
+  - These 960×720 clips were cut at the wrong points, with ads and bumpers mixed in the same files. Spot-check the Mac library before trusting its splits.
+- The House Hippo is the only bumper, so it plays ~4× per half hour. Needs more PSAs or station IDs.
+- Fixed in our fork: FS42 used to space breaks by chapter count and put them right before the end credits.
+  `LiquidBlock.clip_break_points` now picks the chapter nearest to evenly spaced times and never breaks in the last 120 s.
+- Fixed in our fork: Kodi double-episode `.nfo` files (two XML documents in one file) were shown on screen as raw XML through the NFO overlay. `NFOAgent.parse_nfo_string` now handles them.
+
 **Test channels** (`confs/test.json`, `confs/goosebumps.json`, `confs/movies.json`, committed so we can come back to them)
 - ch3 `Test` = Magic School Bus, ch4 `Goosebumps` (PAL 704×576, will judder on NTSC), ch5 `Movies`.
 - Each one is `content_dir: catalog/<name>/` plus a symlink to the show folder on `/mnt/crtmedia`, following the docs' external-drive method.
@@ -81,8 +95,13 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
 - Start, with the env vars needed over SSH:
   `cd ~/FieldStation42 && source env/bin/activate && export XDG_RUNTIME_DIR=/run/user/1000 WAYLAND_DISPLAY=wayland-0 && python3 field_player.py`
 - The player also serves the web console on `:4242`. Don't run `station_42.py --server` at the same time.
-- Stop: `pkill -f field_player.py` from a terminal. In scripts, kill by PID instead, because `pkill -f` can match the script's own command line.
-  **After stopping, confirm no `mpv` is left before starting again.** A leftover player plays audio twice, which sounds like an echo.
+- Stop: `pkill -f field_player.py` from a terminal. In scripts, kill by PID instead, because `pkill -f` and `pgrep -f`
+  can match the script's own command line (this bit us twice).
+  - Start in scripts with `nohup env/bin/python field_player.py > runtime/field_player.log 2>&1 < /dev/null & echo $! > runtime/field_player.pid`.
+  - Take the PID from `$!`, never from `pgrep -f`, and stop with `kill $(cat runtime/field_player.pid)`.
+  - To list the real processes: `ps -eo pid,ppid,args | awk '$3=="env/bin/python" && $4=="field_player.py" || $3=="mpv"'`.
+  - **After stopping, confirm no `mpv` is left before starting again.** A leftover player plays audio twice, which sounds like an echo.
+  - Stop the player before `--rebuild_catalog` or `--delete_schedules`.
 - Change channel: `echo '{"command": "direct", "channel": 4}' > runtime/channel.socket`
 
 **Open issues**

@@ -1,0 +1,168 @@
+{
+  "station_conf": {
+    "network_name": "Main",
+    "channel_number": 2,
+    "network_type": "standard",
+    "schedule_increment": 30,
+    "break_strategy": "standard",
+    "commercial_free": false,
+    "content_dir": "catalog/main",
+    "commercial_dir": "commercial",
+    "bump_dir": "bump",
+    "day_templates": {
+      "allday": {
+        "0": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "1": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        },
+        "2": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "3": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        },
+        "4": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "5": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        },
+        "6": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "7": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        },
+        "8": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "9": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        },
+        "10": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "11": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        },
+        "12": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "13": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        },
+        "14": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "15": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        },
+        "16": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "17": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        },
+        "18": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "19": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        },
+        "20": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "21": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        },
+        "22": {
+          "tags": [
+            "magic_school_bus",
+            "spongebob"
+          ]
+        },
+        "23": {
+          "tags": [
+            "scooby_doo",
+            "are_you_afraid"
+          ]
+        }
+      }
+    },
+    "monday": "allday",
+    "tuesday": "allday",
+    "wednesday": "allday",
+    "thursday": "allday",
+    "friday": "allday",
+    "saturday": "allday",
+    "sunday": "allday"
+  }
+}
