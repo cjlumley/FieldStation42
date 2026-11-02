@@ -10,6 +10,9 @@ from fs42.media_processor import MediaProcessor
 
 
 class LiquidBlock:
+    # no commercial break may start within this many seconds of the end of the content (end credits)
+    BREAK_TAIL_GUARD = 120
+
     def __init__(self, content, start_time, end_time, title=None, break_strategy="standard", break_info=None):
         self.content = content
         # the requested starting time
@@ -63,7 +66,10 @@ class LiquidBlock:
         if max_breaks <= 0 or len(break_points) == 0:
             return []
 
-        if len(break_points) <= max_breaks:
+        in_tail = any(
+            content_duration - bp["chapter_start"] < LiquidBlock.BREAK_TAIL_GUARD for bp in break_points[1:]
+        )
+        if len(break_points) <= max_breaks and not in_tail:
             return break_points
 
         # Merge adjacent chapters to create evenly-distributed segments
@@ -74,13 +80,20 @@ class LiquidBlock:
         # For max_breaks segments, we need (max_breaks - 1) commercial breaks
         num_breaks = max_breaks - 1
 
-        # Select evenly-distributed break positions
-        step = (len(break_points) - 1) / num_breaks if num_breaks > 0 else 0
+        # Pick the chapter boundaries closest to evenly spaced *times* (not evenly spaced chapter
+        # indices: scene-level chapters are uneven, and index spacing lands breaks right before the
+        # end credits). Never break in the last BREAK_TAIL_GUARD seconds, so credits stay attached.
+        candidates = [
+            i for i in range(1, len(break_points))
+            if content_duration - break_points[i]["chapter_start"] >= LiquidBlock.BREAK_TAIL_GUARD
+        ]
         break_indices = []
-        for i in range(1, max_breaks):  # Start from 1, not 0 (skip the first chapter start)
-            index = round(i * step)
-            if index not in break_indices and index < len(break_points):
-                break_indices.append(index)
+        for i in range(1, max_breaks):
+            target = content_duration * i / max_breaks
+            remaining = [c for c in candidates if not break_indices or c > break_indices[-1]]
+            if not remaining:
+                break
+            break_indices.append(min(remaining, key=lambda c: abs(break_points[c]["chapter_start"] - target)))
 
         # Create merged segments by combining chapters between selected break points
         merged_segments = []
@@ -133,9 +146,9 @@ class LiquidBlock:
                 # break_points contains content segments, so we need desired_breaks + 1 segments
                 desired_segments = desired_breaks + 1
 
-                # If we have more chapter markers than needed, select the best-positioned ones
-                if len(break_points) > desired_segments:
-                    break_points = self.clip_break_points(break_points, desired_segments, self.content_duration())
+                # Select the best-positioned chapter markers (also drops any break inside the end credits,
+                # so it runs even when there are no more markers than needed)
+                break_points = self.clip_break_points(break_points, desired_segments, self.content_duration())
 
                 # strict_count is the number of reel blocks (commercial breaks) to create
                 # This is one less than the number of content segments
@@ -146,8 +159,7 @@ class LiquidBlock:
                 # We need max_breaks + 1 content segments to create max_breaks commercial breaks
                 max_segments = int(max_breaks) + 1
 
-                if len(break_points) > max_segments:
-                    break_points = self.clip_break_points(break_points, max_segments, self.content_duration())
+                break_points = self.clip_break_points(break_points, max_segments, self.content_duration())
 
                 # strict_count is the number of reel blocks (one less than content segments)
                 strict_count = len(break_points) - 1 if len(break_points) > 0 else 0
