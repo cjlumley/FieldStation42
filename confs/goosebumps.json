@@ -1,0 +1,93 @@
+{
+  "station_conf": {
+    "network_name": "Goosebumps",
+    "channel_number": 4,
+    "network_type": "standard",
+    "schedule_increment": 0,
+    "commercial_free": true,
+    "content_dir": "catalog/goosebumps",
+    "day_templates": {
+      "allday": {
+        "0": {
+          "tags": "goosebumps"
+        },
+        "1": {
+          "tags": "goosebumps"
+        },
+        "2": {
+          "tags": "goosebumps"
+        },
+        "3": {
+          "tags": "goosebumps"
+        },
+        "4": {
+          "tags": "goosebumps"
+        },
+        "5": {
+          "tags": "goosebumps"
+        },
+        "6": {
+          "tags": "goosebumps"
+        },
+        "7": {
+          "tags": "goosebumps"
+        },
+        "8": {
+          "tags": "goosebumps"
+        },
+        "9": {
+          "tags": "goosebumps"
+        },
+        "10": {
+          "tags": "goosebumps"
+        },
+        "11": {
+          "tags": "goosebumps"
+        },
+        "12": {
+          "tags": "goosebumps"
+        },
+        "13": {
+          "tags": "goosebumps"
+        },
+        "14": {
+          "tags": "goosebumps"
+        },
+        "15": {
+          "tags": "goosebumps"
+        },
+        "16": {
+          "tags": "goosebumps"
+        },
+        "17": {
+          "tags": "goosebumps"
+        },
+        "18": {
+          "tags": "goosebumps"
+        },
+        "19": {
+          "tags": "goosebumps"
+        },
+        "20": {
+          "tags": "goosebumps"
+        },
+        "21": {
+          "tags": "goosebumps"
+        },
+        "22": {
+          "tags": "goosebumps"
+        },
+        "23": {
+          "tags": "goosebumps"
+        }
+      }
+    },
+    "monday": "allday",
+    "tuesday": "allday",
+    "wednesday": "allday",
+    "thursday": "allday",
+    "friday": "allday",
+    "saturday": "allday",
+    "sunday": "allday"
+  }
+}

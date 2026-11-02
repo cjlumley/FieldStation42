@@ -1,0 +1,93 @@
+{
+  "station_conf": {
+    "network_name": "Test",
+    "channel_number": 3,
+    "network_type": "standard",
+    "schedule_increment": 0,
+    "commercial_free": true,
+    "content_dir": "catalog/test",
+    "day_templates": {
+      "allday": {
+        "0": {
+          "tags": "magic_school_bus"
+        },
+        "1": {
+          "tags": "magic_school_bus"
+        },
+        "2": {
+          "tags": "magic_school_bus"
+        },
+        "3": {
+          "tags": "magic_school_bus"
+        },
+        "4": {
+          "tags": "magic_school_bus"
+        },
+        "5": {
+          "tags": "magic_school_bus"
+        },
+        "6": {
+          "tags": "magic_school_bus"
+        },
+        "7": {
+          "tags": "magic_school_bus"
+        },
+        "8": {
+          "tags": "magic_school_bus"
+        },
+        "9": {
+          "tags": "magic_school_bus"
+        },
+        "10": {
+          "tags": "magic_school_bus"
+        },
+        "11": {
+          "tags": "magic_school_bus"
+        },
+        "12": {
+          "tags": "magic_school_bus"
+        },
+        "13": {
+          "tags": "magic_school_bus"
+        },
+        "14": {
+          "tags": "magic_school_bus"
+        },
+        "15": {
+          "tags": "magic_school_bus"
+        },
+        "16": {
+          "tags": "magic_school_bus"
+        },
+        "17": {
+          "tags": "magic_school_bus"
+        },
+        "18": {
+          "tags": "magic_school_bus"
+        },
+        "19": {
+          "tags": "magic_school_bus"
+        },
+        "20": {
+          "tags": "magic_school_bus"
+        },
+        "21": {
+          "tags": "magic_school_bus"
+        },
+        "22": {
+          "tags": "magic_school_bus"
+        },
+        "23": {
+          "tags": "magic_school_bus"
+        }
+      }
+    },
+    "monday": "allday",
+    "tuesday": "allday",
+    "wednesday": "allday",
+    "thursday": "allday",
+    "friday": "allday",
+    "saturday": "allday",
+    "sunday": "allday"
+  }
+}

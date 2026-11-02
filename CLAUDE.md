@@ -64,9 +64,13 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
 - `confs/main_config.json` holds the web API key and is gitignored. Every other `confs/*.json` is tracked. Never commit the key.
 - `gh` is logged in as cjlumley. Commits use the GitHub noreply email (set in the repo-local git config).
 
-**Test channels** (configs exist but aren't committed, pending Cooper's call)
+**Test channels** (`confs/test.json`, `confs/goosebumps.json`, `confs/movies.json`, committed so we can come back to them)
 - ch3 `Test` = Magic School Bus, ch4 `Goosebumps` (PAL 704×576, will judder on NTSC), ch5 `Movies`.
 - Each one is `content_dir: catalog/<name>/` plus a symlink to the show folder on `/mnt/crtmedia`, following the docs' external-drive method.
+  `catalog/` is gitignored. On a fresh clone, recreate the links, then run `--rebuild_catalog` and `--add_week`:
+  `ln -s "/mnt/crtmedia/TV/The Magic School Bus" catalog/test/magic_school_bus`,
+  `ln -s /mnt/crtmedia/TV/Goosebumps catalog/goosebumps/goosebumps`,
+  `ln -s /mnt/crtmedia/Movies catalog/movies/movies` (run `mkdir -p` on each folder first).
 - They run with `schedule_increment: 0` (continuous) plus `commercial_free`.
   - Reason: with a 30-minute increment and no `bump_dir`, `--add_week` crashes with `KeyError: 'bump_dir'`.
   - An empty bump folder fails too. Real slots need real bumpers or commercials.
