@@ -194,6 +194,8 @@ class StationPlayer:
                 script_opts="osc-idlescreen=no",
                 hr_seek="yes",
                 image_display_duration="inf",
+                # use the hardware decoder when there is one (Pi 5 HEVC drops ~half its frames in software)
+                hwdec="auto",
             )
 
         self.station_config = station_config
