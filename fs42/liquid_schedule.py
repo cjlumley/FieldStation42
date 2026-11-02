@@ -60,12 +60,17 @@ class LiquidSchedule:
         target = multiple * math.ceil(required / multiple)
 
         # if there is too little room for commercials, try the next increment up
-        # as long as that doesn't leave the slot mostly commercials
+        # as long as that doesn't leave the slot mostly commercials.
+        # Stations can ask for a real-TV ad load with min_break_ratio / max_break_ratio
+        # (e.g. movies at 0.2 / 0.35 run in a slot ~25% longer than the film, like broadcast TV).
         if not self.conf.get("commercial_free") and break_strategy == "standard":
-            if (target - required) / target < MIN_BREAK_RATIO:
+            min_ratio = self.conf.get("min_break_ratio", MIN_BREAK_RATIO)
+            max_ratio = max(self.conf.get("max_break_ratio", MAX_BREAK_RATIO), min_ratio)
+            while (target - required) / target < min_ratio:
                 bumped = target + multiple
-                if (bumped - required) / bumped <= MAX_BREAK_RATIO:
-                    target = bumped
+                if (bumped - required) / bumped > max_ratio:
+                    break
+                target = bumped
         return target
 
     def _load_blocks(self):

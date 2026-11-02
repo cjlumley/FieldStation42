@@ -130,7 +130,23 @@ class LiquidBlock:
             break_points = _fluid.get_breaks(self.content.realpath)
 
         strict_count = None
-        if break_points:
+
+        # break_every (minutes of program between breaks) sets the break count from the content
+        # length, like broadcast TV, instead of from the spare time; break length then absorbs the rest
+        segments_wanted = None
+        break_every = catalog.config.get("break_every", None)
+        if break_every and break_every > 0 and diff > 2:
+            segments_wanted = max(1, round(self.content_duration() / (break_every * 60)))
+
+        if break_points and segments_wanted:
+            break_points = self.clip_break_points(break_points, segments_wanted, self.content_duration())
+            strict_count = len(break_points) - 1 if len(break_points) > 0 else 0
+        elif segments_wanted and segments_wanted > 1:
+            # no markers: the content is cut evenly with one reel block after each segment. make_reel_fill
+            # always appends the leftover fill as one more block, which becomes the break after the content,
+            # so ask for one strict block per mid-content break
+            strict_count = segments_wanted - 1
+        elif break_points:
             # Calculate how many breaks we need based on break_duration config
             # If break_duration is configured, use it to determine break count
             break_duration = self.break_info.get("break_duration", None)

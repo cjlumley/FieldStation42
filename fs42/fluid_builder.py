@@ -77,6 +77,9 @@ class FluidBuilder:
                     else:
                         breaks = MediaProcessor.black_detect(rfp, cached.duration)
                         FluidStatements.add_break_points(connection, rfp, breaks)
+                        # commit per file: a full scan can take hours, so keep progress if it's stopped
+                        # and don't hold the database write lock the whole time
+                        connection.commit()
                 else:
                     self._l.warning(f"{rfp} is not in catalog cache - not adding break points.")
             connection.commit()

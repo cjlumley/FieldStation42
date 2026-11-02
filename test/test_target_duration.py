@@ -107,5 +107,30 @@ class TestCommercialRoom(unittest.TestCase):
         self.assertEqual(_std(_sched(), 86, strategy=None), 90)
 
 
+def _movie_sched():
+    sched = _sched()
+    sched.conf["min_break_ratio"] = 0.2
+    sched.conf["max_break_ratio"] = 0.35
+    return sched
+
+
+class TestStationBreakRatio(unittest.TestCase):
+    def test_movie_gets_broadcast_ad_load(self):
+        # 105-min film: 120 leaves 12.5% ads, 150 gives 30%
+        self.assertEqual(_std(_movie_sched(), 105), 150)
+        # 159-min film: 180 leaves 11.7%, 210 gives 24.3%
+        self.assertEqual(_std(_movie_sched(), 159), 210)
+
+    def test_already_enough_ads_unchanged(self):
+        self.assertEqual(_std(_movie_sched(), 92), 120)
+
+    def test_never_exceeds_max_ratio(self):
+        # 25-min special: 30 leaves 16.7%, 60 would be 58% ads, so it stays
+        self.assertEqual(_std(_movie_sched(), 25), 30)
+
+    def test_default_ratios_unchanged_without_config(self):
+        self.assertEqual(_std(_sched(), 105), 120)
+
+
 if __name__ == "__main__":
     unittest.main()
