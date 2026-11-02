@@ -78,6 +78,22 @@ class TestParseNfoString:
         meta = NFOAgent.parse_nfo_string(content)
         assert meta == {"type": "tvshow", "title": "Lost", "year": "2004"}
 
+    def test_multi_episode_file_uses_first_episode(self):
+        # Kodi writes S03E07-E08 style files as two XML documents back to back
+        content = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<episodedetails><title>Nasty Patty</title><showtitle>SpongeBob SquarePants</showtitle></episodedetails>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<episodedetails><title>Idiot Box</title><showtitle>SpongeBob SquarePants</showtitle></episodedetails>
+"""
+        meta = NFOAgent.parse_nfo_string(content)
+        assert meta["type"] == "episode"
+        assert meta["title"] == "Nasty Patty"
+        assert NFOAgent.overlay_lines(meta) is None
+
+    def test_broken_xml_is_none_not_plaintext(self):
+        content = '<?xml version="1.0"?>\n<episodedetails><title>Oops</title>'
+        assert NFOAgent.parse_nfo_string(content) is None
+
     def test_unknown_tag_generic_fallback(self):
         content = "<artist><title>Blind Melon</title><genre>Rock</genre></artist>"
         meta = NFOAgent.parse_nfo_string(content)

@@ -268,6 +268,20 @@ class NFOAgent:
         try:
             root = ET.fromstring(content)
         except ET.ParseError:
+            root = None
+            if content.lstrip().startswith("<"):
+                # Kodi writes multi-episode files (S01E01-E02) as several XML documents back to back.
+                # Parse them under a wrapper and use the first one. If it still won't parse, it's
+                # broken XML: return nothing rather than showing raw markup as a plain-text overlay.
+                import re
+                body = re.sub(r"<\?xml[^>]*\?>", "", content)
+                try:
+                    root = next(iter(ET.fromstring(f"<nfo_multi>{body}</nfo_multi>")), None)
+                except ET.ParseError:
+                    pass
+                if root is None:
+                    return None
+        if root is None:
             # Not XML — fall back to plain text, one field per non-empty line.
             lines = [l.strip() for l in content.splitlines() if l.strip()][:MAX_NFO_LINES]
             if not lines:
