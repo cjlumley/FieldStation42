@@ -12,12 +12,12 @@ env/
 local/
 *.kdev4*
 *.kate-swp
-*confs/*.json
+# station configs in confs/ are tracked; main_config.json holds the API key
+confs/main_config.json
 *confs/mine
 osd/osd.json
 fs42/guide_render/static/90s.html
 .idea/
-*confs/
 # C extensions
 *.so
 
