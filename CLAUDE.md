@@ -89,12 +89,19 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
 - **The HDMI test TV defaults to 4K at 30 Hz.** At that mode mpv drops about 60% of frames, because GPU scaling can't keep up.
   - Workaround: `wlr-randr --output HDMI-A-1 --mode 1920x1080@59.939999Hz`, run with the Wayland env vars. It isn't persistent and resets on reboot.
   - This doesn't matter for the CRT, which runs at 480i.
-- **The fan isn't detected.** The device tree shows `cooling_fan` as `disabled`, there's no `fan1_input`, and the SoC runs at ~70°C during playback with no throttling yet.
-  - Cooper is reseating the Active Cooler cable in the FAN header.
-  - After reboot, check `cat /sys/class/hwmon/hwmon*/fan1_input`. Ask before touching `/boot/firmware/config.txt`.
+- **Wi-Fi at boot: fixed, but not yet tested with a reboot.**
+  - The cause: there was no saved Wi-Fi profile, so connections made from the desktop menu didn't survive a reboot.
+  - Fix: one system-wide NetworkManager profile for the home Wi-Fi, saved in `/etc/NetworkManager/system-connections/`, with autoconnect on and `psk-flags 0` (password stored by the system, so it connects with no one logged in). It connected fine alongside ethernet.
+  - To test: unplug ethernet, reboot, then `ssh` in or check `nmcli device status`.
+  - Two empty leftover files, `/etc/netplan/90-NM-*.yaml`, are harmless. Removing them needs sudo.
+  - Note: `/boot/firmware/network-config`, from the Imager, holds the Wi-Fi password in plain text.
+- **Fan: fixed** (the cable was reseated). The device tree shows `cooling_fan` as `okay`, and `pwmfan` reports RPM.
+  - It switches on at 50°C. Under a 4-core full load it reached 57°C at ~2,100 RPM, without leaving its lowest speed step.
+  - Check it with `cat /sys/class/hwmon/hwmon*/fan1_input`.
+- `sudo` asks for a password and the `!` prefix can't supply one. `systemctl poweroff` and `systemctl reboot` work without sudo from the desktop session.
 
 **Next up**
-1. Check the fan after reboot. Re-apply 1080p if testing on the HDMI TV.
+1. Test Wi-Fi with a reboot whenever convenient. Re-apply 1080p if testing on the HDMI TV.
 2. Finish plan step 3 by rsyncing `CRT/filler/` from the Mac to `/mnt/crtmedia/Filler/`. Decide first how the existing `Filler/spots` fits the `kids/` and `general/` layout.
 3. Plan step 4: build the real year-round main channel with shows, period ads, bumpers and real 30-minute slots.
 
