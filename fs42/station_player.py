@@ -1127,6 +1127,12 @@ class StationPlayer:
 
         if len(play_point.plan):
             initial_skip = play_point.offset
+            # Each entry ends at a fixed point on the schedule, measured from when this play point started,
+            # not from when the entry finished loading. Otherwise every file's load/seek time (~0.4 s per ad)
+            # piles up: ~3 s per break, ~40 s by the end of a 2-hour movie, so the next block's opening got
+            # skipped and live bumpers read the wrong spot in the schedule.
+            block_anchor = datetime.datetime.now()
+            scheduled_elapsed = 0.0
 
             # iterate over the slice from index to end
             for entry in play_point.plan[play_point.index :]:
@@ -1175,8 +1181,9 @@ class StationPlayer:
                 if entry.duration:
                     self._l.info(f"Monitoring for: {entry.duration - initial_skip}")
 
-                    # Calculate target end time using wall clock
-                    target_end_time = datetime.datetime.now() + datetime.timedelta(seconds=(entry.duration - initial_skip))
+                    # Target end time on the schedule (see block_anchor above)
+                    scheduled_elapsed += entry.duration - initial_skip
+                    target_end_time = block_anchor + datetime.timedelta(seconds=scheduled_elapsed)
                     self._l.info(f"Target end time: {target_end_time.strftime('%H:%M:%S.%f')[:-3]}")
                     stream_down_message = (self.station_config.get("stream_down_message", "TECHNICAL DIFFICULTIES") if self.station_config else "TECHNICAL DIFFICULTIES")
 
