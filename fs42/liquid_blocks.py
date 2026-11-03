@@ -129,6 +129,7 @@ class LiquidBlock:
         if not break_points:
             # Fall back to black detection if no chapters
             break_points = _fluid.get_breaks(self.content.realpath)
+        raw_break_points = list(break_points) if break_points else []
 
         strict_count = None
 
@@ -232,6 +233,13 @@ class LiquidBlock:
                 else:
                     # no reel blocks = no buffer time = no breaks needed, clear break_points
                     break_points = []
+            elif break_points and len(self.reel_blocks) > len(break_points):
+                # max_break can add capped breaks past strict_count (capped breaks come up short, so more
+                # is left over). With fixed break points the cutter only has len(break_points) segments,
+                # so the surplus breaks would air back to back after the content. Re-pick the points so
+                # every break gets its own segment, or cut evenly if there aren't enough usable points.
+                reclipped = self.clip_break_points(raw_break_points, len(self.reel_blocks), self.content_duration())
+                break_points = reclipped if len(reclipped) >= len(self.reel_blocks) else None
             else:
                 # do nothing for now, they will play at end
                 pass

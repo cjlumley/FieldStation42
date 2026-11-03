@@ -79,14 +79,14 @@ def test_chapters_follow_break_every():
     assert all(segs[i] >= 5 * 60 for i in range(len(segs) - 1))
 
 
-def _breaks(content_min, slot_min, break_every, max_break):
+def _breaks(content_min, slot_min, break_every, max_break, black_breaks=None):
     movie = SimpleNamespace(path="movie.mp4", realpath="movie.mp4", duration=content_min * 60, title="Movie",
                             content_type="feature", media_type="video")
     info = {"start_bump": None, "end_bump": None, "bump_dir": None, "commercial_dir": None}
     block = LiquidBlock(movie, START, START + datetime.timedelta(minutes=slot_min), "Movie", "standard", info)
     fluid = MagicMock()
     fluid.return_value.get_chapters.return_value = []
-    fluid.return_value.get_breaks.return_value = []
+    fluid.return_value.get_breaks.return_value = black_breaks or []
     catalog = _catalog(break_every)
     catalog.config["max_break"] = max_break
 
@@ -141,3 +141,15 @@ def test_max_break_short_special():
     breaks, segs = _breaks(25, 30, 12, 150)
     assert all(b <= 150 for b in breaks), breaks
     assert len(breaks) == 2
+
+
+def test_max_break_with_black_frame_breaks_has_one_break_after_movie():
+    # Aladdin (86.7 min, 26 cached black-detect points) in a 120 min slot: capped breaks come up
+    # short, so max_break adds an extra one. It must get its own segment, not air back to back
+    # with the break after the movie.
+    starts = [0, 237, 350, 908, 1309, 1460, 1780, 2050, 2350, 2600, 2900, 3100, 3330, 3500, 3830, 4120,
+              4380, 4650, 4800, 4936, 5000, 5050, 5100, 5130, 5150, 5170]
+    pts = [{"chapter_start": float(s), "chapter_end": float(s) + 1} for s in starts]
+    breaks, segs = _breaks(86.7, 120, 12, 150, pts)
+    assert all(b <= 150 for b in breaks), breaks
+    assert len(breaks) == segs, (len(breaks), segs)
