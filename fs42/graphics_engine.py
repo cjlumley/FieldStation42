@@ -56,6 +56,10 @@ def graphics_engine_runner(page_url, command_queue):
                 view.page().runJavaScript(f"window.fs42Graphics && window.fs42Graphics.cue({json.dumps(msg.get('cue', {}))})")
                 view.showFullScreen()
                 view.raise_()
+                # the page measured a hidden window; re-fit once it's full screen (resize events also do this)
+                for delay in (60, 250):
+                    QTimer.singleShot(delay, lambda: view.page().runJavaScript(
+                        "window.fs42Graphics && window.fs42Graphics.refit && window.fs42Graphics.refit()"))
             elif cmd == "hide":
                 view.hide()
                 view.page().runJavaScript("window.fs42Graphics && window.fs42Graphics.stop()")

@@ -173,6 +173,7 @@ class StationManager(object):
                     "parental_controls_theme",
                     "custom_holidays",
                     "api_key",
+                    "monitor_aspect",
                 ]
 
                 for key in to_check:

@@ -179,6 +179,12 @@ class StationPlayer:
         if "start_mpv" in StationManager().server_conf:
             start_it = StationManager().server_conf["start_mpv"]
 
+        # monitor_aspect (main_config): the shape of the physical screen, e.g. "4:3" for a CRT fed a 720x480
+        # (non-square pixel) signal. mpv then shows 4:3 shows full-screen and letterboxes 16:9 movies correctly.
+        extra_mpv = {}
+        if StationManager().server_conf.get("monitor_aspect"):
+            extra_mpv["monitoraspect"] = StationManager().server_conf["monitor_aspect"]
+
         if not mpv:
             self._l.info("Starting MPV instance")
             # command on client: mpv --input-ipc-server=runtime/mpv.socket --idle --force-window
@@ -197,6 +203,15 @@ class StationPlayer:
                 # use the hardware decoder when there is one (Pi 5 HEVC drops ~half its frames in software).
                 # copy-back mode: plain "auto" (drm-prime) renders solid blue on Pi 5 + Wayland/Vulkan
                 hwdec="auto-copy",
+                # TV doesn't show subtitles: don't load sidecar .srt files, and don't pick default-flagged
+                # subtitle tracks. Forced tracks (translated foreign-language lines) still show.
+                sub_auto="no",
+                subs_fallback="no",
+                # broadcast-style loudness levelling (EBU R128). Quiet cinema mixes were ~13 dB under the ads;
+                # this brings shows, movies and ads to within a few dB. Measured: 0 ms A/V offset, ~5% of one core.
+                # Station audio effects are added/removed by label on top of it, so it stays in place.
+                af="lavfi=[loudnorm=I=-20:LRA=7:TP=-2]",
+                **extra_mpv,
             )
 
         self.station_config = station_config
@@ -608,13 +623,14 @@ class StationPlayer:
                     remaining = file_duration - (offset_seconds or 0) if file_duration else None
                     cue = AutoBumpAgent.engine_cue(web_url)
                     if cue and WEB_RENDER_AVAILABLE:
-                        # live graphics: stop the video underneath and cue the persistent window
-                        self.mpv.stop()
+                        # live graphics: cue the persistent window, then pause (not stop) the video underneath,
+                        # so its last frame stays up until the graphic covers it instead of flashing black
                         self._graphics_engine(cue["page"]).show({
                             "cue": cue["cue"],
                             "duration": remaining if remaining else file_duration,
                             "network": self.station_config["network_name"],
                         })
+                        self.mpv.pause = True
                         return True
                     if remaining is not None:
                         parsed = urlparse(web_url)
@@ -644,6 +660,7 @@ class StationPlayer:
                 # self.mpv.vf = "lavfi=[]"
                 self._l.info(f"playing {file_path}")
                 self.mpv.command("playlist-clear")
+                self.mpv.pause = False  # a live-graphics cue leaves mpv paused
                 self.mpv.play(file_path)
                 self._hide_graphics()
                 
@@ -760,7 +777,9 @@ class StationPlayer:
             self.mpv.command("af", "remove", self._active_afx)
             self._active_afx = None
         self.mpv.command("playlist-clear")
+        self.mpv.pause = False
         self.mpv.command("loadfile", file_path, "replace")
+        self._hide_graphics()
         self.mpv.loop_playlist = "inf"
         self.current_playing_file_path = file_path
 
@@ -805,6 +824,8 @@ class StationPlayer:
 
             self.mpv.command("playlist-clear")
 
+            self.mpv.pause = False
+            self._hide_graphics()
             # Load files using loadfile with 'append' flag
             for i, file_path in enumerate(valid_files):
                 self._l.debug(f"Adding to playlist: {file_path}")

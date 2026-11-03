@@ -153,7 +153,15 @@
     document.body.innerHTML = '';
   }
 
-  window.fs42Graphics = { cue, stop, refresh, get ready() { return ready; } };
+  // The window is hidden (small) when a cue arrives and goes full screen a moment later,
+  // so re-fit the stage whenever the window size changes.
+  function refit() {
+    const stage = document.getElementById('stage');
+    if (stage) fitStage(stage);
+  }
+  window.addEventListener('resize', refit);
+
+  window.fs42Graphics = { cue, stop, refresh, refit, get ready() { return ready; } };
 
   (async () => {
     await Promise.all(TEMPLATES.map(async n => { sources[n] = await (await fetch(`templates/${n}.dc.html`)).text(); }));
