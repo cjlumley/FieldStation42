@@ -3,6 +3,7 @@
     "network_name": "Movies",
     "channel_number": 5,
     "network_type": "standard",
+    "panscan": 1.0,
     "schedule_increment": 30,
     "break_strategy": "standard",
     "commercial_free": false,

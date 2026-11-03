@@ -52,6 +52,12 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
 **Pi setup**
 - mpv 0.40 plus FS42 deps are installed, and `install.sh` has been run. The venv is in `env/`.
 - mpv shows a picture with the default Vulkan output. **Leave `~/.config/mpv/mpv.conf` alone** (Cooper's call). The opengl workaround wasn't needed.
+- `fs42/station_player.py` also passes, as mpv startup options:
+  - **`sub_auto="no"` and `subs_fallback="no"`.** TV had no subtitles: sidecar `.srt` files aren't loaded and default-flagged tracks aren't picked.
+    Forced tracks still show. Christmas Vacation had shown its `.en.srt`.
+  - **`af=lavfi=[loudnorm=I=-20:LRA=7:TP=-2]`**, broadcast loudness levelling. Christmas Vacation measured ~13 dB under the ads.
+    Afterwards, Elf, SpongeBob and ads land within ~1 dB, and Christmas Vacation within ~6. Measured 0 ms A/V offset and ~5% of one core.
+    Station audio effects are added and removed by label on top of it.
 - `fs42/station_player.py` passes **`hwdec="auto-copy"`** to mpv.
   - Plain `auto` (drm-prime) shows a **solid blue screen** for HEVC on Pi 5 with Wayland.
   - `auto-copy` gives the Pi 5's HEVC decoder (~20% CPU, 0 drops). Software decoding dropped about half the frames.
@@ -104,6 +110,23 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
   - Stop the player before `--rebuild_catalog` or `--delete_schedules`.
 - Change channel: `echo '{"command": "direct", "channel": 4}' > runtime/channel.socket`
 
+**On the CRT (since 2026-11-02 evening)**
+- The CRT is fed through an **HDMI→composite converter box** (it shows up as `HJW MACROSILICON 0x0002E9BD` on `HDMI-A-1`),
+  not the Pi's own composite pins. The box takes whatever HDMI mode it's sent and squeezes it onto the 4:3 tube.
+  - It defaulted to 1280×720, which squashed everything sideways and made 4:3 graphics into a strip with black sides.
+  - Fix: `~/.config/kanshi/config` has a `crt` profile that sets **720×480@59.94** (native NTSC) for that box only.
+    kanshi runs from labwc autostart, so this survives reboots, and other HDMI TVs keep their default.
+    Apply changes with `pkill -HUP -x kanshi` (there's no `kanshictl`).
+- `confs/main_config.json` (local, gitignored) sets `"monitor_aspect": "4:3"`. `station_player.py` passes it as mpv's `monitoraspect`,
+  because the 720×480 frame has non-square pixels. `StationManager` whitelists the key.
+- **Authentic movie framing:** Cooper wants it "like when people watched TV off here". 2000s broadcasts showed movies **full-screen**
+  (cropped, "modified to fit your screen"), not letterboxed. So ch 12 and ch 5 have `"panscan": 1.0`, a centre crop (real pan-and-scan
+  followed the action; this can't). 4:3 shows and ads are unaffected.
+- Ch 12 engine has `"stretch": true`, so Snow Day graphics fill the 720×480 frame. Verified with a screenshot.
+- **Git repo was corrupted** by the unclean power-off during the move: 61 empty object files from the last commits.
+  It was repaired by moving them aside (`~/git-empty-objects/`) and fetching from GitHub; `git fsck` is clean.
+  The backup of the broken `.git` is `~/FieldStation42-git-backup-20261102.tgz`. Shut down with `systemctl poweroff` before moving the Pi.
+
 **Open issues**
 - **The HDMI test TV defaults to 4K at 30 Hz.** At that mode mpv drops about 60% of frames, because GPU scaling can't keep up.
   - Workaround: `wlr-randr --output HDMI-A-1 --mode 1920x1080@59.939999Hz`, run with the Wayland env vars. It isn't persistent and resets on reboot.
@@ -145,7 +168,16 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
   - Run `--rebuild_catalog` then `--add_week` after adding clips. `tools/make_placeholders.py` holds the tag → name list
     (`CHRISTMAS_SPECIALS` / `CHRISTMAS_MOVIES`), and it must match the kit's `channel.json`.
 - **One FS42 tag per title** (e.g. `rudolph`, `elf`), because `next/` matching uses the slot's tag. Specials run 7–16h and movies the rest,
-  using `random_tags`. Breaks come every 12 minutes (`break_every`).
+  using `random_tags`.
+- **Break length: 1½–2½ min**, from Cooper: "it felt like forever… needs to feel like I'm actually watching TV".
+  - `"max_break": 150` (seconds) caps every break, the one after the show included. Extra spare time becomes **more** breaks, never longer ones.
+    `break_every: 12` is the minimum spacing.
+  - Ad load is back to the defaults (no `min_break_ratio`). The old 0.2 ratio gave Polar Express a 150-minute slot and 7-minute breaks.
+  - Measured over a week: 790 mid-show breaks, median 2.2 min, longest 2.5. About 9 minutes of program between breaks. 18% of airtime is ads.
+  - Code: `LiquidBlock.make_plan` sets the break count to `max(break_every count, ceil(spare / max_break))` and passes `break_target`.
+    `ShowCatalog.make_reel_block` only picks ads that still fit when `max_break` is set. `make_reel_fill` keeps adding breaks while the leftover
+    exceeds `max_break`, and on engine channels the after-show break gets cues too (its `post` becomes "up next").
+  - The black just before a bumper is FS42's own fade-to-black at the end of a clipped segment, not a gap.
 - **Verified in FS42's source:**
   - **`next/` fires on every break, mid-show included.** Its clips are merged at random into the pre/post/fill pools whenever the
     next block's tag matches. In the first build, 493 of 524 "up next" clips aired mid-show, but all named the right show.
@@ -158,6 +190,11 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
     A dated clip in `bump/December 13/` only joins that day's pool at random, though. To air one at a fixed time each day,
     generate `date_overrides` slots with a `start_bump` file path. `start_bump` folders ignore date hints.
 - `OvlCreditSqueeze` is an on-top overlay. It needs alpha video plus an FS42 OSD/mpv overlay extension, so it's not part of v1.
+- **Ch 12 ads (2026-11-02):** Cooper's cleaned Christmas library (`christmas-clean` on the Mac) is at `/mnt/crtmedia/Filler/new-ads/`, with a `MANIFEST.csv`.
+  - `ads-christmas/` has 74 clips and `ads-kids/` 98 (holiday-season recordings, not Christmas-themed). There are also 64 network IDs/promos in `bumpers/`, not used yet.
+  - All 720×480 SAR 8:9 (4:3). A spot check of start/end frames showed clean cuts.
+  - `catalog/christmas/commercial/` is its **own** folder: links to `ads-christmas`, `ads-kids` and the House Hippo. It no longer borrows ch 2's pool,
+    so ch 2 gets zero Christmas ads (checked across a full week).
 
 **Live Snow Day bumpers (Cooper chose this over pre-rendered clips: "do b so that we can do this properly").**
 Channel 12 draws its break bumpers live, at air time, from the real schedule.
@@ -174,6 +211,14 @@ Channel 12 draws its break bumpers live, at air time, from the real schedule.
 - Window: `fs42/graphics_engine.py`. Launching a fresh web window per bumper (stock autobump) costs **3–4 s of black** on the Pi 5.
   So the player starts **one persistent QtWebEngine window** per engine at startup (`StationPlayer._start_graphics_engines`).
   A cue updates the page with JS and shows the window over mpv in about 0.1 s; any normal video, channel change or web channel hides it.
+  - The page re-fits the 640×480 stage on `resize`, and again 60 and 250 ms after `showFullScreen`. Without that, it measured the
+    still-hidden window and the graphic landed in the corner, cut off.
+  - On the 16:9 HDMI test TV the graphic is pillarboxed 4:3 (black sides), which is correct. **At the CRT step, set
+    `"autobump": {..., "stretch": true}` on ch 12**, so the 640×480 design fills the 720×480 composite frame. Without it,
+    `min(sx, sy)` letterboxes it with ~40 px bars.
+  - On a cue, mpv is **paused, not stopped**, so the last frame covers the gap instead of black. Every play path
+    (`play_file`, `play_and_wait`, loop playlists) sets `pause = False` before loading.
+  - Verified on air (18:05 break, Christmas Vacation): "stick around! more Christmas Vacation" → 8 ads → "Now back to Christmas Vacation" → movie resumed.
 - Autobump `engine` support is in `AutoBumpAgent.engine_bumps` / `engine_cue`. Leftover-fill breaks get engine cues too (`ShowCatalog.make_reel_fill`).
   Tests: `test/test_graphics_engine_bumps.py`.
 - To change wording, weights or templates, edit `engine.js` and `channel.json`. They're static files: restart the player (the window loads once); no rebuild needed.

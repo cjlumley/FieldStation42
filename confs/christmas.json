@@ -4,19 +4,20 @@
     "network_long_name": "Snow Day",
     "channel_number": 12,
     "network_type": "standard",
+    "panscan": 1.0,
     "schedule_increment": 30,
     "break_strategy": "standard",
     "commercial_free": false,
     "break_duration": 180,
     "break_every": 12,
-    "min_break_ratio": 0.2,
-    "max_break_ratio": 0.35,
+    "max_break": 150,
     "content_dir": "catalog/christmas",
     "commercial_dir": "commercial",
     "bump_dir": "bump",
     "autobump": {
       "engine": "snowday",
-      "duration": 7
+      "duration": 7,
+      "stretch": true
     },
     "day_templates": {
       "allday": {
