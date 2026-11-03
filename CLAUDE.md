@@ -65,7 +65,11 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
   - Not yet checked: 10-bit HEVC (e.g. Beetlejuice) with `auto-copy`.
 - The USB SSD (exFAT, label `crtmedia`) mounts at **`/mnt/crtmedia`**, set up in fstab by UUID with `nofail`.
   It holds Cooper's own media: **never format, delete or rename anything on it without asking**.
-  - Layout: `Movies/` (46), `TV/` (5 shows), `unorganized/`, a tiny `Filler/spots/`, and unextracted zips at the root.
+  - Layout: `Movies/` (48), `TV/` (12 shows, `Show/Season 01/S01E01 - Title.ext`), `Extras/` (featurettes, kept out of show
+    folders so they never air), `Filler/`, `Station/`. `unorganized/` was sorted on 2026-11-02 (undo log: `unorganized/_rename_log.json`).
+  - Added then: Avatar, Ben 10, Danny Phantom, Johnny Test, Fairly OddParents: A New Wish, Wizards of Waverly Place, Gumball S1;
+    movies Back to the Future (AV1, software decode) and Ben 10: Secret of the Omnitrix. Not linked into any channel yet,
+    except that ch 5 links all of `Movies/`, so the two movies join it on the next `--rebuild_catalog`.
   - Most of it is 1080p MKV/HEVC, not the planned 720×480 H.264. Cooper chose no re-encode for now.
 - `confs/main_config.json` holds the web API key and is gitignored. Every other `confs/*.json` is tracked. Never commit the key.
 - `gh` is logged in as cjlumley. Commits use the GitHub noreply email (set in the repo-local git config).
@@ -95,7 +99,8 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
   - Reason: with a 30-minute increment and no `bump_dir`, `--add_week` crashes with `KeyError: 'bump_dir'`.
   - An empty bump folder fails too. Real slots need real bumpers or commercials.
 - Measured: channel switch 0.2–0.4 s, first catalog scan ~0.3 s per new video, re-scan with no changes ~2 s, `--add_week` ~2 s.
-- `--rebuild_catalog` rescans **all** channels and **resets all schedules**, so always follow it with `--add_week`.
+- `--rebuild_catalog` with **no argument** rescans **all** channels and **resets all schedules**, so always follow it with `--add_week`.
+  `-r <NetworkName>` / `-w <NetworkName>` touch only that station. Check `mountpoint /mnt/crtmedia` first: `-r` trims the file cache of missing paths across all channels.
 
 **Running it**
 - Start, with the env vars needed over SSH:
@@ -103,10 +108,11 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
 - The player also serves the web console on `:4242`. Don't run `station_42.py --server` at the same time.
 - Stop: `pkill -f field_player.py` from a terminal. In scripts, kill by PID instead, because `pkill -f` and `pgrep -f`
   can match the script's own command line (this bit us twice).
-  - Start in scripts with `nohup env/bin/python field_player.py > runtime/field_player.log 2>&1 < /dev/null & echo $! > runtime/field_player.pid`.
+  - Start in scripts with `export XDG_RUNTIME_DIR=/run/user/1000 WAYLAND_DISPLAY=wayland-0; nohup env/bin/python field_player.py > runtime/field_player.log 2>&1 < /dev/null & echo $! > runtime/field_player.pid`.
   - Take the PID from `$!`, never from `pgrep -f`, and stop with `kill $(cat runtime/field_player.pid)`.
   - To list the real processes: `ps -eo pid,ppid,args | awk '$3=="env/bin/python" && $4=="field_player.py" || $3=="mpv"'`.
-  - **After stopping, confirm no `mpv` is left before starting again.** A leftover player plays audio twice, which sounds like an echo.
+  - **The Wayland vars must be set in the same shell as the `nohup`**, or mpv falls back to `vo=sdl` and the TV shows the desktop (2026-11-03).
+  - **After stopping, wait until no `mpv` is left before starting again** (loop on the `ps` check; the player can take >10 s to exit). A leftover player plays audio twice, which sounds like an echo.
   - Stop the player before `--rebuild_catalog` or `--delete_schedules`.
 - Change channel: `echo '{"command": "direct", "channel": 4}' > runtime/channel.socket`
 
@@ -200,8 +206,10 @@ Plan steps 1–2 are done and step 3 is half done. Three throwaway **test channe
 Channel 12 draws its break bumpers live, at air time, from the real schedule.
 - Config: `"autobump": {"engine": "snowday", "duration": 7}` (optional `"stretch": true` for the CRT).
   Every break gets a `cue=pre` entry (into break) and a `cue=post` entry (out of break).
-- Page: `fs42/fs42_server/static/snowday/`. It holds `engine.html` and `engine.js`, plus copies of the kit's `runtime.js`,
-  `templates/` and fonts, and `channel.json` (FS42 tag → name, movie tags, facts, IDs, themes).
+- The engine is shared: `fs42/fs42_server/static/bumpengine/{engine.js,runtime.js}`. Each pack folder (`static/snowday/`, `static/onceupon/`)
+  holds only `engine.html` (fonts + script tags), `templates/`, `fonts/` and `channel.json`, which now holds **everything** pack-specific:
+  template list, per-cue weights/conditions, word lists, seasonal date rules (schema in `docs/LIVE_BUMPER_PACKS.md`).
+  Snow Day's move to it was checked against the old engine: 48,000 picks, 0 differences. Debug hook: `window.fs42Graphics.preview(template, props, sec)`.
   - It caches `/schedules/<network>` and refreshes every 20 s.
   - `cue=post` → "Now back to <show>" if any `feature` entry remains in the current block after this bumper.
     Otherwise "Up next <show> at <h:mm>", or UpNextThen.
@@ -221,10 +229,23 @@ Channel 12 draws its break bumpers live, at air time, from the real schedule.
   - Verified on air (18:05 break, Christmas Vacation): "stick around! more Christmas Vacation" → 8 ads → "Now back to Christmas Vacation" → movie resumed.
 - Autobump `engine` support is in `AutoBumpAgent.engine_bumps` / `engine_cue`. Leftover-fill breaks get engine cues too (`ShowCatalog.make_reel_fill`).
   Tests: `test/test_graphics_engine_bumps.py`.
-- To change wording, weights or templates, edit `engine.js` and `channel.json`. They're static files: restart the player (the window loads once); no rebuild needed.
+- To change wording, weights or templates, edit the pack's `channel.json`. They're static files: restart the player (the window loads once); no rebuild needed.
   To update the designs, copy the kit's templates into `static/snowday/templates/`.
 - The pre-rendered clips in `/mnt/crtmedia/Station/christmas/` (from `~/snowday-kit-src/`, rendered on the Pi with Node in `~/.local/node`
   and the system Chromium via `pi-chromium.cjs`) are a fallback only. With `autobump.engine` set, FS42 doesn't air folder bumpers on ch 12.
+
+## Once Upon (ch 10, princess channel, added 2026-11-03)
+- `confs/onceupon.json`: network `OnceUpon`, Aladdin, Beauty and the Beast, Mulan only (`random_tags`, 30-min increment, `max_break` 150, `panscan` 1.0),
+  `autobump.engine: onceupon` with `stretch`. Pack from Cooper's "Once Upon bumper library" board: `static/onceupon/` (Fredoka + Pacifico bundled).
+- Template fixes vs the upload: page turn, burst and slide-in renamed to `*Cycle` so they sync to the slot; BumpSting rebuilt with `naturalSpeed`;
+  1 px paper stripes thickened; corner wordmark pulled into title-safe; 18 px text minimums. Snipe* / Premiere / SignOff are installed but not cued.
+- `catalog/onceupon/`: movie folder links, `commercial/` = per-file links to `Filler/new-ads/ads-kids` minus holiday clips (93) + the 8 ch 2 toy ads
+  + House Hippo; `bump/` = House Hippo (safety net only; the engine supplies bumpers).
+- Fixed in our fork: when `max_break` added more breaks than a movie's cached break points, the extras aired back to back after the movie
+  (every Aladdin airing). `LiquidBlock.make_plan` now re-picks the points (`test/test_break_every.py`).
+- Known: Aladdin is 25 fps (PAL speed-up), so it judders a little on NTSC and runs ~4% fast. Breaks come about every 6–7 min of movie
+  (a 2-hour slot for an ~88-min movie), ~23% ads.
+- The player remembers the last channel by list position, not number, so adding a channel can shift where it comes back after a restart.
 
 ## Working style
 Cooper has ADHD. Give a plain-language summary first, then the detail. Keep steps short.
