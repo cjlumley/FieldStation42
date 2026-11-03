@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Once Upon sign-off</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Pacifico&display=swap">
+<style>
+body{margin:0}
+@keyframes pageTurnCycle{0%{transform:scaleX(0.04) skewY(10deg);opacity:0}2%{opacity:1}8%{transform:scaleX(1.02) skewY(-1deg)}10%,88%{transform:scaleX(1) skewY(0deg);opacity:1}97%{transform:scaleX(0.04) skewY(-10deg);opacity:1}100%{transform:scaleX(0.04) skewY(-10deg);opacity:0}}
+@keyframes pageShadeCycle{0%{opacity:0.95}9%,88%{opacity:0}97%,100%{opacity:0.95}}
+@keyframes popCycle{0%,9%{transform:scale(0.4);opacity:0}15%{transform:scale(1.06);opacity:1}18%,100%{transform:scale(1);opacity:1}}
+@keyframes riseCycle{0%,11%{transform:translateY(40px);opacity:0}18%,100%{transform:translateY(0);opacity:1}}
+@keyframes slideInRCycle{0%,11%{transform:translateX(360px);opacity:0}18%{transform:translateX(-10px);opacity:1}21%,100%{transform:translateX(0);opacity:1}}
+@keyframes zzz{0%{transform:translate(0,0);opacity:0}20%{opacity:1}100%{transform:translate(26px,-60px);opacity:0}}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes twinkle{0%,100%{transform:scale(0.55) rotate(0deg);opacity:0.35}50%{transform:scale(1) rotate(20deg);opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes bubble{0%{transform:translateY(0);opacity:0}15%{opacity:0.85}100%{transform:translateY(-360px);opacity:0}}
+@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+</style>
+</helmet>
+<div style="width: 640px; height: 480px; position: relative; overflow: hidden; background: #1A0B30; filter: {{crtFilter}}; font-family: 'Fredoka', system-ui, sans-serif; color: #3A1A5C">
+<div style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; overflow: hidden; transform-origin: 0% 50%; animation: pageTurnCycle 7s cubic-bezier(0.45, 0, 0.25, 1) both infinite">
+<div style="position: absolute; left: 0; top: 0"><dc-import name="OnceBG" theme="{{theme}}" hint-size="640px,480px"></dc-import></div>
+<div style="position: absolute; left: 64px; top: 48px; width: 512px; height: 344px; display: flex; align-items: center; justify-content: center; gap: 30px">
+<div aria-hidden="true" style="flex: none; position: relative; width: 190px; height: 190px; animation: popCycle 7s cubic-bezier(0.2, 0.8, 0.3, 1) both infinite">
+<sc-if value="{{isNight}}" hint-placeholder-val="{{true}}">
+<div style="position: absolute; left: 0; top: 0; width: 190px; height: 190px; animation: bob 4s ease-in-out infinite">
+<div style="position: absolute; left: 10px; top: 20px; width: 130px; height: 130px; border-radius: 50%; box-shadow: 34px 14px 0 0 #FFE9A8, 34px 14px 40px 10px rgba(255,233,168,0.35)"></div>
+<div style="position: absolute; left: 140px; top: 40px; font-family: 'Pacifico', cursive; font-size: 30px; color: #FFFFFF; animation: zzz 3s ease-out infinite">z</div>
+<div style="position: absolute; left: 150px; top: 60px; font-family: 'Pacifico', cursive; font-size: 22px; color: #FFFFFF; animation: zzz 3s ease-out -1s infinite">z</div>
+<div style="position: absolute; left: 160px; top: 80px; font-family: 'Pacifico', cursive; font-size: 16px; color: #FFFFFF; animation: zzz 3s ease-out -2s infinite">z</div>
+</div>
+</sc-if>
+<sc-if value="{{isMorning}}" hint-placeholder-val="{{false}}">
+<div style="position: absolute; left: 0; top: 0; width: 190px; height: 190px; animation: spinSlow 24s linear infinite">
+<sc-for list="{{rays}}" as="r" hint-placeholder-count="12">
+<div style="position: absolute; left: 89px; top: 0px; width: 12px; height: 190px; transform: rotate({{r.a}}deg)"><div style="width: 12px; height: 34px; border-radius: 6px; background: #FFD34D"></div></div>
+</sc-for>
+</div>
+<div style="position: absolute; left: 40px; top: 40px; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #FFF1B0 0%, #FFD34D 60%, #F2B21E 100%); box-shadow: 0 0 30px rgba(255,211,77,0.7)"></div>
+</sc-if>
+</div>
+<div style="flex: none; width: 270px; display: flex; flex-direction: column; animation: slideInRCycle 7s cubic-bezier(0.2, 0.8, 0.3, 1) both infinite">
+<div data-fit="1" style="width: 270px; font-weight: 700; font-size: {{size1}}px; line-height: 1.02; color: #FFFFFF; text-shadow: -3px -3px 0 #3A1A5C, 3px -3px 0 #3A1A5C, -3px 3px 0 #3A1A5C, 3px 3px 0 #3A1A5C, 0 -4px 0 #3A1A5C, 0 4px 0 #3A1A5C, -4px 0 0 #3A1A5C, 4px 0 0 #3A1A5C, 0 8px 0 #3A1A5C">{{line1}}</div>
+<div data-fit="1" style="width: 270px; font-weight: 700; font-size: {{size2}}px; line-height: 1.02; color: #FFD34D; text-shadow: -3px -3px 0 #3A1A5C, 3px -3px 0 #3A1A5C, -3px 3px 0 #3A1A5C, 3px 3px 0 #3A1A5C, 0 -4px 0 #3A1A5C, 0 4px 0 #3A1A5C, -4px 0 0 #3A1A5C, 4px 0 0 #3A1A5C, 0 8px 0 #3A1A5C">{{line2}}</div>
+<div style="margin-top: 14px; align-self: flex-start; background: #FFF4E6; border-radius: 999px; padding: 4px 16px 6px; box-shadow: 0 4px 0 #3A1A5C; animation: riseCycle 7s cubic-bezier(0.2, 0.8, 0.3, 1) 0.3s both infinite"><div data-fit="1" style="max-width: 238px; font-weight: 600; font-size: {{subSize}}px; line-height: 1.2; color: #A82868">{{sub}}</div></div>
+</div>
+</div>
+<div style="position: absolute; right: 68px; bottom: 52px"><dc-import name="OnceWordmark" size="24" hint-size="120px,43px"></dc-import></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; z-index: 5; pointer-events: none"><dc-import name="OncePage" dur="7" hint-size="640px,480px"></dc-import></div>
+</div>
+<sc-if value="{{crt}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; z-index: 10; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px), repeating-linear-gradient(90deg, rgba(255,0,0,0.06) 0px, rgba(255,0,0,0.06) 1px, rgba(0,255,0,0.06) 1px, rgba(0,255,0,0.06) 2px, rgba(0,0,255,0.06) 2px, rgba(0,0,255,0.06) 3px), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 58%, rgba(0,0,0,0.5) 100%); box-shadow: inset 0 0 50px rgba(0,0,0,0.55)"></div>
+</sc-if>
+<sc-if value="{{safe}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 32px; top: 24px; width: 576px; height: 432px; box-sizing: border-box; border: 2px dashed rgba(255,230,0,0.9); z-index: 11; pointer-events: none"></div>
+<div aria-hidden="true" style="position: absolute; left: 64px; top: 48px; width: 512px; height: 384px; box-sizing: border-box; border: 2px dashed rgba(0,240,255,0.95); z-index: 11; pointer-events: none"></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"mode": {"editor": "enum", "options": ["good night", "good morning"], "default": "good night", "section": "Copy"}, "backAt": {"editor": "text", "default": "[7:00]", "section": "Copy"}, "theme": {"editor": "enum", "options": ["auto", "castle", "sparkle", "ocean", "garden", "twilight"], "default": "auto", "section": "Look"}, "crt": {"editor": "boolean", "default": true, "section": "Look"}, "safe": {"editor": "boolean", "default": false, "section": "Look"}, "$preview": {"width": 640, "height": 480}}'>
+class Component extends DCLogic {
+renderVals() {
+const p = this.props;
+const crt = p.crt ?? true;
+const fit = (t, max, min, w, lines) => { const n = Math.max(4, String(t ?? '').length); return Math.max(min, Math.min(max, Math.floor((w * lines * 0.9) / (n * 0.56)))); };
+const night = (p.mode ?? 'good night') === 'good night'; const back = p.backAt ?? '[7:00]';
+const line1 = night ? 'Sweet' : 'Rise and'; const line2 = night ? 'dreams!' : 'shine!';
+const sub = night ? 'Once Upon is back at ' + back : 'the stories start right now';
+const th = p.theme ?? 'auto';
+const rays = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(a => ({ a }));
+return { isNight: night, isMorning: !night, rays, line1, line2, size1: fit(line1, 64, 34, 270, 1), size2: fit(line2, 84, 40, 270, 1), sub, subSize: fit(sub, 22, 18, 238, 1), theme: th === 'auto' ? (night ? 'twilight' : 'garden') : th, crt, safe: p.safe ?? false, crtFilter: crt ? 'blur(0.6px) saturate(1.15) contrast(1.06)' : 'none' };
+}
+}
+</script>
+</body>
+</html>

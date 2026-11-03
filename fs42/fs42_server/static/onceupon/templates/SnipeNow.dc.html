@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Once Upon lower third · you're watching</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Pacifico&display=swap">
+<style>
+body{margin:0}
+@keyframes snipeCycle{0%{transform:translateY(220px)}10%{transform:translateY(-10px)}14%,86%{transform:translateY(0)}89%{transform:translateY(-8px)}97%,100%{transform:translateY(220px)}}
+@keyframes twinkle{0%,100%{transform:scale(0.55) rotate(0deg);opacity:0.35}50%{transform:scale(1) rotate(20deg);opacity:1}}
+</style>
+</helmet>
+<div style="width: 640px; height: 480px; filter: {{crtFilter}}; position: relative; overflow: hidden; font-family: 'Fredoka', system-ui, sans-serif; color: #3A1A5C">
+<sc-if value="{{showChecker}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background-color: #3A3F4A; background-image: conic-gradient(#2E333C 0deg 90deg, #3A3F4A 90deg 180deg, #2E333C 180deg 270deg, #3A3F4A 270deg 360deg); background-size: 24px 24px"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 150px; width: 640px; text-align: center; font-size: 20px; font-weight: 600; color: rgba(255,255,255,0.7)">[the show keeps playing here]</div>
+</sc-if>
+<div style="position: absolute; left: 64px; bottom: 56px; width: 512px; animation: snipeCycle 7s cubic-bezier(0.2, 0.8, 0.3, 1) both infinite">
+<div style="position: relative; display: flex; align-items: stretch; filter: drop-shadow(0 6px 0 #2A1145) drop-shadow(0 10px 14px rgba(0,0,0,0.45))">
+<div style="position: relative; flex: none; width: 150px; box-sizing: border-box; border-radius: 18px 0 0 18px; border: 5px solid #FFD34D; border-right: none; background: radial-gradient(circle, rgba(255,255,255,0.22) 0px, rgba(255,255,255,0.22) 2px, rgba(255,255,255,0) 3px), #4B2380; background-size: 18px 18px, auto; display: flex; align-items: center; justify-content: center; overflow: hidden">
+<dc-import name="OnceWordmark" size="24" hint-size="120px,43px"></dc-import>
+</div>
+<div style="position: relative; flex: none; width: 362px; box-sizing: border-box; border-radius: 0 18px 18px 0; border: 5px solid #FFD34D; border-left: none; background: #FFF4E6; padding: 12px 22px 12px 20px; display: flex; flex-direction: column; justify-content: center; gap: 2px">
+<div aria-hidden="true" style="position: absolute; right: -12px; top: -14px; width: 28px; height: 28px; background: #7FE8D0; clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%); animation: twinkle 2.2s ease-in-out infinite"></div>
+<div data-fit="1" style="width: 320px; font-weight: 700; font-size: {{topSize}}px; line-height: 1.15; color: #A82868">{{label}}</div>
+<div data-fit="2" style="width: 320px; font-weight: 700; font-size: {{nameSize}}px; line-height: 1.04; color: #3A1A5C">{{showName}}</div>
+</div>
+</div>
+</div>
+<sc-if value="{{crt}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; z-index: 10; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px), repeating-linear-gradient(90deg, rgba(255,0,0,0.06) 0px, rgba(255,0,0,0.06) 1px, rgba(0,255,0,0.06) 1px, rgba(0,255,0,0.06) 2px, rgba(0,0,255,0.06) 2px, rgba(0,0,255,0.06) 3px), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 58%, rgba(0,0,0,0.5) 100%); box-shadow: inset 0 0 50px rgba(0,0,0,0.55)"></div>
+</sc-if>
+<sc-if value="{{safe}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 32px; top: 24px; width: 576px; height: 432px; box-sizing: border-box; border: 2px dashed rgba(255,230,0,0.9); z-index: 11; pointer-events: none"></div>
+<div aria-hidden="true" style="position: absolute; left: 64px; top: 48px; width: 512px; height: 384px; box-sizing: border-box; border: 2px dashed rgba(0,240,255,0.95); z-index: 11; pointer-events: none"></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"showName": {"editor": "text", "default": "[SHOW NAME]", "section": "Copy"}, "label": {"editor": "text", "default": "You&#39;re watching", "section": "Copy"}, "showChecker": {"editor": "boolean", "default": true, "section": "Look"}, "crt": {"editor": "boolean", "default": false, "section": "Look"}, "safe": {"editor": "boolean", "default": false, "section": "Look"}, "$preview": {"width": 640, "height": 480}}'>
+class Component extends DCLogic {
+renderVals() {
+const p = this.props;
+const crt = p.crt ?? false;
+const fit = (t, max, min, w, lines) => { const n = Math.max(4, String(t ?? '').length); return Math.max(min, Math.min(max, Math.floor((w * lines * 0.9) / (n * 0.56)))); };
+const name = p.showName ?? '[SHOW NAME]'; const label = p.label ?? "You're watching";
+return { showName: name, nameSize: fit(name, 34, 20, 320, 2), label, topSize: fit(label, 24, 18, 320, 1), showChecker: p.showChecker ?? true, crt, safe: p.safe ?? false, crtFilter: crt ? 'blur(0.6px) saturate(1.15) contrast(1.06)' : 'none' };
+}
+}
+</script>
+</body>
+</html>

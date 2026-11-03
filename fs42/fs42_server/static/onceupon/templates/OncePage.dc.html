@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Once Upon page turn</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>body{margin:0}</style>
+</helmet>
+<div style="position: relative; width: 640px; height: 480px; overflow: hidden; pointer-events: none; animation: pageShadeCycle {{dur}}s cubic-bezier(0.45, 0, 0.25, 1) both infinite">
+<div style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: linear-gradient(90deg, rgba(26,11,48,0.7) 0%, rgba(26,11,48,0) 12%, rgba(255,244,230,0.35) 55%, rgba(42,17,69,0.75) 100%)"></div>
+<div style="position: absolute; left: 0; top: 0; width: 18px; height: 480px; background: linear-gradient(90deg, #120620 0%, #3A1A5C 100%)"></div>
+<div style="position: absolute; right: 14px; top: 0; width: 10px; height: 480px; background: repeating-linear-gradient(90deg, #FFF4E6 0px, #FFF4E6 3px, #E9D8C0 3px, #E9D8C0 5px)"></div>
+<div style="position: absolute; right: 0; top: 0; width: 14px; height: 480px; background: linear-gradient(90deg, #FFE7A0 0%, #FFD34D 45%, #C99A1E 100%)"></div>
+<div style="position: absolute; right: 30px; top: 70px; width: 18px; height: 18px; background: #FFD34D; clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%)"></div>
+<div style="position: absolute; right: 44px; top: 230px; width: 12px; height: 12px; background: #FFFFFF; clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%)"></div>
+<div style="position: absolute; right: 28px; top: 380px; width: 14px; height: 14px; background: #FF8FC8; clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%)"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dur": {"editor": "number", "default": 7}, "$preview": {"width": 640, "height": 480}}'>
+class Component extends DCLogic {
+renderVals() {
+return { dur: Number(this.props.dur ?? 7) };
+}
+}
+</script>
+</body>
+</html>

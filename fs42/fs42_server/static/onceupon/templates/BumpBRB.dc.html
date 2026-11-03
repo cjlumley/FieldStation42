@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Once Upon be right back</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Pacifico&display=swap">
+<style>
+body{margin:0}
+@keyframes pageTurnCycle{0%{transform:scaleX(0.04) skewY(10deg);opacity:0}2%{opacity:1}8%{transform:scaleX(1.02) skewY(-1deg)}10%,88%{transform:scaleX(1) skewY(0deg);opacity:1}97%{transform:scaleX(0.04) skewY(-10deg);opacity:1}100%{transform:scaleX(0.04) skewY(-10deg);opacity:0}}
+@keyframes pageShadeCycle{0%{opacity:0.95}9%,88%{opacity:0}97%,100%{opacity:0.95}}
+@keyframes popCycle{0%,9%{transform:scale(0.4);opacity:0}15%{transform:scale(1.06);opacity:1}18%,100%{transform:scale(1);opacity:1}}
+@keyframes riseCycle{0%,11%{transform:translateY(40px);opacity:0}18%,100%{transform:translateY(0);opacity:1}}
+@keyframes floatCycle{0%,9%{transform:translateY(70px) rotate(-3deg);opacity:0}16%{transform:translateY(-6px) rotate(1deg);opacity:1}20%,100%{transform:translateY(0) rotate(0deg);opacity:1}}
+@keyframes slideInRCycle{0%,11%{transform:translateX(360px);opacity:0}18%{transform:translateX(-10px);opacity:1}21%,100%{transform:translateX(0);opacity:1}}
+@keyframes twinkle{0%,100%{transform:scale(0.55) rotate(0deg);opacity:0.35}50%{transform:scale(1) rotate(20deg);opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes bubble{0%{transform:translateY(0);opacity:0}15%{opacity:0.85}100%{transform:translateY(-360px);opacity:0}}
+@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+</style>
+</helmet>
+<div style="width: 640px; height: 480px; position: relative; overflow: hidden; background: #1A0B30; filter: {{crtFilter}}; font-family: 'Fredoka', system-ui, sans-serif; color: #3A1A5C">
+<div style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; overflow: hidden; transform-origin: 0% 50%; animation: pageTurnCycle 7s cubic-bezier(0.45, 0, 0.25, 1) both infinite">
+<div style="position: absolute; left: 0; top: 0"><dc-import name="OnceBG" theme="{{theme}}" hint-size="640px,480px"></dc-import></div>
+<div style="position: absolute; left: 64px; top: 48px; width: 512px; height: 344px; display: flex; align-items: center; justify-content: center; gap: 26px">
+<div style="flex: none; animation: floatCycle 7s cubic-bezier(0.2, 0.8, 0.3, 1) both infinite"><div style="animation: bob 3.2s ease-in-out infinite"><div aria-hidden="true" style="position: relative; width: 220px; height: 200px">
+<div style="position: absolute; left: 40px; top: 4px; width: 16px; height: 16px; background: #FFD34D; clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%); animation: twinkle 2s ease-in-out infinite"></div>
+<div style="position: absolute; left: 100px; top: -10px; width: 22px; height: 22px; background: #FFFFFF; clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%); animation: twinkle 2.4s ease-in-out -0.8s infinite"></div>
+<div style="position: absolute; left: 160px; top: 6px; width: 14px; height: 14px; background: #7FE8D0; clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%); animation: twinkle 1.8s ease-in-out -0.4s infinite"></div>
+<div style="position: absolute; left: 4px; top: 50px; width: 212px; height: 136px; border-radius: 10px; background: #4B2380; box-shadow: 0 8px 0 rgba(20,7,38,0.45)"></div>
+<div style="position: absolute; left: 14px; top: 38px; width: 98px; height: 136px; box-sizing: border-box; border-radius: 10px 2px 2px 10px; background: #FFF4E6; transform: skewY(5deg); transform-origin: 100% 100%; padding: 20px 12px; display: flex; flex-direction: column; gap: 10px">
+<div style="height: 5px; border-radius: 3px; background: #D8C4EE"></div><div style="height: 5px; width: 85%; border-radius: 3px; background: #D8C4EE"></div><div style="height: 5px; border-radius: 3px; background: #D8C4EE"></div><div style="height: 5px; width: 70%; border-radius: 3px; background: #D8C4EE"></div><div style="height: 5px; width: 90%; border-radius: 3px; background: #D8C4EE"></div>
+</div>
+<div style="position: absolute; left: 108px; top: 38px; width: 98px; height: 136px; box-sizing: border-box; border-radius: 2px 10px 10px 2px; background: #FFF4E6; transform: skewY(-5deg); transform-origin: 0% 100%; padding: 20px 12px; display: flex; flex-direction: column; gap: 10px">
+<div style="height: 5px; border-radius: 3px; background: #D8C4EE"></div><div style="height: 5px; width: 80%; border-radius: 3px; background: #D8C4EE"></div><div style="height: 5px; border-radius: 3px; background: #D8C4EE"></div><div style="height: 5px; width: 60%; border-radius: 3px; background: #D8C4EE"></div>
+</div>
+<div style="position: absolute; left: 104px; top: 36px; width: 12px; height: 140px; background: linear-gradient(90deg, rgba(58,26,92,0) 0%, rgba(58,26,92,0.28) 50%, rgba(58,26,92,0) 100%)"></div>
+<div style="position: absolute; left: 140px; top: 160px; width: 20px; height: 40px; background: #FF8FC8; clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 78%, 0% 100%)"></div>
+</div></div></div>
+<div style="flex: none; width: 260px; display: flex; flex-direction: column; animation: slideInRCycle 7s cubic-bezier(0.2, 0.8, 0.3, 1) both infinite">
+<div data-fit="1" style="width: 260px; font-weight: 700; font-size: {{size1}}px; line-height: 1.02; color: #FFFFFF; text-shadow: -3px -3px 0 #3A1A5C, 3px -3px 0 #3A1A5C, -3px 3px 0 #3A1A5C, 3px 3px 0 #3A1A5C, 0 -4px 0 #3A1A5C, 0 4px 0 #3A1A5C, -4px 0 0 #3A1A5C, 4px 0 0 #3A1A5C, 0 8px 0 #3A1A5C">{{line1}}</div>
+<div data-fit="1" style="width: 260px; font-weight: 700; font-size: {{size2}}px; line-height: 1.02; color: #FFD34D; text-shadow: -3px -3px 0 #3A1A5C, 3px -3px 0 #3A1A5C, -3px 3px 0 #3A1A5C, 3px 3px 0 #3A1A5C, 0 -4px 0 #3A1A5C, 0 4px 0 #3A1A5C, -4px 0 0 #3A1A5C, 4px 0 0 #3A1A5C, 0 8px 0 #3A1A5C">{{line2}}</div>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{true}}">
+<div style="margin-top: 14px; align-self: flex-start; background: #FFF4E6; border-radius: 999px; padding: 4px 16px 6px; box-shadow: 0 4px 0 #3A1A5C; animation: riseCycle 7s cubic-bezier(0.2, 0.8, 0.3, 1) 0.3s both infinite"><div data-fit="1" style="max-width: 228px; font-weight: 600; font-size: {{subSize}}px; line-height: 1.2; color: #A82868">{{sub}}</div></div>
+</sc-if>
+</div>
+</div>
+<div style="position: absolute; right: 68px; bottom: 52px"><dc-import name="OnceWordmark" size="24" hint-size="120px,43px"></dc-import></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; z-index: 5; pointer-events: none"><dc-import name="OncePage" dur="7" hint-size="640px,480px"></dc-import></div>
+</div>
+<sc-if value="{{crt}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; z-index: 10; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px), repeating-linear-gradient(90deg, rgba(255,0,0,0.06) 0px, rgba(255,0,0,0.06) 1px, rgba(0,255,0,0.06) 1px, rgba(0,255,0,0.06) 2px, rgba(0,0,255,0.06) 2px, rgba(0,0,255,0.06) 3px), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 58%, rgba(0,0,0,0.5) 100%); box-shadow: inset 0 0 50px rgba(0,0,0,0.55)"></div>
+</sc-if>
+<sc-if value="{{safe}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 32px; top: 24px; width: 576px; height: 432px; box-sizing: border-box; border: 2px dashed rgba(255,230,0,0.9); z-index: 11; pointer-events: none"></div>
+<div aria-hidden="true" style="position: absolute; left: 64px; top: 48px; width: 512px; height: 384px; box-sizing: border-box; border: 2px dashed rgba(0,240,255,0.95); z-index: 11; pointer-events: none"></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"line": {"editor": "text", "default": "be right back", "section": "Copy"}, "theme": {"editor": "enum", "options": ["castle", "sparkle", "ocean", "garden", "twilight"], "default": "twilight", "section": "Look"}, "crt": {"editor": "boolean", "default": true, "section": "Look"}, "safe": {"editor": "boolean", "default": false, "section": "Look"}, "$preview": {"width": 640, "height": 480}}'>
+class Component extends DCLogic {
+renderVals() {
+const p = this.props;
+const crt = p.crt ?? true;
+const fit = (t, max, min, w, lines) => { const n = Math.max(4, String(t ?? '').length); return Math.max(min, Math.min(max, Math.floor((w * lines * 0.9) / (n * 0.56)))); };
+const split = (t) => { const w = String(t).trim().split(/\s+/); if (w.length < 2) return ['', w.join(' ')]; let best = 1, bd = 1e9; for (let i = 1; i < w.length; i++) { const d = Math.abs(w.slice(0, i).join(' ').length - w.slice(i).join(' ').length); if (d <= bd) { bd = d; best = i; } } return [w.slice(0, best).join(' '), w.slice(best).join(' ')]; };
+const known = { 'be right back': ['Be right', 'back!', "don't close the book!"], "don't go anywhere": ["Don't go", 'anywhere!', 'the story continues soon'], 'stay tuned': ['Stay', 'tuned!', 'more magic in a minute'] };
+const raw = String(p.line ?? 'be right back'); const bar = raw.indexOf('|');
+const main = (bar < 0 ? raw : raw.slice(0, bar)).trim(); const k = known[main.toLowerCase().replace(/!$/, '')];
+const two = k ? [k[0], k[1]] : split(main); const sub = bar >= 0 ? raw.slice(bar + 1).trim() : (k ? k[2] : '');
+return { line1: two[0], line2: two[1], size1: fit(two[0], 60, 32, 260, 1), size2: fit(two[1], 84, 40, 260, 1), sub, hasSub: !!sub, subSize: fit(sub, 22, 18, 228, 1), theme: p.theme ?? 'twilight', crt, safe: p.safe ?? false, crtFilter: crt ? 'blur(0.6px) saturate(1.15) contrast(1.06)' : 'none' };
+}
+}
+</script>
+</body>
+</html>

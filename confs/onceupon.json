@@ -1,0 +1,226 @@
+{
+  "station_conf": {
+    "network_name": "OnceUpon",
+    "network_long_name": "Once Upon",
+    "channel_number": 10,
+    "network_type": "standard",
+    "panscan": 1.0,
+    "schedule_increment": 30,
+    "break_strategy": "standard",
+    "commercial_free": false,
+    "break_duration": 180,
+    "break_every": 12,
+    "max_break": 150,
+    "content_dir": "catalog/onceupon",
+    "commercial_dir": "commercial",
+    "bump_dir": "bump",
+    "autobump": {
+      "engine": "onceupon",
+      "duration": 7,
+      "stretch": true
+    },
+    "day_templates": {
+      "allday": {
+        "0": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "1": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "2": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "3": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "4": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "5": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "6": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "7": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "8": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "9": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "10": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "11": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "12": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "13": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "14": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "15": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "16": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "17": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "18": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "19": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "20": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "21": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "22": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        },
+        "23": {
+          "tags": [
+            "aladdin",
+            "beauty_and_the_beast",
+            "mulan"
+          ],
+          "random_tags": true
+        }
+      }
+    },
+    "monday": "allday",
+    "tuesday": "allday",
+    "wednesday": "allday",
+    "thursday": "allday",
+    "friday": "allday",
+    "saturday": "allday",
+    "sunday": "allday"
+  }
+}

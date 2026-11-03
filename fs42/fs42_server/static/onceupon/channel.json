@@ -1,0 +1,231 @@
+{
+  "_comment": "Once Upon (channel 10) live bumper pack config, read by the shared engine (static/bumpengine/engine.js). Schema: docs/LIVE_BUMPER_PACKS.md. shows: FS42 tag -> on-screen name. movies: tags that get the movie promo. Year-round: no seasonal entries.",
+  "templates": [
+    "OnceBG",
+    "OnceWordmark",
+    "OncePage",
+    "BumpBRB",
+    "BumpBackTo",
+    "BumpComingUp",
+    "BumpID",
+    "BumpLineup",
+    "BumpMovie",
+    "BumpSting",
+    "BumpTrivia",
+    "BumpUpNext",
+    "BumpUpNextThen"
+  ],
+  "fonts": [
+    "700 40px Fredoka",
+    "600 20px Fredoka",
+    "500 20px Fredoka",
+    "400 40px Pacifico"
+  ],
+  "themes": [
+    "castle",
+    "sparkle",
+    "ocean",
+    "garden",
+    "twilight"
+  ],
+  "cues": {
+    "post": [
+      {
+        "template": "BumpBackTo",
+        "weight": 6,
+        "when": "continues",
+        "props": {
+          "showName": "{cur}",
+          "label": [
+            "Now back to",
+            "And now, back to",
+            "Welcome back to",
+            "Back to the story"
+          ]
+        }
+      },
+      {
+        "template": "BumpSting",
+        "weight": 1,
+        "when": "continues"
+      },
+      {
+        "template": "BumpUpNext",
+        "weight": 4,
+        "when": [
+          "!continues",
+          "next"
+        ],
+        "props": {
+          "showName": "{next}",
+          "time": "{nextTime}",
+          "label": [
+            "Up next",
+            "Coming up!",
+            "Next up!"
+          ]
+        }
+      },
+      {
+        "template": "BumpUpNextThen",
+        "weight": 2,
+        "when": [
+          "!continues",
+          "next",
+          "then"
+        ],
+        "props": {
+          "showName": "{next}",
+          "time": "{nextTime}",
+          "thenName": "{then}",
+          "thenTime": "{thenTime}"
+        }
+      },
+      {
+        "template": "BumpSting",
+        "weight": 1,
+        "when": [
+          "!continues",
+          "!next"
+        ]
+      }
+    ],
+    "pre": [
+      {
+        "template": "BumpBRB",
+        "weight": 3,
+        "props": {
+          "line": [
+            "be right back",
+            "don't go anywhere",
+            "stay tuned",
+            "we'll be right back!|happily ever after soon",
+            "don't go away!|the story's not over yet"
+          ]
+        }
+      },
+      {
+        "template": "BumpComingUp",
+        "weight": 2,
+        "when": "continues",
+        "props": {
+          "header": [
+            "Stay tuned!",
+            "Don't touch that dial!",
+            "Stick around!",
+            "More magic after this!"
+          ],
+          "tease": "more {cur}"
+        }
+      },
+      {
+        "template": "BumpComingUp",
+        "weight": 2,
+        "when": [
+          "!continues",
+          "next"
+        ],
+        "props": {
+          "header": [
+            "Stay tuned!",
+            "Stick around!"
+          ],
+          "tease": "{next} is next"
+        }
+      },
+      {
+        "template": "BumpTrivia",
+        "weight": 2,
+        "props": {
+          "fact": {
+            "pick": "facts"
+          },
+          "header": [
+            "Did you know?",
+            "Storybook fact!",
+            "Once upon a fact"
+          ]
+        }
+      },
+      {
+        "template": "BumpID",
+        "weight": 1,
+        "props": {
+          "tag": {
+            "pick": "ids"
+          }
+        }
+      },
+      {
+        "template": "BumpLineup",
+        "weight": 1,
+        "when": "lineup",
+        "props": {
+          "header": {
+            "byHour": {
+              "0": "Today on Once Upon",
+              "17": "Tonight on Once Upon"
+            }
+          },
+          "lineup": "{lineup}"
+        }
+      },
+      {
+        "template": "BumpMovie",
+        "weight": 2,
+        "when": "movie",
+        "props": {
+          "movieTitle": "{movie}",
+          "label": [
+            "Storybook movie",
+            "Don't miss it!",
+            "Coming up"
+          ],
+          "when": {
+            "byHour": {
+              "0": "today at {movieTime}",
+              "17": "tonight at {movieTime}"
+            },
+            "of": "movie"
+          }
+        }
+      }
+    ]
+  },
+  "lineup": {
+    "size": 4,
+    "min": 3
+  },
+  "shows": {
+    "aladdin": "Aladdin",
+    "beauty_and_the_beast": "Beauty and the Beast",
+    "mulan": "Mulan"
+  },
+  "movies": [
+    "aladdin",
+    "beauty_and_the_beast",
+    "mulan"
+  ],
+  "facts": [
+    "Beauty and the Beast was the first animated movie ever nominated for the Best Picture Oscar.",
+    "Robin Williams was the voice of the Genie in Aladdin.",
+    "Lea Salonga was the singing voice of both Jasmine and Mulan.",
+    "Ming-Na Wen is the speaking voice of Mulan.",
+    "Eddie Murphy is the voice of Mushu, Mulan's little dragon.",
+    "A Whole New World, from Aladdin, won the Oscar for Best Original Song.",
+    "Angela Lansbury, the voice of Mrs. Potts, sings the song Beauty and the Beast.",
+    "Mulan's story comes from an old Chinese poem called the Ballad of Mulan.",
+    "Beauty and the Beast was first published as a fairy tale in France in 1740.",
+    "Aladdin's tale was added to the Arabian Nights by a French translator in the early 1700s.",
+    "The Brothers Grimm published their first book of fairy tales in 1812.",
+    "Charles Perrault's 1697 Cinderella gave us the fairy godmother, the pumpkin and the glass slipper.",
+    "Anne of Green Gables first came out in 1908, written by L.M. Montgomery of Prince Edward Island.",
+    "Mulan's lucky cricket is named Cri-Kee."
+  ],
+  "ids": [
+    "fairy tales · channel 10",
+    "movie magic · channel 10",
+    "where every story begins",
+    "happily ever after, all day"
+  ]
+}
