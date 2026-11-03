@@ -1,4 +1,4 @@
-// Minimal in-browser renderer for the Snow Day .dc.html templates.
+// Minimal in-browser renderer for .dc.html bumper templates (the kit runtime, shared by every pack).
 // Supports what the templates use: {{holes}}, <sc-if>, <sc-for>, <dc-import>, data-props defaults, renderVals().
 (() => {
   class DCLogic { constructor(props) { this.props = props; } }

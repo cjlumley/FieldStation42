@@ -1,5 +1,224 @@
 {
-  "_comment": "Snow Day live bumper config. shows: FS42 tag -> on-screen name. movies: tags that get the movie promo.",
+  "_comment": "Snow Day live bumper pack config, read by the shared engine (static/bumpengine/engine.js). Schema: docs/LIVE_BUMPER_PACKS.md. shows: FS42 tag -> on-screen name. movies: tags that get the movie promo.",
+  "templates": [
+    "SnowBG",
+    "SnowWordmark",
+    "BumpBRB",
+    "BumpBackTo",
+    "BumpComingUp",
+    "BumpCountdown",
+    "BumpID",
+    "BumpLineup",
+    "BumpMerry",
+    "BumpMovie",
+    "BumpSting",
+    "BumpTrivia",
+    "BumpUpNext",
+    "BumpUpNextThen"
+  ],
+  "fonts": [
+    "800 40px \"Baloo 2\"",
+    "700 20px \"Baloo 2\"",
+    "800 20px Nunito",
+    "700 20px Nunito"
+  ],
+  "themes": [
+    "plaid",
+    "night",
+    "lights",
+    "giftwrap",
+    "hearth"
+  ],
+  "cues": {
+    "post": [
+      {
+        "template": "BumpBackTo",
+        "weight": 6,
+        "when": "continues",
+        "props": {
+          "showName": "{cur}",
+          "label": [
+            "NOW BACK TO",
+            "AND NOW, BACK TO",
+            "WELCOME BACK TO",
+            "RETURNING TO"
+          ]
+        }
+      },
+      {
+        "template": "BumpSting",
+        "weight": 1,
+        "when": "continues"
+      },
+      {
+        "template": "BumpUpNext",
+        "weight": 4,
+        "when": [
+          "!continues",
+          "next"
+        ],
+        "props": {
+          "showName": "{next}",
+          "time": "{nextTime}",
+          "label": [
+            "up next!",
+            "coming up!",
+            "next on snow day"
+          ]
+        }
+      },
+      {
+        "template": "BumpUpNextThen",
+        "weight": 2,
+        "when": [
+          "!continues",
+          "next",
+          "then"
+        ],
+        "props": {
+          "showName": "{next}",
+          "time": "{nextTime}",
+          "thenName": "{then}",
+          "thenTime": "{thenTime}"
+        }
+      },
+      {
+        "template": "BumpSting",
+        "weight": 1,
+        "when": [
+          "!continues",
+          "!next"
+        ]
+      }
+    ],
+    "pre": [
+      {
+        "template": "BumpBRB",
+        "weight": 3,
+        "props": {
+          "line": [
+            "we'll be right back!",
+            "don't go anywhere!",
+            "back in a jingle!",
+            "stay cozy, back soon!"
+          ],
+          "art": [
+            "gift",
+            "cocoa",
+            "snowman",
+            "tree"
+          ]
+        }
+      },
+      {
+        "template": "BumpComingUp",
+        "weight": 2,
+        "when": "continues",
+        "props": {
+          "header": [
+            "stay tuned!",
+            "don't touch that dial!",
+            "more after this!",
+            "stick around!"
+          ],
+          "tease": "more {cur}"
+        }
+      },
+      {
+        "template": "BumpComingUp",
+        "weight": 2,
+        "when": [
+          "!continues",
+          "next"
+        ],
+        "props": {
+          "header": [
+            "stay tuned!",
+            "stick around!"
+          ],
+          "tease": "{next} is next"
+        }
+      },
+      {
+        "template": "BumpTrivia",
+        "weight": 2,
+        "props": {
+          "fact": {
+            "pick": "facts"
+          },
+          "header": [
+            "did you know?",
+            "snow day fact!",
+            "holiday fun fact"
+          ]
+        }
+      },
+      {
+        "template": "BumpCountdown",
+        "weight": 3,
+        "dates": [
+          "12-01",
+          "12-24"
+        ],
+        "props": {
+          "sleeps": "{days:12-25}"
+        }
+      },
+      {
+        "template": "BumpMerry",
+        "weight": 1,
+        "props": {
+          "greeting": [
+            "merry christmas!",
+            "happy holidays!",
+            "season's greetings!"
+          ]
+        }
+      },
+      {
+        "template": "BumpID",
+        "weight": 1,
+        "props": {
+          "tag": {
+            "pick": "ids"
+          }
+        }
+      },
+      {
+        "template": "BumpLineup",
+        "weight": 1,
+        "when": "lineup",
+        "props": {
+          "header": {
+            "byHour": {
+              "0": "today on snow day",
+              "16": "coming up tonight"
+            }
+          },
+          "lineup": "{lineup}"
+        }
+      },
+      {
+        "template": "BumpMovie",
+        "weight": 2,
+        "when": "movie",
+        "props": {
+          "movieTitle": "{movie}",
+          "when": {
+            "byHour": {
+              "0": "today at {movieTime}",
+              "17": "tonight at {movieTime}"
+            },
+            "of": "movie"
+          }
+        }
+      }
+    ]
+  },
+  "lineup": {
+    "size": 4,
+    "min": 3
+  },
   "shows": {
     "charlie_brown_christmas": "A Charlie Brown Christmas",
     "frosty": "Frosty the Snowman",
@@ -45,16 +264,9 @@
     "more snow day"
   ],
   "ids": [
-    "all December \u00b7 channel 12",
+    "all December · channel 12",
     "cozy holiday specials all month",
     "your home for the holidays",
     "the most wonderful channel of the year"
-  ],
-  "themes": [
-    "plaid",
-    "night",
-    "lights",
-    "giftwrap",
-    "hearth"
   ]
 }
