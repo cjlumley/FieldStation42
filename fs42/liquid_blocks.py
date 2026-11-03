@@ -1,4 +1,5 @@
 import datetime
+import math
 import os.path
 import random
 
@@ -134,9 +135,17 @@ class LiquidBlock:
         # break_every (minutes of program between breaks) sets the break count from the content
         # length, like broadcast TV, instead of from the spare time; break length then absorbs the rest
         segments_wanted = None
+        break_target = None
         break_every = catalog.config.get("break_every", None)
         if break_every and break_every > 0 and diff > 2:
             segments_wanted = max(1, round(self.content_duration() / (break_every * 60)))
+        # max_break (seconds) caps every break, the one after the show included: if there's more spare
+        # time than break_every's breaks can hold, add breaks rather than lengthening them
+        max_break = catalog.config.get("max_break", None)
+        if max_break and max_break > 0 and diff > 2:
+            reel_blocks_needed = max(segments_wanted or 1, math.ceil(diff / max_break))
+            segments_wanted = reel_blocks_needed
+            break_target = diff / reel_blocks_needed
 
         if break_points and segments_wanted:
             break_points = self.clip_break_points(break_points, segments_wanted, self.content_duration())
@@ -202,8 +211,9 @@ class LiquidBlock:
                 strict_count=strict_count,
                 lookahead=self.lookahead,
                 break_strategy=self.break_strategy,
+                break_target=break_target,
             )
-            
+
         else:
             self.reel_blocks = []
 

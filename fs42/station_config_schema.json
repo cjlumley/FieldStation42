@@ -53,6 +53,11 @@
           "exclusiveMinimum": 0,
           "description": "Minutes of program between commercial breaks; sets the break count from content length (broadcast style) instead of from break_duration"
         },
+        "max_break": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Longest a single commercial break may run, in seconds (e.g. 150). Extra spare time becomes more breaks, never longer ones."
+        },
         "min_break_ratio": {
           "type": "number",
           "minimum": 0,

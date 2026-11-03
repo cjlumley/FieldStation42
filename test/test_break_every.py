@@ -77,3 +77,67 @@ def test_chapters_follow_break_every():
     segs = _segments(103, 150, 12, chapters)
     assert 8 <= len(segs) <= 10
     assert all(segs[i] >= 5 * 60 for i in range(len(segs) - 1))
+
+
+def _breaks(content_min, slot_min, break_every, max_break):
+    movie = SimpleNamespace(path="movie.mp4", realpath="movie.mp4", duration=content_min * 60, title="Movie",
+                            content_type="feature", media_type="video")
+    info = {"start_bump": None, "end_bump": None, "bump_dir": None, "commercial_dir": None}
+    block = LiquidBlock(movie, START, START + datetime.timedelta(minutes=slot_min), "Movie", "standard", info)
+    fluid = MagicMock()
+    fluid.return_value.get_chapters.return_value = []
+    fluid.return_value.get_breaks.return_value = []
+    catalog = _catalog(break_every)
+    catalog.config["max_break"] = max_break
+
+    durations = [30, 15, 30, 60, 30, 15, 45, 30, 15, 30]
+    picks = {"i": 0}
+
+    def find_commercial(seconds, when, commercial_dir=None):
+        fitting = [d for d in durations if d <= seconds]
+        if not fitting:
+            raise MatchingContentNotFound("nothing fits")
+        picks["i"] += 1
+        d = fitting[picks["i"] % len(fitting)]
+        return SimpleNamespace(path="ad.mp4", duration=d, content_type="commercial", media_type="video")
+
+    catalog.find_commercial = find_commercial
+    with patch("fs42.liquid_blocks.FluidBuilder", fluid):
+        block.make_plan(catalog)
+    breaks, cur, segs, show = [], 0.0, 0, False
+    for e in block.plan:
+        if e.path == "movie.mp4":
+            if cur:
+                breaks.append(cur)
+                cur = 0.0
+            if not show:
+                segs += 1
+            show = True
+        else:
+            cur += e.duration
+            show = False
+    if cur:
+        breaks.append(cur)
+    return breaks, segs
+
+
+def test_max_break_caps_every_break_polar_express():
+    # The Polar Express (100 min) in a 120 min slot: 20 min of breaks, none longer than 2.5 min
+    breaks, segs = _breaks(100, 120, 12, 150)
+    assert all(b <= 150 for b in breaks), breaks
+    assert sum(breaks) >= 20 * 60 - 60
+    assert len(breaks) >= 8
+
+
+def test_max_break_adds_breaks_instead_of_lengthening():
+    # lots of spare time: more breaks, each still capped
+    breaks, segs = _breaks(100, 150, 12, 150)
+    assert all(b <= 150 for b in breaks), breaks
+    assert len(breaks) >= 20
+
+
+def test_max_break_short_special():
+    # 25 min special in a 30 min slot: 5 min of breaks becomes two short breaks, not one long one
+    breaks, segs = _breaks(25, 30, 12, 150)
+    assert all(b <= 150 for b in breaks), breaks
+    assert len(breaks) == 2

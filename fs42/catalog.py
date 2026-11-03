@@ -736,8 +736,18 @@ class ShowCatalog:
             remaining -= end_candidate.duration
 
         # aim for lower and should average close over time since the returned can be larger
+        capped = bool(self.config.get("max_break"))
         while remaining > (target_duration * 0.1):
-            if not self.config["commercial_free"]:
+            if capped:
+                # max_break stations: only pick clips that still fit, so a break never runs long
+                try:
+                    if not self.config["commercial_free"]:
+                        candidate = self.find_commercial(remaining, when, commercial_dir)
+                    else:
+                        candidate = self.find_bump(remaining, when, None, bump_dir, lookahead=lookahead)
+                except MatchingContentNotFound:
+                    break
+            elif not self.config["commercial_free"]:
                 candidate = self.find_commercial(target_duration, when, commercial_dir)
             else:
                 candidate = self.find_bump(target_duration, when, None, bump_dir, lookahead=lookahead)
@@ -749,7 +759,7 @@ class ShowCatalog:
 
 
     def make_reel_fill(self, when, length, use_bumpers=True, commercial_dir=None, bump_dir=None, strict_count=None,
-                       lookahead=None, break_strategy=None):
+                       lookahead=None, break_strategy=None, break_target=None):
         target_break_duration = self.config["break_duration"]
 
         strategy = self.config.get("break_strategy", None)
@@ -774,7 +784,9 @@ class ShowCatalog:
                 )
         else:
             if strict_count:
-                target_break_duration = length / strict_count
+                # break_target (from max_break) sizes every break, the one after the show included;
+                # otherwise the strict breaks share the whole length
+                target_break_duration = break_target if break_target else length / strict_count
 
 
 
@@ -796,7 +808,11 @@ class ShowCatalog:
                     blocks.append(block)
 
                     if strict_count and len(blocks) >= strict_count:
-                        keep_going = False
+                        # max_break: capped breaks can come up a little short, so keep adding breaks
+                        # until what's left fits in one more capped break (the one after the show)
+                        max_break = self.config.get("max_break")
+                        if not (break_target and max_break and remaining > max_break):
+                            keep_going = False
 
                 else:
                     keep_going = False
@@ -809,7 +825,10 @@ class ShowCatalog:
         # discarded for overshooting), give it the same in/out bumpers as the other breaks.
         fill_pre, fill_post = None, None
         engine = (self.config.get("autobump") or {}).get("engine")
-        if (use_bumpers and strict_count and len(blocks) < strict_count and strategy != "end"
+        # On live-engine channels the break after the show gets cues too: its out-of-break cue sees
+        # no more of the current show and turns into "up next <show>".
+        mid_show_leftover = strict_count and len(blocks) < strict_count
+        if (use_bumpers and strict_count and (mid_show_leftover or engine) and strategy != "end"
                 and ("autobump" not in self.config or engine) and not AutoBumpAgent.do_fill(self.config)):
             try:
                 if engine:
