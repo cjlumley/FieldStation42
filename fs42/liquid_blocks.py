@@ -293,6 +293,9 @@ class LiquidClipBlock(LiquidBlock):
         if break_duration and break_duration > 0 and diff > 2:
             # calculate how many breaks we want based on total buffer time and break_duration
             strict_count = max(1, int(diff / break_duration))
+            # at least one break after each clip, so two cartoons in a half hour get
+            # "ep 1, break, ep 2, break" instead of one long break and a stub at the end
+            strict_count = max(strict_count, len(self.content))
 
         self.reel_blocks = None
         if diff < -2:

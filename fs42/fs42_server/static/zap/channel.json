@@ -1,0 +1,242 @@
+{
+  "_comment": "ZAP! (channel 7) live bumper pack config, read by the shared engine (static/bumpengine/engine.js). Schema: docs/LIVE_BUMPER_PACKS.md. Snipe*, BumpPremiere and BumpSignOff are installed but not cued.",
+  "templates": [
+    "ZapBG",
+    "ZapWordmark",
+    "ZapWipe",
+    "BumpBRB",
+    "BumpBackTo",
+    "BumpComingUp",
+    "BumpID",
+    "BumpLineup",
+    "BumpMovie",
+    {
+      "name": "BumpSting",
+      "naturalSpeed": true
+    },
+    "BumpTrivia",
+    "BumpUpNext",
+    "BumpUpNextThen"
+  ],
+  "fonts": [
+    "400 40px Anton",
+    "800 20px \"Barlow Condensed\"",
+    "italic 800 20px \"Barlow Condensed\"",
+    "400 40px \"Permanent Marker\""
+  ],
+  "themes": [
+    "concrete",
+    "slash",
+    "tape",
+    "static",
+    "orange"
+  ],
+  "cues": {
+    "post": [
+      {
+        "template": "BumpBackTo",
+        "weight": 6,
+        "when": "continues",
+        "props": {
+          "showName": "{cur}",
+          "label": [
+            "now back to",
+            "back to",
+            "welcome back to",
+            "and now, back to"
+          ]
+        }
+      },
+      {
+        "template": "BumpSting",
+        "weight": 1,
+        "when": "continues"
+      },
+      {
+        "template": "BumpUpNext",
+        "weight": 4,
+        "when": [
+          "!continues",
+          "next"
+        ],
+        "props": {
+          "showName": "{next}",
+          "time": "{nextTime}",
+          "label": [
+            "up next",
+            "next on zap!",
+            "coming up",
+            "don't move"
+          ]
+        }
+      },
+      {
+        "template": "BumpUpNextThen",
+        "weight": 2,
+        "when": [
+          "!continues",
+          "next",
+          "then"
+        ],
+        "props": {
+          "showName": "{next}",
+          "time": "{nextTime}",
+          "thenName": "{then}",
+          "thenTime": "{thenTime}"
+        }
+      },
+      {
+        "template": "BumpSting",
+        "weight": 1,
+        "when": [
+          "!continues",
+          "!next"
+        ]
+      }
+    ],
+    "pre": [
+      {
+        "template": "BumpBRB",
+        "weight": 3,
+        "props": {
+          "line": [
+            "be right back",
+            "don't go anywhere",
+            "stay put!",
+            "back in a flash",
+            "don't touch that remote"
+          ]
+        }
+      },
+      {
+        "template": "BumpComingUp",
+        "weight": 2,
+        "when": "continues",
+        "props": {
+          "header": [
+            "stay tuned",
+            "stick around",
+            "don't touch that dial",
+            "still to come"
+          ],
+          "tease": [
+            "{cur} continues",
+            "{cur} is back after this"
+          ]
+        }
+      },
+      {
+        "template": "BumpComingUp",
+        "weight": 2,
+        "when": [
+          "!continues",
+          "next"
+        ],
+        "props": {
+          "header": [
+            "stay tuned",
+            "stick around"
+          ],
+          "tease": "{next} is next"
+        }
+      },
+      {
+        "template": "BumpTrivia",
+        "weight": 2,
+        "props": {
+          "fact": {
+            "pick": "facts"
+          },
+          "header": [
+            "did you know?",
+            "zap! fact",
+            "toon trivia"
+          ]
+        }
+      },
+      {
+        "template": "BumpID",
+        "weight": 1,
+        "props": {
+          "tag": {
+            "pick": "ids"
+          }
+        }
+      },
+      {
+        "template": "BumpLineup",
+        "weight": 1,
+        "when": "lineup",
+        "props": {
+          "header": {
+            "byHour": {
+              "0": "today on zap!",
+              "15": "this afternoon on zap!",
+              "18": "tonight on zap!"
+            }
+          },
+          "lineup": "{lineup}"
+        }
+      },
+      {
+        "template": "BumpMovie",
+        "weight": 3,
+        "when": "movie",
+        "props": {
+          "movieTitle": "{movie}",
+          "label": [
+            "zap! movie",
+            "friday movie",
+            "movie night"
+          ],
+          "when": {
+            "byHour": {
+              "0": "today at {movieTime}",
+              "17": "tonight at {movieTime}"
+            },
+            "of": "movie"
+          }
+        }
+      }
+    ]
+  },
+  "lineup": {
+    "size": 4,
+    "min": 3
+  },
+  "shows": {
+    "avatar": "Avatar: The Last Airbender",
+    "ben10": "Ben 10",
+    "danny_phantom": "Danny Phantom",
+    "johnny_test": "Johnny Test",
+    "wizards": "Wizards of Waverly Place",
+    "gumball": "The Amazing World of Gumball",
+    "fairly_oddparents": "The Fairly OddParents: A New Wish",
+    "ben10_movie": "Ben 10: Secret of the Omnitrix"
+  },
+  "movies": [
+    "ben10_movie"
+  ],
+  "facts": [
+    "Johnny Test was animated in Canada, and aired on Teletoon.",
+    "Ben 10 was created by Man of Action, the team behind Big Hero 6's comics.",
+    "The 10 in Ben 10 is Ben Tennyson's age when he found the Omnitrix.",
+    "Appa, Aang's flying sky bison, has six legs.",
+    "Avatar: The Last Airbender's bending styles are based on real martial arts.",
+    "Danny Phantom was created by Butch Hartman, who also made The Fairly OddParents.",
+    "Danny Phantom got his ghost powers from his parents' Ghost Portal.",
+    "Selena Gomez played Alex Russo on Wizards of Waverly Place.",
+    "The Russo family runs the Waverly Sub Station in New York City.",
+    "Gumball mixes 2D, 3D, stop-motion and real photos, sometimes in the same scene.",
+    "Darwin was Gumball's pet goldfish before he grew legs.",
+    "In The Fairly OddParents, Cosmo and Wanda's wands are shaped like stars.",
+    "Johnny's twin sisters Susan and Mary are genius scientists.",
+    "Uncle Iroh's favourite drink is jasmine tea."
+  ],
+  "ids": [
+    "cartoons all day \u00b7 ch 7",
+    "zap! \u00b7 channel 7",
+    "more toons. more zap!",
+    "after school on zap!"
+  ]
+}

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ZAP! be right back</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,800;1,800&family=Permanent+Marker&display=swap">
+<style>
+body{margin:0}
+@keyframes wipeCycle{0%{clip-path:polygon(-400px 0px, -160px 0px, -320px 480px, -400px 480px)}8%,89.9%{clip-path:polygon(-400px 0px, 940px 0px, 780px 480px, -400px 480px)}90%{clip-path:polygon(-160px 0px, 1200px 0px, 1200px 480px, -320px 480px)}98%,100%{clip-path:polygon(940px 0px, 1200px 0px, 1200px 480px, 780px 480px)}}
+@keyframes sweepCycle{0%{transform:translateX(-370px)}8%{transform:translateX(730px)}8.01%,90%{transform:translateX(-370px)}98%,100%{transform:translateX(730px)}}
+@keyframes slamCycle{0%,5%{transform:translateX(-260px) skewX(-25deg);opacity:0}11%{transform:translateX(14px) skewX(6deg);opacity:1}13%{transform:translateX(-4px) skewX(-2deg)}15%,82%{transform:translateX(0) skewX(0deg);opacity:1}89%,100%{transform:translateX(320px) skewX(-25deg);opacity:0}}
+@keyframes popInCycle{0%,5%{transform:scale(0.3);opacity:0}11%{transform:scale(1.08);opacity:1}14%,82%{transform:scale(1);opacity:1}89%,100%{transform:scale(0.3);opacity:0}}
+@keyframes cardCycle{0%,5%{transform:translateX(720px) skewX(-6deg)}12%{transform:translateX(-16px) skewX(-6deg)}15%,82%{transform:translateX(0) skewX(-6deg)}90%,100%{transform:translateX(-720px) skewX(-6deg)}}
+@keyframes dropCycle{0%,5%{transform:translateY(-560px) rotate(-6deg)}12%{transform:translateY(16px) rotate(-1deg)}14%{transform:translateY(-6px) rotate(-2deg)}16%,82%{transform:translateY(0) rotate(-2deg)}90%,100%{transform:translateY(-560px) rotate(-6deg)}}
+@keyframes tvCycle{0%,5%{transform:translateY(420px) rotate(-14deg)}12%{transform:translateY(-10px) rotate(-3deg)}15%,82%{transform:translateY(0) rotate(-5deg)}90%,100%{transform:translateY(420px) rotate(10deg)}}
+@keyframes tapeCycle{0%,10%{clip-path:inset(0 100% 0 0)}17%,82%{clip-path:inset(0 0 0 0)}88%,100%{clip-path:inset(0 0 0 100%)}}
+@keyframes riseCycle{0%,9%{transform:translateY(60px);opacity:0}16%,82%{transform:translateY(0);opacity:1}88%,100%{transform:translateY(-30px);opacity:0}}
+@keyframes zipCycle{0%,3%{transform:translateX(-320px);opacity:0}5%{opacity:1}14%,100%{transform:translateX(960px);opacity:0}}
+@keyframes flashCycle{0%,8%{transform:scale(0);opacity:0}12%{opacity:1}32%,100%{transform:scale(2.6);opacity:0}}
+@keyframes snipeCycle{0%{transform:translateY(220px)}10%{transform:translateY(-10px)}14%,86%{transform:translateY(0)}89%{transform:translateY(-8px)}97%,100%{transform:translateY(220px)}}
+@keyframes labelCycle{0%,12%{transform:scale(0) rotate(-20deg)}17%{transform:scale(1.15) rotate(-4deg)}20%,84%{transform:scale(1) rotate(-4deg)}88%,100%{transform:scale(0) rotate(-4deg)}}
+@keyframes drift{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(8px,-10px) rotate(4deg)}}
+@keyframes slide{0%,100%{transform:translateX(0)}50%{transform:translateX(18px)}}
+@keyframes jitter{0%,100%{transform:translate(0,0)}25%{transform:translate(1px,-1px)}50%{transform:translate(-1px,1px)}75%{transform:translate(1px,1px)}}
+@keyframes roll{0%{transform:translateY(-60px)}100%{transform:translateY(480px)}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes glow{0%,100%{opacity:0.5}50%{opacity:1}}
+.zap-hold, .zap-hold *{animation-play-state:paused !important; animation-delay:-3.5s !important}
+.zap-hold4, .zap-hold4 *{animation-play-state:paused !important; animation-delay:-2s !important}
+</style>
+</helmet>
+<div class="{{holdClass}}" style="width: 640px; height: 480px; position: relative; overflow: hidden">
+<sc-if value="{{showChecker}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: linear-gradient(135deg, #3A4A5E 0%, #5A6B80 100%)">
+<div style="position: absolute; left: 70px; top: 80px; width: 240px; height: 190px; border-radius: 50%; background: rgba(200,160,120,0.35); filter: blur(22px)"></div>
+<div style="position: absolute; left: 330px; top: 130px; width: 230px; height: 170px; border-radius: 50%; background: rgba(150,180,210,0.3); filter: blur(24px)"></div>
+<div style="position: absolute; left: 0; top: 226px; width: 640px; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: 2px; color: rgba(255,255,255,0.7)">[THE PAUSED SHOW]</div>
+</div>
+</sc-if>
+<div style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; overflow: hidden; filter: {{crtFilter}}; animation: wipeCycle 7s linear both infinite; font-family: 'Barlow Condensed', system-ui, sans-serif; color: #FFFFFF">
+<div style="position: absolute; left: 0; top: 0"><dc-import name="ZapBG" theme="{{theme}}" hint-size="640px,480px"></dc-import></div>
+<div style="position: absolute; left: 64px; top: 48px; width: 512px; height: 344px; display: flex; align-items: center; justify-content: center; gap: 28px">
+<div style="flex: none; animation: tvCycle 7s cubic-bezier(0.2, 0.8, 0.3, 1) both infinite"><div aria-hidden="true" style="position: relative; width: 220px; height: 190px">
+<div style="position: absolute; left: 0; top: 0; width: 220px; height: 178px; box-sizing: border-box; border-radius: 18px; background: linear-gradient(180deg, #3A3A42 0%, #1A1A1F 100%); border: 5px solid #000000; box-shadow: 8px 8px 0 #B6FF00">
+<div style="position: absolute; left: 14px; top: 14px; width: 150px; height: 118px; box-sizing: border-box; border-radius: 22px / 26px; border: 5px solid #000000; overflow: hidden; background: #0A0A0A"><div style="position: absolute; left: 0; top: 0; width: 140px; height: 108px; display: flex; animation: jitter 0.25s steps(2) infinite"><div style="flex: 1; background: #C0C0C0"></div><div style="flex: 1; background: #C0C000"></div><div style="flex: 1; background: #00C0C0"></div><div style="flex: 1; background: #00C000"></div><div style="flex: 1; background: #C000C0"></div><div style="flex: 1; background: #C00000"></div><div style="flex: 1; background: #0000C0"></div></div>
+<div style="position: absolute; left: 0; top: 0; width: 140px; height: 26px; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%); animation: roll 1.6s linear infinite"></div></div>
+<div style="position: absolute; left: 176px; top: 20px; width: 24px; height: 24px; border-radius: 50%; background: #111111; border: 4px solid #6A6A75"></div>
+<div style="position: absolute; left: 176px; top: 62px; width: 24px; height: 24px; border-radius: 50%; background: #111111; border: 4px solid #6A6A75"></div>
+<div style="position: absolute; left: 174px; top: 104px; width: 30px; height: 8px; background: #6A6A75"></div>
+<div style="position: absolute; left: 174px; top: 118px; width: 30px; height: 8px; background: #6A6A75"></div>
+</div>
+<div style="position: absolute; left: 40px; top: 172px; width: 140px; height: 16px; background: #000000; clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%)"></div>
+</div></div>
+<div style="flex: none; width: 250px; display: flex; flex-direction: column; animation: slamCycle 7s cubic-bezier(0.2, 0.8, 0.3, 1) both infinite">
+<div style="display: flex; flex-direction: column; font-family: 'Anton', sans-serif; line-height: 0.98; text-transform: uppercase; text-shadow: 5px 5px 0 #000000">
+<div data-fit="1" style="width: 250px; font-size: {{size1}}px; color: #FFFFFF">{{line1}}</div>
+<div data-fit="1" style="width: 250px; font-size: {{size2}}px; color: #B6FF00">{{line2}}</div>
+</div>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{true}}">
+<div data-fit="2" style="margin-top: 12px; width: 250px; font-family: 'Permanent Marker', cursive; font-size: 24px; line-height: 1.15; color: #FFE600; transform: rotate(-3deg)">{{sub}}</div>
+</sc-if>
+</div>
+</div>
+<div style="position: absolute; right: 60px; bottom: 44px"><dc-import name="ZapWordmark" size="30" hint-size="90px,54px"></dc-import></div>
+<sc-if value="{{crt}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; z-index: 10; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px), repeating-linear-gradient(90deg, rgba(255,0,0,0.06) 0px, rgba(255,0,0,0.06) 1px, rgba(0,255,0,0.06) 1px, rgba(0,255,0,0.06) 2px, rgba(0,0,255,0.06) 2px, rgba(0,0,255,0.06) 3px), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 58%, rgba(0,0,0,0.5) 100%); box-shadow: inset 0 0 50px rgba(0,0,0,0.55)"></div>
+</sc-if>
+<sc-if value="{{safe}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 32px; top: 24px; width: 576px; height: 432px; box-sizing: border-box; border: 2px dashed rgba(255,230,0,0.9); z-index: 11; pointer-events: none"></div>
+<div aria-hidden="true" style="position: absolute; left: 64px; top: 48px; width: 512px; height: 384px; box-sizing: border-box; border: 2px dashed rgba(0,240,255,0.95); z-index: 11; pointer-events: none"></div>
+</sc-if>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; z-index: 20; pointer-events: none"><dc-import name="ZapWipe" dur="7" hint-size="640px,480px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"line": {"editor": "text", "default": "be right back", "section": "Copy"}, "theme": {"editor": "enum", "options": ["concrete", "slash", "tape", "static", "orange"], "default": "concrete", "section": "Look"}, "motion": {"editor": "enum", "options": ["still", "play"], "default": "still", "section": "Look"}, "showChecker": {"editor": "boolean", "default": true, "section": "Look"}, "crt": {"editor": "boolean", "default": true, "section": "Look"}, "safe": {"editor": "boolean", "default": false, "section": "Look"}, "$preview": {"width": 640, "height": 480}}'>
+class Component extends DCLogic {
+renderVals() {
+const p = this.props;
+const crt = p.crt ?? true;
+const fit = (t, max, min, w, lines) => { const n = Math.max(4, String(t ?? '').length); return Math.max(min, Math.min(max, Math.floor((w * lines * 0.92) / (n * 0.5)))); };
+const split = (t) => { const w = String(t).trim().split(/\s+/); if (w.length < 2) return ['', w.join(' ')]; const c = w.findIndex((x, i) => i < w.length - 1 && /,$/.test(x)); if (c >= 0) return [w.slice(0, c + 1).join(' '), w.slice(c + 1).join(' ')]; let best = 1, bd = 1e9; for (let i = 1; i < w.length; i++) { const d = Math.abs(w.slice(0, i).join(' ').length - w.slice(i).join(' ').length); if (d <= bd) { bd = d; best = i; } } return [w.slice(0, best).join(' '), w.slice(best).join(' ')]; };
+const lines = { 'be right back': ['be right', 'back', "don't touch that remote"], 'be right back!': ['be right', 'back!', "don't touch that remote"], "don't go anywhere": ["don't go", 'anywhere', 'more toons in a sec'], 'stay tuned': ['stay', 'tuned', 'more coming right up'] };
+const raw = String(p.line ?? 'be right back'); const bar = raw.indexOf('|');
+const main = (bar < 0 ? raw : raw.slice(0, bar)).trim(); const known = lines[main.toLowerCase()];
+const two = known ? [known[0], known[1]] : split(main); const sub = bar >= 0 ? raw.slice(bar + 1).trim() : (known ? known[2] : '');
+return { line1: two[0], line2: two[1], size1: fit(two[0], 64, 34, 250, 1), size2: fit(two[1], 86, 40, 250, 1), sub, hasSub: !!sub, theme: p.theme ?? 'concrete', showChecker: p.showChecker ?? true, holdClass: (p.showChecker ?? true) && (p.motion ?? 'still') !== 'play' ? 'zap-hold' : '', crt, safe: p.safe ?? false, crtFilter: crt ? 'blur(0.6px) saturate(1.2) contrast(1.08)' : 'none' };
+}
+}
+</script>
+</body>
+</html>

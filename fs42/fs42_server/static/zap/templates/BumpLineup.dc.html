@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ZAP! lineup</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,800;1,800&family=Permanent+Marker&display=swap">
+<style>
+body{margin:0}
+@keyframes wipeCycle{0%{clip-path:polygon(-400px 0px, -160px 0px, -320px 480px, -400px 480px)}8%,89.9%{clip-path:polygon(-400px 0px, 940px 0px, 780px 480px, -400px 480px)}90%{clip-path:polygon(-160px 0px, 1200px 0px, 1200px 480px, -320px 480px)}98%,100%{clip-path:polygon(940px 0px, 1200px 0px, 1200px 480px, 780px 480px)}}
+@keyframes sweepCycle{0%{transform:translateX(-370px)}8%{transform:translateX(730px)}8.01%,90%{transform:translateX(-370px)}98%,100%{transform:translateX(730px)}}
+@keyframes slamCycle{0%,5%{transform:translateX(-260px) skewX(-25deg);opacity:0}11%{transform:translateX(14px) skewX(6deg);opacity:1}13%{transform:translateX(-4px) skewX(-2deg)}15%,82%{transform:translateX(0) skewX(0deg);opacity:1}89%,100%{transform:translateX(320px) skewX(-25deg);opacity:0}}
+@keyframes popInCycle{0%,5%{transform:scale(0.3);opacity:0}11%{transform:scale(1.08);opacity:1}14%,82%{transform:scale(1);opacity:1}89%,100%{transform:scale(0.3);opacity:0}}
+@keyframes cardCycle{0%,5%{transform:translateX(720px) skewX(-6deg)}12%{transform:translateX(-16px) skewX(-6deg)}15%,82%{transform:translateX(0) skewX(-6deg)}90%,100%{transform:translateX(-720px) skewX(-6deg)}}
+@keyframes dropCycle{0%,5%{transform:translateY(-560px) rotate(-6deg)}12%{transform:translateY(16px) rotate(-1deg)}14%{transform:translateY(-6px) rotate(-2deg)}16%,82%{transform:translateY(0) rotate(-2deg)}90%,100%{transform:translateY(-560px) rotate(-6deg)}}
+@keyframes tvCycle{0%,5%{transform:translateY(420px) rotate(-14deg)}12%{transform:translateY(-10px) rotate(-3deg)}15%,82%{transform:translateY(0) rotate(-5deg)}90%,100%{transform:translateY(420px) rotate(10deg)}}
+@keyframes tapeCycle{0%,10%{clip-path:inset(0 100% 0 0)}17%,82%{clip-path:inset(0 0 0 0)}88%,100%{clip-path:inset(0 0 0 100%)}}
+@keyframes riseCycle{0%,9%{transform:translateY(60px);opacity:0}16%,82%{transform:translateY(0);opacity:1}88%,100%{transform:translateY(-30px);opacity:0}}
+@keyframes zipCycle{0%,3%{transform:translateX(-320px);opacity:0}5%{opacity:1}14%,100%{transform:translateX(960px);opacity:0}}
+@keyframes flashCycle{0%,8%{transform:scale(0);opacity:0}12%{opacity:1}32%,100%{transform:scale(2.6);opacity:0}}
+@keyframes snipeCycle{0%{transform:translateY(220px)}10%{transform:translateY(-10px)}14%,86%{transform:translateY(0)}89%{transform:translateY(-8px)}97%,100%{transform:translateY(220px)}}
+@keyframes labelCycle{0%,12%{transform:scale(0) rotate(-20deg)}17%{transform:scale(1.15) rotate(-4deg)}20%,84%{transform:scale(1) rotate(-4deg)}88%,100%{transform:scale(0) rotate(-4deg)}}
+@keyframes drift{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(8px,-10px) rotate(4deg)}}
+@keyframes slide{0%,100%{transform:translateX(0)}50%{transform:translateX(18px)}}
+@keyframes jitter{0%,100%{transform:translate(0,0)}25%{transform:translate(1px,-1px)}50%{transform:translate(-1px,1px)}75%{transform:translate(1px,1px)}}
+@keyframes roll{0%{transform:translateY(-60px)}100%{transform:translateY(480px)}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes glow{0%,100%{opacity:0.5}50%{opacity:1}}
+.zap-hold, .zap-hold *{animation-play-state:paused !important; animation-delay:-3.5s !important}
+.zap-hold4, .zap-hold4 *{animation-play-state:paused !important; animation-delay:-2s !important}
+</style>
+</helmet>
+<div class="{{holdClass}}" style="width: 640px; height: 480px; position: relative; overflow: hidden">
+<sc-if value="{{showChecker}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: linear-gradient(135deg, #3A4A5E 0%, #5A6B80 100%)">
+<div style="position: absolute; left: 70px; top: 80px; width: 240px; height: 190px; border-radius: 50%; background: rgba(200,160,120,0.35); filter: blur(22px)"></div>
+<div style="position: absolute; left: 330px; top: 130px; width: 230px; height: 170px; border-radius: 50%; background: rgba(150,180,210,0.3); filter: blur(24px)"></div>
+<div style="position: absolute; left: 0; top: 226px; width: 640px; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: 2px; color: rgba(255,255,255,0.7)">[THE PAUSED SHOW]</div>
+</div>
+</sc-if>
+<div style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; overflow: hidden; filter: {{crtFilter}}; animation: wipeCycle 7s linear both infinite; font-family: 'Barlow Condensed', system-ui, sans-serif; color: #FFFFFF">
+<div style="position: absolute; left: 0; top: 0"><dc-import name="ZapBG" theme="{{theme}}" hint-size="640px,480px"></dc-import></div>
+<div style="position: absolute; left: 64px; top: 48px; width: 512px; height: 384px; box-sizing: border-box; padding-top: 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px">
+<div style="width: 480px; animation: dropCycle 7s cubic-bezier(0.2, 0.8, 0.3, 1) both infinite"><div style="position: relative; box-sizing: border-box; padding: 44px 26px 16px; background: #111111; border-top: 12px solid #B6FF00; box-shadow: 10px 10px 0 rgba(0,0,0,0.45)">
+<div style="position: absolute; left: -20px; top: -34px; transform: rotate(-3deg)"><div style="animation: tapeCycle 7s cubic-bezier(0.2, 0.8, 0.3, 1) both infinite"><div style="background: #FF2D95; clip-path: polygon(0% 8%, 2% 0%, 4% 10%, 6% 2%, 100% 0%, 98% 14%, 100% 30%, 97% 50%, 100% 72%, 98% 88%, 100% 100%, 3% 100%, 0% 90%, 2% 70%, 0% 52%, 2% 30%); padding: 5px 26px 3px"><div data-fit="1" style="width: 260px; text-align: center; font-family: 'Anton', sans-serif; font-size: {{headerSize}}px; line-height: 1.15; letter-spacing: 2px; text-transform: uppercase; color: #111111">{{header}}</div></div></div></div>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 16px; padding: 9px 4px; border-bottom: 4px solid rgba(255,122,0,0.55)">
+<div style="flex: none; width: 86px; text-align: right; font-weight: 800; font-style: italic; font-size: 28px; color: #B6FF00">{{r.t}}</div>
+<div data-fit="2" style="flex: none; width: 320px; font-family: 'Anton', sans-serif; font-size: {{r.size}}px; line-height: 1.05; letter-spacing: 1px; text-transform: uppercase; color: #FFFFFF">{{r.s}}</div>
+</div>
+</sc-for>
+</div></div>
+</div>
+<sc-if value="{{crt}}" hint-placeholder-val="{{true}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; z-index: 10; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px), repeating-linear-gradient(90deg, rgba(255,0,0,0.06) 0px, rgba(255,0,0,0.06) 1px, rgba(0,255,0,0.06) 1px, rgba(0,255,0,0.06) 2px, rgba(0,0,255,0.06) 2px, rgba(0,0,255,0.06) 3px), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 58%, rgba(0,0,0,0.5) 100%); box-shadow: inset 0 0 50px rgba(0,0,0,0.55)"></div>
+</sc-if>
+<sc-if value="{{safe}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 32px; top: 24px; width: 576px; height: 432px; box-sizing: border-box; border: 2px dashed rgba(255,230,0,0.9); z-index: 11; pointer-events: none"></div>
+<div aria-hidden="true" style="position: absolute; left: 64px; top: 48px; width: 512px; height: 384px; box-sizing: border-box; border: 2px dashed rgba(0,240,255,0.95); z-index: 11; pointer-events: none"></div>
+</sc-if>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; z-index: 20; pointer-events: none"><dc-import name="ZapWipe" dur="7" hint-size="640px,480px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"lineup": {"editor": "text", "default": "[7:00]=[SHOW ONE]|[7:30]=[SHOW TWO]|[8:00]=[SHOW THREE]|[8:30]=[SHOW FOUR]", "section": "Copy"}, "header": {"editor": "text", "default": "tonight on zap!", "section": "Copy"}, "theme": {"editor": "enum", "options": ["concrete", "slash", "tape", "static", "orange"], "default": "static", "section": "Look"}, "motion": {"editor": "enum", "options": ["still", "play"], "default": "still", "section": "Look"}, "showChecker": {"editor": "boolean", "default": true, "section": "Look"}, "crt": {"editor": "boolean", "default": true, "section": "Look"}, "safe": {"editor": "boolean", "default": false, "section": "Look"}, "$preview": {"width": 640, "height": 480}}'>
+class Component extends DCLogic {
+renderVals() {
+const p = this.props;
+const crt = p.crt ?? true;
+const fit = (t, max, min, w, lines) => { const n = Math.max(4, String(t ?? '').length); return Math.max(min, Math.min(max, Math.floor((w * lines * 0.92) / (n * 0.5)))); };
+const raw = p.lineup ?? '[7:00]=[SHOW ONE]|[7:30]=[SHOW TWO]|[8:00]=[SHOW THREE]|[8:30]=[SHOW FOUR]';
+const rows = raw.split('|').slice(0, 4).map(x => { const i = x.indexOf('='); const t = i < 0 ? '' : x.slice(0, i).trim(); const s = i < 0 ? x.trim() : x.slice(i + 1).trim(); return { t, s, size: fit(s, 34, 20, 320, 2) }; });
+const header = p.header ?? 'tonight on zap!';
+return { rows, header, headerSize: fit(header, 32, 20, 260, 1), theme: p.theme ?? 'static', showChecker: p.showChecker ?? true, holdClass: (p.showChecker ?? true) && (p.motion ?? 'still') !== 'play' ? 'zap-hold' : '', crt, safe: p.safe ?? false, crtFilter: crt ? 'blur(0.6px) saturate(1.2) contrast(1.08)' : 'none' };
+}
+}
+</script>
+</body>
+</html>

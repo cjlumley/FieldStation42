@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ZAP! logo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,800;1,800&family=Permanent+Marker&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="position: relative; width: {{w}}px; height: {{h}}px; display: flex; align-items: center; justify-content: center; font-family: 'Anton', system-ui, sans-serif">
+<div style="position: relative; transform: rotate(-3deg)">
+<div style="transform: skewX(-10deg); background: #111111; border: {{bd}}px solid #FFFFFF; box-shadow: {{sh}}px {{sh}}px 0 #B6FF00; padding: {{py}}px {{px}}px {{pyb}}px">
+<div style="transform: skewX(10deg); font-size: {{size}}px; line-height: 1; letter-spacing: {{ls}}px; color: #FFFFFF; text-shadow: {{ts}}px {{ts}}px 0 #FF7A00">ZAP<span style="color: #B6FF00">!</span></div>
+</div>
+<div aria-hidden="true" style="position: absolute; left: {{bx}}px; top: {{by}}px; width: {{bw}}px; height: {{bh}}px; transform: rotate(14deg)">
+<div style="position: absolute; left: {{bo}}px; top: {{bo}}px; width: {{bw}}px; height: {{bh}}px; background: #111111; clip-path: polygon(42% 0%, 100% 0%, 64% 40%, 94% 40%, 20% 100%, 40% 52%, 6% 52%)"></div>
+<div style="position: absolute; left: 0; top: 0; width: {{bw}}px; height: {{bh}}px; background: #FFE600; clip-path: polygon(42% 0%, 100% 0%, 64% 40%, 94% 40%, 20% 100%, 40% 52%, 6% 52%)"></div>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"size": {"editor": "int", "default": 110, "min": 20, "max": 200}, "$preview": {"width": 330, "height": 198}}'>
+class Component extends DCLogic {
+renderVals() {
+const size = Number(this.props.size ?? 110);
+const k = (f, m) => Math.max(m, Math.round(size * f));
+return { size, w: Math.round(size * 3), h: Math.round(size * 1.8), bd: k(0.04, 2), sh: k(0.07, 3), ts: k(0.05, 2), ls: k(0.03, 1), py: k(0.1, 3), pyb: k(0.06, 2), px: k(0.22, 6), bw: k(0.42, 10), bh: k(0.7, 16), bx: -k(0.2, 6), by: -k(0.3, 8), bo: k(0.035, 2) };
+}
+}
+</script>
+</body>
+</html>

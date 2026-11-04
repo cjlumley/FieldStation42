@@ -1,0 +1,617 @@
+{
+  "station_conf": {
+    "network_name": "Zap",
+    "network_long_name": "ZAP!",
+    "channel_number": 7,
+    "network_type": "standard",
+    "panscan": 1.0,
+    "schedule_increment": 30,
+    "break_strategy": "standard",
+    "commercial_free": false,
+    "break_duration": 180,
+    "break_every": 12,
+    "max_break": 150,
+    "content_dir": "catalog/zap",
+    "commercial_dir": "commercial",
+    "bump_dir": "bump",
+    "clip_shows": [
+      {
+        "tags": "gumball",
+        "duration": 30,
+        "break_strategy": "end",
+        "break_duration": 180
+      },
+      {
+        "tags": "fairly_oddparents",
+        "duration": 30,
+        "break_strategy": "end",
+        "break_duration": 180
+      }
+    ],
+    "autobump": {
+      "engine": "zap",
+      "duration": 7,
+      "stretch": true
+    },
+    "day_templates": {
+      "allday": {
+        "0": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "1": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "2": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "3": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "4": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "5": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "6": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "7": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "8": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "9": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "10": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "11": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "12": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "13": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "14": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "15": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "16": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "17": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "18": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "19": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "20": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "21": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "22": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "23": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        }
+      },
+      "friday": {
+        "0": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "1": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "2": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "3": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "4": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "5": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "6": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "7": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "8": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "9": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "10": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "11": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "12": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "13": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "14": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "15": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "16": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "17": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "18": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "19": {
+          "tags": "ben10_movie"
+        },
+        "20": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "21": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "22": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        },
+        "23": {
+          "tags": [
+            "avatar",
+            "ben10",
+            "danny_phantom",
+            "johnny_test",
+            "wizards",
+            "gumball",
+            "fairly_oddparents"
+          ],
+          "random_tags": true
+        }
+      }
+    },
+    "monday": "allday",
+    "tuesday": "allday",
+    "wednesday": "allday",
+    "thursday": "allday",
+    "saturday": "allday",
+    "sunday": "allday",
+    "friday": "friday"
+  }
+}

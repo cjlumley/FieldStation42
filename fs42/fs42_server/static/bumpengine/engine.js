@@ -41,7 +41,12 @@
   const pad = n => String(n).padStart(2, '0');
   const apiTime = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
   const clock = d => `${d.getHours() % 12 || 12}:${pad(d.getMinutes())}`;
-  const showName = block => (block && (cfg.shows[block.content && block.content.tag] || block.title)) || '';
+  // Clip-show blocks (two short cartoons per slot) have a list as content and the FS42 tag as their title.
+  const blockTag = block => {
+    const c = block && block.content;
+    return (c && (c.tag || (Array.isArray(c) && c[0] && c[0].tag))) || (block && block.title);
+  };
+  const showName = block => (block && (cfg.shows[blockTag(block)] || cfg.shows[block.title] || block.title)) || '';
 
   async function refresh(network) {
     try {

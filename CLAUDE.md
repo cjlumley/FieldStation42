@@ -247,6 +247,25 @@ Channel 12 draws its break bumpers live, at air time, from the real schedule.
   (a 2-hour slot for an ~88-min movie), ~23% ads.
 - The player remembers the last channel by list position, not number, so adding a channel can shift where it comes back after a restart.
 
+## ZAP! (ch 7, everyday cartoon channel, added 2026-11-03)
+- `confs/zap.json`: network `Zap`, 30-min slots, all day `random_tags` over avatar, ben10, danny_phantom, johnny_test, wizards,
+  gumball, fairly_oddparents. Friday 19:00 = `ben10_movie` (Secret of the Omnitrix, 90-min slot). `max_break` 150, `panscan` 1.0,
+  `autobump.engine: zap` with `stretch`. Pack from Cooper's "ZAP! bumper library" board: `static/zap/` (Anton, Barlow Condensed 800
+  normal + italic, Permanent Marker bundled). Snipe* / Premiere / SignOff are installed but not cued.
+- `catalog/zap/`: folder links for most shows. **Per-file links** for `johnny_test/` (9 of 22 files on the SSD are corrupt, so only the
+  13 readable ones) and `fairly_oddparents/` (the 32 ~11-min episodes; the 4 double-length ones are left out because they aired alone
+  with a 7-min break). `commercial/` + `bump/` are copies of ch 10's links (kids ads minus holiday, toy ads, House Hippo).
+- **Gumball and FOP: A New Wish are clip shows** (`clip_shows: [{"tags", "duration": 30, "break_strategy": "end", "break_duration": 180}]`,
+  a list, duration in minutes), so two ~12-min episodes share a half hour: ep 1, break, ep 2, break.
+  - Fixed in our fork: `StationIO._normalize_clip_shows` used to drop a clip show's `break_strategy`/`break_duration`. The "end" strategy
+    is what lets the second episode fit (the default 0.8 content ratio caps a 30-min clip show at ~23 min of content).
+  - Fixed in our fork: `LiquidClipBlock.make_plan` asks for at least one break per clip, instead of one long break plus a stub at the end.
+  - Gumball breaks are ~2.8 min. FOP episodes are shorter (11.3 min), so its breaks are ~3.7 min, over the 2.5-min target. Known, not fixed.
+  - Clip blocks are titled by FS42 ("Gumball", "Fairly Oddparents"), with a list as content. `bumpengine/engine.js` `showName` now also
+    looks up the tag of the first clip, so bumpers say the `channel.json` name.
+- Johnny Test episodes are ~20 min, so they get breaks about every 4 min. Double episodes of Danny Phantom / Wizards take 60-min slots.
+- Tests: `test/test_clip_show_pairs.py`.
+
 ## Working style
 Cooper has ADHD. Give a plain-language summary first, then the detail. Keep steps short.
 He's a strong developer (TS/React/Python), so don't over-explain code. Explain anything hardware or Linux-specific.

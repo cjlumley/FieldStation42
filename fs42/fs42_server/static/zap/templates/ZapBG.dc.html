@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ZAP! backgrounds</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 640px; height: 480px; position: relative; overflow: hidden; background: {{base}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: {{wash}}"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: radial-gradient(circle at 18% 22%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 22%), radial-gradient(circle at 78% 70%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 26%), radial-gradient(circle at 60% 18%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 18%), radial-gradient(circle at 30% 80%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 20%)"></div>
+<sc-if value="{{isSlash}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: -120px; top: -40px; width: 300px; height: 620px; transform: rotate(24deg)"><div style="position: absolute; left: 0; top: 0; width: 300px; height: 620px; background: #B6FF00; opacity: 0.85; animation: slide 9s ease-in-out infinite"></div></div>
+<div aria-hidden="true" style="position: absolute; left: 40px; top: -40px; width: 60px; height: 620px; transform: rotate(24deg)"><div style="position: absolute; left: 0; top: 0; width: 60px; height: 620px; background: #FF7A00; opacity: 0.85; animation: slide 9s ease-in-out -2s infinite"></div></div>
+<div aria-hidden="true" style="position: absolute; left: 520px; top: -60px; width: 220px; height: 640px; transform: rotate(24deg)"><div style="position: absolute; left: 0; top: 0; width: 220px; height: 640px; background: #FF2D95; opacity: 0.7; animation: slide 9s ease-in-out -4s infinite"></div></div>
+</sc-if>
+<sc-if value="{{isTape}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: -40px; top: 40px; width: 360px; height: 46px; background: #111111; transform: rotate(-12deg); clip-path: polygon(0% 8%, 2% 0%, 4% 10%, 6% 2%, 100% 0%, 98% 14%, 100% 30%, 97% 50%, 100% 72%, 98% 88%, 100% 100%, 3% 100%, 0% 90%, 2% 70%, 0% 52%, 2% 30%)"></div>
+<div aria-hidden="true" style="position: absolute; left: 380px; top: 380px; width: 340px; height: 46px; background: #111111; transform: rotate(-8deg); clip-path: polygon(0% 8%, 2% 0%, 4% 10%, 6% 2%, 100% 0%, 98% 14%, 100% 30%, 97% 50%, 100% 72%, 98% 88%, 100% 100%, 3% 100%, 0% 90%, 2% 70%, 0% 52%, 2% 30%)"></div>
+<div aria-hidden="true" style="position: absolute; left: 470px; top: 30px; width: 260px; height: 40px; background: #FF2D95; transform: rotate(16deg); clip-path: polygon(0% 8%, 2% 0%, 4% 10%, 6% 2%, 100% 0%, 98% 14%, 100% 30%, 97% 50%, 100% 72%, 98% 88%, 100% 100%, 3% 100%, 0% 90%, 2% 70%, 0% 52%, 2% 30%)"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background-image: radial-gradient(circle, rgba(17,17,17,0.28) 0px, rgba(17,17,17,0.28) 5px, rgba(0,0,0,0) 6px); background-size: 20px 20px; -webkit-mask-image: linear-gradient(135deg, #000000 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,0) 68%, #000000 100%); mask-image: linear-gradient(135deg, #000000 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,0) 68%, #000000 100%)"></div>
+</sc-if>
+<sc-if value="{{isOrange}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 480px; background: repeating-linear-gradient(-24deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 70px, rgba(17,17,17,0.16) 70px, rgba(17,17,17,0.16) 94px)"></div>
+</sc-if>
+<sc-if value="{{isStatic}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 640px; height: 60px; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.07) 50%, rgba(255,255,255,0) 100%); animation: roll 4s linear infinite"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 440px; width: 640px; height: 40px; display: flex">
+<div style="flex: 1; background: #C0C0C0"></div><div style="flex: 1; background: #C0C000"></div><div style="flex: 1; background: #00C0C0"></div><div style="flex: 1; background: #00C000"></div><div style="flex: 1; background: #C000C0"></div><div style="flex: 1; background: #C00000"></div><div style="flex: 1; background: #0000C0"></div>
+</div>
+<div style="position: absolute; left: 70px; top: 58px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; letter-spacing: 3px; color: #B6FF00; animation: blink 1.2s steps(1) infinite">● LIVE</div>
+</sc-if>
+<sc-for list="{{marks}}" as="m" hint-placeholder-count="6">
+<div aria-hidden="true" style="position: absolute; left: {{m.x}}px; top: {{m.y}}px; opacity: {{m.o}}; animation: drift {{m.dur}}s ease-in-out {{m.d}}s infinite">
+<div style="transform: rotate({{m.r}}deg)">
+<sc-if value="{{m.isArrow}}" hint-placeholder-val="{{true}}"><svg width="150" height="70" viewBox="0 0 150 70" aria-hidden="true"><path d="M8 50 C40 10 80 70 120 26" style="fill: none; stroke: {{m.c}}; stroke-width: 9px; stroke-linecap: round"></path><path d="M100 14 L124 24 L112 46" style="fill: none; stroke: {{m.c}}; stroke-width: 9px; stroke-linecap: round; stroke-linejoin: round"></path></svg></sc-if>
+<sc-if value="{{m.isX}}" hint-placeholder-val="{{false}}"><svg width="54" height="54" viewBox="0 0 54 54" aria-hidden="true"><path d="M8 8 L46 46 M46 8 L8 46" style="fill: none; stroke: {{m.c}}; stroke-width: 10px; stroke-linecap: round"></path></svg></sc-if>
+<sc-if value="{{m.isBolt}}" hint-placeholder-val="{{false}}"><div style="width: 40px; height: 66px; background: {{m.c}}; clip-path: polygon(42% 0%, 100% 0%, 64% 40%, 94% 40%, 20% 100%, 40% 52%, 6% 52%)"></div></sc-if>
+<sc-if value="{{m.isDrip}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 10px; align-items: flex-start"><div style="width: 12px; height: {{m.h1}}px; border-radius: 0 0 6px 6px; background: {{m.c}}"></div><div style="width: 12px; height: {{m.h2}}px; border-radius: 0 0 6px 6px; background: {{m.c}}"></div><div style="width: 12px; height: {{m.h3}}px; border-radius: 0 0 6px 6px; background: {{m.c}}"></div></div></sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;concrete&quot;,&quot;slash&quot;,&quot;tape&quot;,&quot;static&quot;,&quot;orange&quot;],&quot;default&quot;:&quot;concrete&quot;},&quot;$preview&quot;:{&quot;width&quot;:640,&quot;height&quot;:480}}">
+class Component extends DCLogic {
+renderVals() {
+const theme = this.props.theme ?? 'concrete';
+const T = {
+concrete: { base: '#1C1C21', wash: 'radial-gradient(ellipse at 50% 45%, #3A3A44 0%, #24242B 50%, #141418 100%)', cols: ['#B6FF00', '#FF7A00', '#FFE600', '#FF2D95'] },
+slash: { base: '#22103F', wash: 'radial-gradient(ellipse at 50% 50%, #3F1F75 0%, #2A1350 55%, #170932 100%)', cols: ['#FFE600', '#FFFFFF', '#B6FF00', '#FF7A00'] },
+tape: { base: '#8FD400', wash: 'radial-gradient(ellipse at 50% 50%, #C2FF2E 0%, #A8EC0A 50%, #7EC000 100%)', cols: ['#111111', '#FF2D95', '#111111', '#FFFFFF'] },
+static: { base: '#0B0B12', wash: 'radial-gradient(ellipse at 50% 45%, #22223A 0%, #12121F 55%, #06060C 100%)', cols: ['#FF7A00', '#B6FF00', '#FF2D95', '#FFE600'] },
+orange: { base: '#D95F00', wash: 'radial-gradient(ellipse at 50% 50%, #FFA54A 0%, #FF8A1A 50%, #D96400 100%)', cols: ['#111111', '#FFE600', '#FFFFFF', '#111111'] }
+};
+const t = T[theme] || T.concrete;
+let s = 9;
+const r = () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+const kinds = ['arrow', 'x', 'drip', 'bolt', 'x', 'arrow'];
+const spots = [[40, 360], [540, 70], [470, 0], [30, 60], [560, 330], [430, 400]];
+const marks = kinds.map((k, i) => ({ x: spots[i][0], y: spots[i][1], r: k === 'drip' ? 0 : Math.round(-30 + r() * 60), c: t.cols[i % 4], o: 0.9, dur: (5 + r() * 4).toFixed(1), d: (-r() * 4).toFixed(1), h1: 40 + Math.round(r() * 60), h2: 70 + Math.round(r() * 70), h3: 30 + Math.round(r() * 50), isArrow: k === 'arrow', isX: k === 'x', isBolt: k === 'bolt', isDrip: k === 'drip' }));
+return { base: t.base, wash: t.wash, marks, isSlash: theme === 'slash', isTape: theme === 'tape', isStatic: theme === 'static', isOrange: theme === 'orange' };
+}
+}
+</script>
+</body>
+</html>

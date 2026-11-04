@@ -322,6 +322,12 @@ class StationIO:
             if start_clip:
                 clip_dict[clip_tag]["start_clip"] = start_clip
                 clip_dict[clip_tag]["end_clip"] = end_clip
+            # LiquidSchedule._clip_fill reads these per clip show, so keep them.
+            # (break_strategy "end" + break_duration lets two 11-min cartoons fill one half hour.)
+            if not isinstance(entry, str):
+                for key in ("break_strategy", "break_duration"):
+                    if key in entry:
+                        clip_dict[clip_tag][key] = entry[key]
 
         return clip_dict
 
